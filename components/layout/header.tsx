@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Phone, Truck } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useScrolled } from '@/lib/hooks';
 import { primaryNav } from '@/data/navigation';
@@ -24,27 +24,6 @@ export function Header() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-[90]">
-        {/* Top utility strip */}
-        <div
-          className={cn(
-            'overflow-hidden bg-red text-white transition-all duration-500 ease-out-expo',
-            scrolled ? 'h-0 opacity-0' : 'h-9 opacity-100',
-          )}
-        >
-          <div className="container flex h-9 items-center justify-between text-[11px] font-medium uppercase tracking-wide">
-            <span className="flex items-center gap-2">
-              <Truck className="h-3.5 w-3.5" />
-              {siteConfig.delivery}
-            </span>
-            <span className="hidden items-center gap-5 sm:flex">
-              <span className="text-white/80">Mon–Fri 8:00–17:30 · Sat 8:00–13:00</span>
-              <a href={`tel:${siteConfig.phoneHref}`} className="hover:text-white/80">
-                {siteConfig.phoneDisplay}
-              </a>
-            </span>
-          </div>
-        </div>
-
         {/* Main bar */}
         <div
           className={cn(

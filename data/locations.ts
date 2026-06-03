@@ -2,14 +2,14 @@ import type { Location } from '@/types';
 
 // Real Mit-Mak Motors branch footprint, Pretoria North.
 // (Phone is the published main line; per-branch direct lines & exact
-// coordinates can be refined.) IDs are stable — inventory references them.
+// coordinates can be refined.) IDs are stable, inventory references them.
 const PHONE = '+27 12 546 5878';
 const WA = '27125465878';
 
 export const locations: Location[] = [
   {
     id: 'gerrit-maritz-flagship',
-    name: 'Mit-Mak Motors — Flagship',
+    name: 'Mit-Mak Motors, Flagship',
     kind: 'Flagship Showroom',
     street: '590 Gerrit Maritz Street',
     suburb: 'Pretoria North',
@@ -25,7 +25,7 @@ export const locations: Location[] = [
   },
   {
     id: 'gerrit-maritz-bakkie',
-    name: 'Mit-Mak Motors — Gerrit Maritz',
+    name: 'Mit-Mak Motors, Gerrit Maritz',
     kind: 'Bakkie & 4x4 Centre',
     street: '591 Gerrit Maritz Street',
     suburb: 'Pretoria North',

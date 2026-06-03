@@ -16,7 +16,7 @@ export function getVehicle(slug: string): Vehicle | undefined {
 
 /**
  * Lightweight card projection. Client components (showroom, featured carousel,
- * hero) receive these — never the full 1.5 MB dataset — keeping JS payloads
+ * hero) receive these, never the full 1.5 MB dataset, keeping JS payloads
  * small. Heavy fields (full gallery, prose, features) stay server-side.
  */
 export function toCard(v: Vehicle): Vehicle {
@@ -28,8 +28,12 @@ export const vehicleCards: Vehicle[] = vehicles.map(toCard);
 export const featuredVehicles = vehicles.filter((v) => v.featured);
 export const featuredCards = vehicleCards.filter((v) => v.featured);
 
+// Hero = a real Porsche from their stock (silver Panamera, studio hero shot).
 export const heroVehicle =
-  [...vehicles].sort((a, b) => b.price - a.price).find((v) => v.images.length >= 6) ?? vehicles[0];
+  vehicles.find((v) => v.slug === '2012-porsche-panamera-diesel-2') ??
+  vehicles.find((v) => /porsche/i.test(v.make) && v.images.length >= 6) ??
+  [...vehicles].sort((a, b) => b.price - a.price).find((v) => v.images.length >= 6) ??
+  vehicles[0];
 
 export function relatedVehicles(vehicle: Vehicle, limit = 4): Vehicle[] {
   return vehicles

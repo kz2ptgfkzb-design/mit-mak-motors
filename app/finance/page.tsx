@@ -39,7 +39,7 @@ export default function FinancePage({ searchParams }: { searchParams: { vehicle?
       <PageHero
         eyebrow="Vehicle Finance"
         title="Apply in Minutes"
-        description="One application. Every major bank. We do the legwork to land you the best rate — with pre-approval, most applicants hear back within one business day."
+        description="One application. Every major bank. We do the legwork to land you the best rate, with pre-approval, most applicants hear back within one business day."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Finance', href: '/finance' }]}
       >
         <Tabs active="individual" />
@@ -64,7 +64,7 @@ export default function FinancePage({ searchParams }: { searchParams: { vehicle?
       <CtaBand
         eyebrow="Prefer to talk?"
         title="Our finance house is open"
-        description="Pop in to the Mit-Mak Finance House on Gerrit Maritz Street, or send a WhatsApp — René and the team will sort you out."
+        description="Pop in to the Mit-Mak Finance House on Gerrit Maritz Street, or send a WhatsApp, René and the team will sort you out."
         primary={{ label: 'Contact Finance', href: '/contact' }}
         secondary={{ label: 'Browse the Showroom', href: '/showroom' }}
       />

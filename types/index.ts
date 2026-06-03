@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// Mit-Mak Motors — typed content model
+// Mit-Mak Motors, typed content model
 // This is the single source of truth for inventory + taxonomy.
 // Swap the JSON-like arrays in /data for a CMS feed and every page
 // (showroom, filters, detail, compare, related) updates automatically.
@@ -65,7 +65,7 @@ export interface Vehicle {
   vin?: string;
 
   // Meta
-  dateAdded: string; // ISO — drives "Newest" sort
+  dateAdded: string; // ISO, drives "Newest" sort
   locationId: string;
 
   // Media

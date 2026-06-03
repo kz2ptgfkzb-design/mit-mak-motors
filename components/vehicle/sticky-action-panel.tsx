@@ -72,7 +72,7 @@ export function StickyActionPanel({ vehicle }: { vehicle: Vehicle }) {
 
         {vehicle.reserved ? (
           <div className="mt-5 rounded-full border border-white/20 bg-white/5 py-3 text-center font-display text-xs uppercase tracking-wide text-graphite-200">
-            Reserved — join the waitlist
+            Reserved, join the waitlist
           </div>
         ) : (
           <Link

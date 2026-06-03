@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // Vehicle finance math (instalment sale with optional balloon).
 // All figures in ZAR. Interest is a nominal annual rate, compounded
-// monthly — the standard SA bank quoting convention.
+// monthly, the standard SA bank quoting convention.
 // ─────────────────────────────────────────────────────────────
 
 export interface FinanceInput {
@@ -12,7 +12,7 @@ export interface FinanceInput {
   termMonths: number;
   /** Nominal annual interest rate, e.g. 11.75 */
   interestRate: number;
-  /** Balloon / residual as a percentage of the purchase price (0–40) */
+  /** Balloon / residual as a percentage of the purchase price (0-40) */
   balloonPct: number;
   /** Optional once-off + monthly admin fees */
   initiationFee?: number;
@@ -79,7 +79,7 @@ export function calculateFinance(input: FinanceInput): FinanceResult {
   };
 }
 
-/** Quick estimate used on cards / hero — 10% deposit, 72mo, no balloon. */
+/** Quick estimate used on cards / hero, 10% deposit, 72mo, no balloon. */
 export function estimateMonthly(price: number): number {
   return calculateFinance({
     price,

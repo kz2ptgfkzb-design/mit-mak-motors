@@ -5,7 +5,7 @@ import { PageHero } from '@/components/layout/page-hero';
 import { ShowroomClient } from '@/components/showroom/showroom-client';
 
 export const metadata: Metadata = {
-  title: 'Showroom — Premium Pre-Owned Cars',
+  title: 'Showroom, Premium Pre-Owned Cars',
   description:
     'Browse Mit-Mak Motors’ full showroom of inspected, reconditioned premium pre-owned cars. Filter by make, model, price, body type, drive and more. Delivered free nationwide.',
   alternates: { canonical: '/showroom' },
@@ -35,7 +35,7 @@ export default function ShowroomPage({
       <PageHero
         eyebrow="The Showroom"
         title="Find Your Next Car"
-        description="Every vehicle inspected, reconditioned and ready to drive — then delivered free, anywhere in South Africa. Filter, compare and reserve in minutes."
+        description="Every vehicle inspected, reconditioned and ready to drive, then delivered free, anywhere in South Africa. Filter, compare and reserve in minutes."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Showroom', href: '/showroom' }]}
       />
       <ShowroomClient cards={vehicleCards} meta={filterMeta} initialFilters={initialFilters} initialSort={initialSort} />

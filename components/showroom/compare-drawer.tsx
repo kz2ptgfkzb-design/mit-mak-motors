@@ -20,7 +20,7 @@ const ROWS: { label: string; get: (v: Vehicle) => string }[] = [
   { label: 'Transmission', get: (v) => v.transmission },
   { label: 'Fuel', get: (v) => v.fuel },
   { label: 'Engine', get: (v) => v.engineSize },
-  { label: 'Power', get: (v) => v.power || '—' },
+  { label: 'Power', get: (v) => v.power || '-' },
   { label: 'Doors', get: (v) => `${v.doors}` },
   { label: 'Seats', get: (v) => `${v.seats}` },
   { label: 'Colour', get: (v) => v.color },

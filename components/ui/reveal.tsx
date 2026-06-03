@@ -37,7 +37,7 @@ export function Reveal({
   );
 }
 
-/** Staggered word/char reveal — used for assembling headlines. */
+/** Staggered word/char reveal, used for assembling headlines. */
 export function RevealText({
   text,
   className,

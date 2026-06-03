@@ -13,7 +13,7 @@ export default function NotFound() {
         </div>
         <h1 className="text-stroke font-anton text-[34vw] leading-none tracking-tight lg:text-[20rem]">404</h1>
         <p className="mx-auto -mt-4 max-w-md text-base text-graphite-300 md:text-lg">
-          This page took a wrong turn. Let’s get you back on the road — the showroom’s this way.
+          This page took a wrong turn. Let’s get you back on the road, the showroom’s this way.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button href="/" size="lg" arrow magnetic>

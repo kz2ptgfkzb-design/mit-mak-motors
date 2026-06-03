@@ -16,7 +16,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
 
   const go = (dir: number) => setIndex((i) => (i + dir + n) % n);
 
-  // Simulated 360° spin — cycles one full loop of frames.
+  // Simulated 360° spin, cycles one full loop of frames.
   function spin() {
     if (spinning) return;
     setSpinning(true);
@@ -65,7 +65,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
-            <Image src={images[index]} alt={`${alt} — image ${index + 1}`} fill priority sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
+            <Image src={images[index]} alt={`${alt}, image ${index + 1}`} fill priority sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
           </motion.div>
         </AnimatePresence>
 
@@ -156,7 +156,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
                 <ChevronLeft className="h-6 w-6" />
               </button>
               <div className="relative h-full w-full max-w-5xl">
-                <Image src={images[index]} alt={`${alt} — image ${index + 1}`} fill sizes="90vw" className="object-contain" />
+                <Image src={images[index]} alt={`${alt}, image ${index + 1}`} fill sizes="90vw" className="object-contain" />
               </div>
               <button onClick={() => go(1)} aria-label="Next" data-cursor="hover" className="absolute right-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-ink-900/60 text-white hover:border-red">
                 <ChevronRight className="h-6 w-6" />

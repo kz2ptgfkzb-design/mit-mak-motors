@@ -71,19 +71,8 @@ export function IgnitionIntro() {
               animate={{ scale: 1, opacity: 1, rotate: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             >
-              <LogoMark className="h-16 w-20" />
+              <LogoMark className="h-28 w-auto sm:h-32" />
             </motion.div>
-
-            <div className="mt-5 overflow-hidden">
-              <motion.p
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
-                className="font-anton text-4xl uppercase tracking-tight text-white sm:text-5xl"
-              >
-                Mit-Mak Motors
-              </motion.p>
-            </div>
 
             <motion.div
               initial={{ scaleX: 0 }}

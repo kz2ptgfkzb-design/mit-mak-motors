@@ -80,7 +80,7 @@ export function ShowroomClient({
             <SearchX className="h-10 w-10 text-graphite-500" />
             <h3 className="mt-5 font-display text-2xl uppercase tracking-tight text-white">No matches</h3>
             <p className="mt-2 max-w-sm text-sm text-graphite-400">
-              Nothing in the current stock fits those filters. Try widening your search — new arrivals land weekly.
+              Nothing in the current stock fits those filters. Try widening your search, new arrivals land weekly.
             </p>
             <Button onClick={clear} variant="outline" className="mt-6">
               Clear all filters

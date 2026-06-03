@@ -11,14 +11,14 @@ import { Reveal } from '@/components/ui/reveal';
 import { Counter } from '@/components/ui/counter';
 
 export const metadata: Metadata = {
-  title: 'About — Why Mit-Mak',
+  title: 'About, Why Mit-Mak',
   description:
-    'Mit-Mak Motors: Pretoria’s most-awarded pre-owned dealership. The story behind Trusted. Awarded. Unmatched. — and why 12,000+ South Africans chose us.',
+    'Mit-Mak Motors: Pretoria’s most-awarded pre-owned dealership. The story behind Trusted. Awarded. Unmatched., and why 12,000+ South Africans chose us.',
   alternates: { canonical: '/about' },
 };
 
 const values = [
-  { icon: Truck, title: 'Delivered Free', text: 'Every car, every province — door-to-door at no cost. We own the logistics so you never have to travel.' },
+  { icon: Truck, title: 'Delivered Free', text: 'Every car, every province, door-to-door at no cost. We own the logistics so you never have to travel.' },
   { icon: ShieldCheck, title: 'Inspected & Reconditioned', text: 'A 212-point process signed off by three specialists. If it’s below standard, it’s fixed before it’s listed.' },
   { icon: Trophy, title: 'Awarded', text: 'AutoTrader Dealer of the Year, 2024 and 2025. Recognised for the cars, the service and the experience.' },
   { icon: Star, title: '#1 on HelloPeter', text: 'Seven years at the top, 9.7 / 10 across thousands of verified reviews. Reputation you can audit.' },
@@ -30,7 +30,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Why Mit-Mak"
         title="Trusted. Awarded. Unmatched."
-        description="What started as a single bay in Pretoria North is now South Africa’s most-awarded pre-owned dealership — built on one stubborn idea: tell the truth, fix the car properly, deliver it free."
+        description="What started as a single bay in Pretoria North is now South Africa’s most-awarded pre-owned dealership, built on one stubborn idea: tell the truth, fix the car properly, deliver it free."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }]}
       />
 
@@ -49,15 +49,15 @@ export default function AboutPage() {
               <div className="mt-6 space-y-4 text-graphite-300">
                 <p>
                   Mit-Mak Motors was founded on the floor, not in a boardroom. Mike Makua bought, prepped and sold
-                  cars one at a time — and refused to let a single one leave below standard.
+                  cars one at a time, and refused to let a single one leave below standard.
                 </p>
                 <p>
                   That obsession scaled. Today we run six branches across Gerrit Maritz and Rachel de Beer Streets in
                   Pretoria North, a dedicated reconditioning hub, and a delivery operation that reaches all nine
-                  provinces — free.
+                  provinces, free.
                 </p>
                 <p>
-                  The awards followed the standard, not the other way around. <span className="text-white">Trusted. Awarded. Unmatched.</span> isn’t a slogan — it’s the order we earned it in.
+                  The awards followed the standard, not the other way around. <span className="text-white">Trusted. Awarded. Unmatched.</span> isn’t a slogan, it’s the order we earned it in.
                 </p>
               </div>
             </Reveal>

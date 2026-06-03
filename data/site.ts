@@ -12,10 +12,10 @@ export const siteConfig = {
   email: 'sales@mitmakmotors.co.za',
   financeEmail: 'finance@mitmakmotors.co.za',
   hours: [
-    { day: 'Monday – Friday', time: '08:00 – 17:30' },
-    { day: 'Saturday', time: '08:00 – 13:00' },
+    { day: 'Monday - Friday', time: '08:00 - 17:30' },
+    { day: 'Saturday', time: '08:00 - 13:00' },
     { day: 'Sunday', time: 'Closed' },
-    { day: 'Public Holidays', time: '08:00 – 13:00' },
+    { day: 'Public Holidays', time: '08:00 - 13:00' },
   ],
   socials: [
     { label: 'Facebook', href: 'https://facebook.com', handle: '/mitmakmotors' },

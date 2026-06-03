@@ -15,7 +15,7 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Legal"
         title="Privacy Policy"
-        description="How we collect, use and protect your personal information — in line with the Protection of Personal Information Act (POPIA)."
+        description="How we collect, use and protect your personal information, in line with the Protection of Personal Information Act (POPIA)."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy', href: '/privacy' }]}
       />
 
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
             <ul>
               <li>To respond to enquiries, reserve vehicles and process finance or sale applications.</li>
               <li>To arrange delivery and provide customer support.</li>
-              <li>To send you marketing — only where you’ve opted in — which you can stop at any time.</li>
+              <li>To send you marketing, only where you’ve opted in, which you can stop at any time.</li>
               <li>To improve the website and our service.</li>
             </ul>
 
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
 
             <h2>Sharing</h2>
             <p>
-              We share information only as needed to deliver our service — for example, with accredited finance and insurance
+              We share information only as needed to deliver our service, for example, with accredited finance and insurance
               partners when you apply, or delivery partners to get your car to you. We do not sell your personal information.
             </p>
 

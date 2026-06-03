@@ -107,7 +107,7 @@ export const fomoZone: FomoItem[] = [
     id: 'masterclass',
     eyebrow: 'Mit-Mak',
     title: 'The Masterclass',
-    blurb: 'Everything we know about buying, selling & financing — taught straight, no gatekeeping.',
+    blurb: 'Everything we know about buying, selling & financing, taught straight, no gatekeeping.',
     cta: 'Reserve a Seat',
     href: '/fomo-zone#masterclass',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',

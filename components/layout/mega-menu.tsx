@@ -162,7 +162,7 @@ export function MegaMenu({ open, onClose }: { open: boolean; onClose: () => void
                 <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="text-sm text-graphite-300 hover:text-white" data-cursor="hover">
                   WhatsApp
                 </a>
-                <span className="text-sm text-graphite-500">Mon–Fri 8:00–17:30 · Sat 8:00–13:00</span>
+                <span className="text-sm text-graphite-500">Mon-Fri 8:00-17:30 · Sat 8:00-13:00</span>
               </div>
               <div className="flex items-center gap-4">
                 {siteConfig.socials.map((s) => (

@@ -26,7 +26,7 @@ export function Testimonials() {
             </div>
             <p className="mt-4 max-w-xs text-base text-graphite-300">
               <span className="text-white">#1 on HelloPeter, 7 years running.</span> A service index built one
-              honest deal at a time — across 4,800+ verified reviews.
+              honest deal at a time, across 4,800+ verified reviews.
             </p>
             <Button href="/about" variant="outline" className="mt-7" arrow>
               Why we&apos;re trusted

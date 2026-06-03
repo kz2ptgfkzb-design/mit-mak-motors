@@ -23,7 +23,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!v) return { title: 'Vehicle not found' };
   const title = `${v.year} ${v.make} ${v.model} ${v.variant}`;
   return {
-    title: `${title} — ${formatPrice(v.price)}`,
+    title: `${title}, ${formatPrice(v.price)}`,
     description: `${title} for sale at Mit-Mak Motors. ${v.tagline} ${v.mileage.toLocaleString('en-ZA')} km · ${v.fuel} · ${v.transmission}. Inspected, reconditioned & delivered free nationwide.`,
     alternates: { canonical: `/vehicles/${v.slug}` },
     openGraph: { title, description: v.tagline, images: [{ url: v.images[0] }], type: 'website' },
@@ -155,7 +155,7 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
       <CtaBand
         eyebrow="Not quite the one?"
         title="The right car is in the showroom"
-        description="Browse every inspected, reconditioned vehicle — or tell us what you're after and we'll find it. Delivered free, anywhere in South Africa."
+        description="Browse every inspected, reconditioned vehicle, or tell us what you're after and we'll find it. Delivered free, anywhere in South Africa."
         secondary={{ label: 'Get a Cash Offer', href: '/sell-your-car' }}
       />
 

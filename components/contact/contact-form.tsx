@@ -54,7 +54,7 @@ export function ContactForm({ prefillSubject = '', prefillMessage = '' }: { pref
           <Check className="h-7 w-7 text-white" />
         </span>
         <h3 className="mt-5 font-anton text-2xl uppercase tracking-tight text-white">Message sent</h3>
-        <p className="mt-2 text-graphite-300">Thanks — we’ll be in touch shortly. For anything urgent, give us a call or WhatsApp.</p>
+        <p className="mt-2 text-graphite-300">Thanks, we’ll be in touch shortly. For anything urgent, give us a call or WhatsApp.</p>
       </div>
     );
   }

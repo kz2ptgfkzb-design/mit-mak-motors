@@ -50,7 +50,7 @@ const steps: StepDef<State>[] = [
   {
     id: 'condition',
     title: 'Condition',
-    description: 'Be honest — it gets you a faster, firmer offer with no surprises at handover.',
+    description: 'Be honest, it gets you a faster, firmer offer with no surprises at handover.',
     render: ({ form, update }) => (
       <div className="space-y-6">
         <Field label="Overall condition">
@@ -104,7 +104,7 @@ const steps: StepDef<State>[] = [
   {
     id: 'details',
     title: 'Your Offer',
-    description: 'Where should we send your cash offer? We’ll call you back — usually within the hour.',
+    description: 'Where should we send your cash offer? We’ll call you back, usually within the hour.',
     validate: (f) => {
       const e = required(f, [['name', 'Name'], ['mobile', 'Mobile']]);
       const email = `${f.email ?? ''}`;
@@ -147,7 +147,7 @@ export function SellForm() {
       formType="sell-car"
       submitLabel="Get My Cash Offer"
       successTitle="Offer on the Way"
-      successMessage="We’ve got your details — expect a call from our buying team shortly, usually within the hour, with your best cash price."
+      successMessage="We’ve got your details, expect a call from our buying team shortly, usually within the hour, with your best cash price."
     />
   );
 }

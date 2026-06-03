@@ -7,8 +7,8 @@ import { PageHero } from '@/components/layout/page-hero';
 import { Reveal } from '@/components/ui/reveal';
 
 export const metadata: Metadata = {
-  title: 'Blog — Guides, News & Tips',
-  description: 'Buying guides, finance explainers and behind-the-scenes from Mit-Mak Motors — Pretoria’s most-awarded pre-owned dealership.',
+  title: 'Blog, Guides, News & Tips',
+  description: 'Buying guides, finance explainers and behind-the-scenes from Mit-Mak Motors, Pretoria’s most-awarded pre-owned dealership.',
   alternates: { canonical: '/blog' },
 };
 
@@ -20,7 +20,7 @@ export default function BlogPage() {
       <PageHero
         eyebrow="The Journal"
         title="Guides, News & Tips"
-        description="Straight talk on buying, selling and financing cars in South Africa — plus the occasional look behind the Mit-Mak curtain."
+        description="Straight talk on buying, selling and financing cars in South Africa, plus the occasional look behind the Mit-Mak curtain."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }]}
       />
 

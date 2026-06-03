@@ -234,7 +234,7 @@ export function FilterBar({ filters, onChange, onClear, meta, resultCount, activ
                     className={numberInput}
                     aria-label="Minimum price"
                   />
-                  <span className="text-graphite-600">–</span>
+                  <span className="text-graphite-600">-</span>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -258,7 +258,7 @@ export function FilterBar({ filters, onChange, onClear, meta, resultCount, activ
                     className={numberInput}
                     aria-label="Minimum year"
                   />
-                  <span className="text-graphite-600">–</span>
+                  <span className="text-graphite-600">-</span>
                   <input
                     type="number"
                     inputMode="numeric"

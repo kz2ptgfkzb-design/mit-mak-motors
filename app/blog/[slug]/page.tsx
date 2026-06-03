@@ -68,7 +68,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
         <div className="mt-12 rounded-2xl border border-white/10 bg-ink-850 p-7">
           <p className="font-display text-lg uppercase tracking-tight text-white">Get the next one in your inbox</p>
-          <p className="mt-1.5 text-sm text-graphite-400">Fresh stock, guides and offers — no spam, unsubscribe anytime.</p>
+          <p className="mt-1.5 text-sm text-graphite-400">Fresh stock, guides and offers, no spam, unsubscribe anytime.</p>
           <NewsletterForm className="mt-5 max-w-md" />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-/** Single chevron — the core brand "speed" mark. */
+/** Single chevron, the core brand "speed" mark. */
 export function Chevron({ className, size = 14 }: { className?: string; size?: number }) {
   return (
     <svg
@@ -61,7 +61,7 @@ export function SpeedLines({ className }: { className?: string }) {
   );
 }
 
-/** Full-width chevron divider with a centred fade — used between sections. */
+/** Full-width chevron divider with a centred fade, used between sections. */
 export function ChevronDivider({ className }: { className?: string }) {
   return (
     <div className={cn('relative flex h-8 w-full items-center justify-center overflow-hidden', className)} aria-hidden>

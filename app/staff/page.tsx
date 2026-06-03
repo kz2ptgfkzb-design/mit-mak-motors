@@ -5,8 +5,8 @@ import { Reveal } from '@/components/ui/reveal';
 import { CtaBand } from '@/components/layout/cta-band';
 
 export const metadata: Metadata = {
-  title: 'Our Staff — Meet the Team',
-  description: 'The people behind Mit-Mak Motors’ 7-year #1 HelloPeter streak — sales, finance, reconditioning and customer experience experts across six branches.',
+  title: 'Our Staff, Meet the Team',
+  description: 'The people behind Mit-Mak Motors’ 7-year #1 HelloPeter streak, sales, finance, reconditioning and customer experience experts across six branches.',
   alternates: { canonical: '/staff' },
 };
 
@@ -24,7 +24,7 @@ export default function StaffPage() {
       <PageHero
         eyebrow="The People"
         title="Meet the Team"
-        description="Awards don’t answer WhatsApps at 7pm — people do. Meet the team that earned us 7 years at #1 on HelloPeter."
+        description="Awards don’t answer WhatsApps at 7pm, people do. Meet the team that earned us 7 years at #1 on HelloPeter."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Staff', href: '/staff' }]}
       />
 

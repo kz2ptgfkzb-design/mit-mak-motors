@@ -6,13 +6,13 @@ import { Reveal } from '@/components/ui/reveal';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Referrals — Refer & Earn',
+  title: 'Referrals, Refer & Earn',
   description: 'Refer a friend to Mit-Mak Motors. When they buy, you both earn. Simple, generous and paid out fast.',
   alternates: { canonical: '/referrals' },
 };
 
 const steps = [
-  { icon: Share2, title: 'Refer a friend', text: 'Send them our way — by WhatsApp, a quick message, or in person. Tell us who to expect.' },
+  { icon: Share2, title: 'Refer a friend', text: 'Send them our way, by WhatsApp, a quick message, or in person. Tell us who to expect.' },
   { icon: Car, title: 'They buy & take delivery', text: 'Your friend finds their car, we deliver it free, everyone’s happy.' },
   { icon: Banknote, title: 'You both get paid', text: 'You each receive a R2,000 reward once the deal is finalised. No catch.' },
 ];
@@ -23,7 +23,7 @@ export default function ReferralsPage() {
       <PageHero
         eyebrow="Refer & Earn"
         title="Good Cars, Shared"
-        description="Know someone in the market? Refer them to Mit-Mak. When they buy, you both pocket R2,000 — our way of saying thanks."
+        description="Know someone in the market? Refer them to Mit-Mak. When they buy, you both pocket R2,000, our way of saying thanks."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Referrals', href: '/referrals' }]}
       />
 
@@ -47,7 +47,7 @@ export default function ReferralsPage() {
           <div className="mt-12 overflow-hidden rounded-2xl border border-red/30 bg-gradient-to-br from-red/15 to-ink-900 p-8 text-center lg:p-12">
             <p className="font-display text-sm uppercase tracking-[0.2em] text-red">The Reward</p>
             <p className="mt-3 font-anton text-5xl uppercase tracking-tight text-white sm:text-6xl">R2 000 each</p>
-            <p className="mx-auto mt-4 max-w-md text-graphite-300">Paid to both you and your friend once their purchase is finalised. Refer as many people as you like — there’s no limit.</p>
+            <p className="mx-auto mt-4 max-w-md text-graphite-300">Paid to both you and your friend once their purchase is finalised. Refer as many people as you like, there’s no limit.</p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Button href={whatsappLink('Hi Mit-Mak, I’d like to refer a friend.')} target="_blank" rel="noopener noreferrer" size="lg" magnetic>
                 Refer via WhatsApp

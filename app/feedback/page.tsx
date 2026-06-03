@@ -6,7 +6,7 @@ import { ContactForm } from '@/components/contact/contact-form';
 
 export const metadata: Metadata = {
   title: 'Compliment / Complaint',
-  description: 'Tell us how we did. Mit-Mak Motors takes every compliment and complaint seriously — it’s how we’ve stayed #1 on HelloPeter for 7 years.',
+  description: 'Tell us how we did. Mit-Mak Motors takes every compliment and complaint seriously, it’s how we’ve stayed #1 on HelloPeter for 7 years.',
   alternates: { canonical: '/feedback' },
 };
 
@@ -16,7 +16,7 @@ export default function FeedbackPage() {
       <PageHero
         eyebrow="We're Listening"
         title="Compliment or Complaint"
-        description="Good or bad, we want to hear it — every piece of feedback makes us sharper. It’s exactly how we’ve held #1 on HelloPeter for seven years."
+        description="Good or bad, we want to hear it, every piece of feedback makes us sharper. It’s exactly how we’ve held #1 on HelloPeter for seven years."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Feedback', href: '/feedback' }]}
       />
 
@@ -34,7 +34,7 @@ export default function FeedbackPage() {
               </span>
               <h3 className="mt-4 font-display text-lg uppercase tracking-tight text-white">Got a compliment?</h3>
               <p className="mt-2 text-sm text-graphite-400">
-                Made up about your experience? Tell us — and feel free to leave us a review on HelloPeter too. It means the world to the team.
+                Made up about your experience? Tell us, and feel free to leave us a review on HelloPeter too. It means the world to the team.
               </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-ink-900/60 p-6">

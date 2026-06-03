@@ -24,7 +24,7 @@ const anton = Anton({ subsets: ['latin'], weight: '400', variable: '--font-anton
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Premium Pre-Owned Cars, Pretoria`,
+    default: `${siteConfig.name}, Premium Pre-Owned Cars, Pretoria`,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -46,12 +46,12 @@ export const metadata: Metadata = {
     locale: 'en_ZA',
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name}, ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name}, ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },
@@ -71,7 +71,7 @@ const jsonLd = {
   url: siteConfig.url,
   telephone: siteConfig.phoneDisplay,
   email: siteConfig.email,
-  priceRange: 'R119 900 – R1 999 900',
+  priceRange: 'R119 900 - R1 999 900',
   areaServed: 'ZA',
   aggregateRating: {
     '@type': 'AggregateRating',

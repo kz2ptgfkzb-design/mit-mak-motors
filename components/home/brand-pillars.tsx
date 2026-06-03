@@ -19,7 +19,7 @@ const PILLARS = [
   {
     n: '01',
     title: ['Delivered FREE', 'anywhere in SA'],
-    body: 'From Musina to Cape Agulhas, your car arrives at your door — fully prepped, free of charge. We handle transport, paperwork and handover.',
+    body: 'From Musina to Cape Agulhas, your car arrives at your door, fully prepped, free of charge. We handle transport, paperwork and handover.',
     image: img('1502161254066-6c74afbf07aa'),
     metric: { value: 9, suffix: '/9', decimals: 0, label: 'Provinces · door-to-door · free' },
   },
@@ -33,7 +33,7 @@ const PILLARS = [
   {
     n: '03',
     title: ['Dealer of', 'the Year'],
-    body: 'AutoTrader Dealer of the Year, 2024 and 2025 — recognised for the cars, the service and the experience, twice over.',
+    body: 'AutoTrader Dealer of the Year, 2024 and 2025, recognised for the cars, the service and the experience, twice over.',
     image: img('1583121274602-3e2820c69888'),
     metric: { value: 2, suffix: '×', decimals: 0, label: 'AutoTrader DOTY · 2024 & 2025' },
   },

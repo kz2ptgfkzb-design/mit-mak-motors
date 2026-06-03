@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
  * Shared form handler for the placeholder API routes.
  * If FORM_WEBHOOK_URL is set, the payload is forwarded there (wire this to your
  * CRM / email service / Zapier). Otherwise it's logged server-side and echoed
- * back as success — enough to develop and demo the full UX end-to-end.
+ * back as success, enough to develop and demo the full UX end-to-end.
  */
 export async function handleFormSubmission(req: Request, kind: string) {
   let payload: unknown = {};

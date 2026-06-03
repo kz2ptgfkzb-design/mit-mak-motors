@@ -3,7 +3,7 @@ import type { Award, StatItem } from '@/types';
 export const awards: Award[] = [
   { id: 'at-2025', title: 'AutoTrader Dealer of the Year', subtitle: 'Multi-Franchise Used', year: '2025' },
   { id: 'at-2024', title: 'AutoTrader Dealer of the Year', subtitle: 'Multi-Franchise Used', year: '2024' },
-  { id: 'hp', title: '#1 on HelloPeter', subtitle: '7 Years Running', year: '2018–2025' },
+  { id: 'hp', title: '#1 on HelloPeter', subtitle: '7 Years Running', year: '2018-2025' },
   { id: 'service', title: '9.7 / 10 Service Index', subtitle: 'Verified Customer Rating' },
   { id: 'delivery', title: 'Free Nationwide Delivery', subtitle: 'Door-to-Door, Every Province' },
   { id: 'inspected', title: '212-Point Inspection', subtitle: 'Inspected & Reconditioned' },

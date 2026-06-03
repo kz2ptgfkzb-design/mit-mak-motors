@@ -6,14 +6,14 @@ import { SellForm } from '@/components/sell/sell-form';
 import { CtaBand } from '@/components/layout/cta-band';
 
 export const metadata: Metadata = {
-  title: 'Sell Your Car — Get the Best Cash Price',
+  title: 'Sell Your Car, Get the Best Cash Price',
   description:
     'Sell your car to Mit-Mak Motors for a fair, market-related cash price. Free valuation, instant callback, same-day payment. No admin, no hassle.',
   alternates: { canonical: '/sell-your-car' },
 };
 
 const steps = [
-  { icon: ClipboardList, title: 'Tell us about your car', text: 'A few details and a couple of photos — takes two minutes.' },
+  { icon: ClipboardList, title: 'Tell us about your car', text: 'A few details and a couple of photos, takes two minutes.' },
   { icon: PhoneCall, title: 'Get an instant callback', text: 'Our buying team calls you back, usually within the hour, with a cash offer.' },
   { icon: ClipboardCheck, title: 'Free inspection', text: 'We verify the car at a branch or come to you. No obligation.' },
   { icon: Banknote, title: 'Same-day payment', text: 'Accept the offer and the money is in your account the same day.' },
@@ -27,7 +27,7 @@ export default function SellPage() {
       <PageHero
         eyebrow="Sell or Trade"
         title="Get the Best Cash Price"
-        description="Skip the strangers at your gate. Get a fair, market-related cash offer for your car — free valuation, instant callback, money the same day."
+        description="Skip the strangers at your gate. Get a fair, market-related cash offer for your car, free valuation, instant callback, money the same day."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Sell Your Car', href: '/sell-your-car' }]}
       />
 
@@ -85,7 +85,7 @@ export default function SellPage() {
       <CtaBand
         eyebrow="Trading up?"
         title="Sell and drive away in something new"
-        description="Put your trade-in straight towards your next car from our showroom — and we’ll deliver it free, anywhere in South Africa."
+        description="Put your trade-in straight towards your next car from our showroom, and we’ll deliver it free, anywhere in South Africa."
         primary={{ label: 'Browse the Showroom', href: '/showroom' }}
         secondary={{ label: 'Apply for Finance', href: '/finance' }}
       />

@@ -8,7 +8,7 @@ import { Reveal } from '@/components/ui/reveal';
 import { CtaBand } from '@/components/layout/cta-band';
 
 export const metadata: Metadata = {
-  title: 'FOMO Zone — Raffle, Auction, Merch & Masterclass',
+  title: 'FOMO Zone, Raffle, Auction, Merch & Masterclass',
   description:
     'The Mit-Mak FOMO Zone: win a car in the raffle, steal a deal at the BobElz auction, rep the UB Drip merch, and learn the game at our masterclass.',
   alternates: { canonical: '/fomo-zone' },
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 
 const detail: Record<string, string> = {
   raffle:
-    'Every ticket is a shot at driving away in a fully-loaded hero car — reconditioned, licensed and delivered free to your door. Draws are streamed live, winners announced on the spot. Limited tickets, big odds, bigger energy.',
+    'Every ticket is a shot at driving away in a fully-loaded hero car, reconditioned, licensed and delivered free to your door. Draws are streamed live, winners announced on the spot. Limited tickets, big odds, bigger energy.',
   auction:
-    'No reserve. No games. Hand-picked stock goes under the hammer live, and the highest bid wins — often well below retail. Register, get verified, and bid from anywhere in South Africa.',
+    'No reserve. No games. Hand-picked stock goes under the hammer live, and the highest bid wins, often well below retail. Register, get verified, and bid from anywhere in South Africa.',
   merch:
-    'Limited-run apparel built for the culture — tees, caps and outerwear that rep the brand on every street. Drops are small and sell fast. Cop it before it’s gone.',
+    'Limited-run apparel built for the culture, tees, caps and outerwear that rep the brand on every street. Drops are small and sell fast. Cop it before it’s gone.',
   masterclass:
-    'Everything we’ve learned about buying smart, selling high and financing right — taught straight, no gatekeeping. Live sessions and online modules for first-timers and seasoned petrolheads alike.',
+    'Everything we’ve learned about buying smart, selling high and financing right, taught straight, no gatekeeping. Live sessions and online modules for first-timers and seasoned petrolheads alike.',
 };
 
 export default function FomoZonePage() {
@@ -31,7 +31,7 @@ export default function FomoZonePage() {
       <PageHero
         eyebrow="Don't Miss Out"
         title="The FOMO Zone"
-        description="More than a dealership. Win a car, steal an auction deal, rep the merch and learn the game — this is where the Mit-Mak community lives."
+        description="More than a dealership. Win a car, steal an auction deal, rep the merch and learn the game, this is where the Mit-Mak community lives."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'FOMO Zone', href: '/fomo-zone' }]}
       />
 
@@ -62,7 +62,7 @@ export default function FomoZonePage() {
                     {item.cta}
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </button>
-                  <p className="mt-3 text-xs text-graphite-600">Launching soon — drop your email below to get first access.</p>
+                  <p className="mt-3 text-xs text-graphite-600">Launching soon, drop your email below to get first access.</p>
                 </div>
               </div>
             </div>

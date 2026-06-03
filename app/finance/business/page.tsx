@@ -34,7 +34,7 @@ export default function BusinessFinancePage() {
       <PageHero
         eyebrow="Business Finance"
         title="Finance for Your Fleet"
-        description="From a single company car to a full fleet — structured finance for Pty Ltds, CCs, sole proprietors and trusts, with VAT-efficient options and a dedicated consultant."
+        description="From a single company car to a full fleet, structured finance for Pty Ltds, CCs, sole proprietors and trusts, with VAT-efficient options and a dedicated consultant."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Finance', href: '/finance' }, { label: 'Business', href: '/finance/business' }]}
       >
         <Tabs />

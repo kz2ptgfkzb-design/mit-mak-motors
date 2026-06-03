@@ -5,17 +5,17 @@ import { Reveal } from '@/components/ui/reveal';
 import { SectionHeading } from '@/components/ui/section-heading';
 
 export const metadata: Metadata = {
-  title: 'Careers — Join the Team',
+  title: 'Careers, Join the Team',
   description: 'Careers at Mit-Mak Motors. Join Pretoria’s fastest-growing, most-awarded pre-owned dealership. Sales, finance, reconditioning, delivery and marketing roles.',
   alternates: { canonical: '/careers' },
 };
 
 const roles = [
-  { title: 'Sales Executive', branch: 'Flagship — Gerrit Maritz', type: 'Full-time', blurb: 'Own the floor. Help customers find the right car and close with honesty and pace.' },
+  { title: 'Sales Executive', branch: 'Flagship, Gerrit Maritz', type: 'Full-time', blurb: 'Own the floor. Help customers find the right car and close with honesty and pace.' },
   { title: 'F&I Business Manager', branch: 'Finance House', type: 'Full-time', blurb: 'Structure finance and insurance, secure the best bank rates, protect the deal.' },
-  { title: 'Reconditioning Technician', branch: 'Delivery Hub', type: 'Full-time', blurb: 'Run cars through the 212-point process. Detail, repair, sign off — to the standard.' },
+  { title: 'Reconditioning Technician', branch: 'Delivery Hub', type: 'Full-time', blurb: 'Run cars through the 212-point process. Detail, repair, sign off, to the standard.' },
   { title: 'Nationwide Delivery Driver', branch: 'Delivery Hub', type: 'Full-time', blurb: 'Get reconditioned cars to customers’ doors across all nine provinces, spotless.' },
-  { title: 'Digital Marketing Coordinator', branch: 'Flagship — Gerrit Maritz', type: 'Full-time', blurb: 'Run the content, the socials and the FOMO Zone. Make the brand impossible to ignore.' },
+  { title: 'Digital Marketing Coordinator', branch: 'Flagship, Gerrit Maritz', type: 'Full-time', blurb: 'Run the content, the socials and the FOMO Zone. Make the brand impossible to ignore.' },
   { title: 'Customer Experience Agent', branch: 'Premium & Performance', type: 'Full-time', blurb: 'Be the reason we stay #1 on HelloPeter. Fast, warm, relentless follow-through.' },
 ];
 
@@ -32,7 +32,7 @@ export default function CareersPage() {
       <PageHero
         eyebrow="Work With Us"
         title="Build the Standard"
-        description="We’re Pretoria’s fastest-growing, most-awarded pre-owned dealership — and we’re hiring people who care as much as we do."
+        description="We’re Pretoria’s fastest-growing, most-awarded pre-owned dealership, and we’re hiring people who care as much as we do."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Careers', href: '/careers' }]}
       />
 
@@ -83,7 +83,7 @@ export default function CareersPage() {
           </div>
           <p className="mt-8 text-sm text-graphite-500">
             Don’t see your role? Send your CV to{' '}
-            <a href="mailto:careers@mitmakmotors.co.za" className="text-red underline underline-offset-4">careers@mitmakmotors.co.za</a> — we’re always keen to meet good people.
+            <a href="mailto:careers@mitmakmotors.co.za" className="text-red underline underline-offset-4">careers@mitmakmotors.co.za</a>, we’re always keen to meet good people.
           </p>
         </div>
       </section>

@@ -40,7 +40,7 @@ export function FinanceExtras({ variant }: { variant: 'individual' | 'business' 
         id="credit-score"
         icon={<Activity className="h-5 w-5" />}
         title="Free Credit Score"
-        blurb="Know where you stand before you apply. Check your score for free — no impact on your record."
+        blurb="Know where you stand before you apply. Check your score for free, no impact on your record."
         cta="Check my score"
         href="/finance#credit-score"
       />
@@ -48,7 +48,7 @@ export function FinanceExtras({ variant }: { variant: 'individual' | 'business' 
         id="insurance"
         icon={<ShieldCheck className="h-5 w-5" />}
         title="King Price Insurance"
-        blurb="Cover from the moment you drive off. Premiums that decrease as your car’s value does — exclusive to Mit-Mak buyers."
+        blurb="Cover from the moment you drive off. Premiums that decrease as your car’s value does, exclusive to Mit-Mak buyers."
         cta="Get an insurance quote"
         href="/finance#insurance"
       />
@@ -56,7 +56,7 @@ export function FinanceExtras({ variant }: { variant: 'individual' | 'business' 
         <Card
           icon={<Building2 className="h-5 w-5" />}
           title="Buying through a business?"
-          blurb="Companies, CCs, sole proprietors and trusts — we have a dedicated business finance track."
+          blurb="Companies, CCs, sole proprietors and trusts, we have a dedicated business finance track."
           cta="Business finance"
           href="/finance/business"
         />

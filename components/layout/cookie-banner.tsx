@@ -50,7 +50,7 @@ export function CookieBanner() {
               <p className="font-display text-sm uppercase tracking-wide text-white">We value your privacy</p>
               <p className="mt-1.5 text-sm leading-relaxed text-graphite-300">
                 We use essential cookies to run the site and optional ones to improve it. You can decline the
-                optional ones — your choice.{' '}
+                optional ones, your choice.{' '}
                 <Link href="/privacy" className="text-red underline-offset-4 hover:underline">
                   Privacy Policy
                 </Link>

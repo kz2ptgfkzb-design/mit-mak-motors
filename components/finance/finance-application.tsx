@@ -35,7 +35,7 @@ export function FinanceApplication({ variant, vehicleName = '' }: { variant: 'in
   const consentStep: StepDef<State> = {
     id: 'consent',
     title: 'Review & Consent',
-    description: 'Final step — confirm and submit. We’ll match you to the best rate across every major bank.',
+    description: 'Final step, confirm and submit. We’ll match you to the best rate across every major bank.',
     validate: (f): Record<string, string> => (f.consent ? {} : { consent: 'Please give consent to proceed' }),
     render: ({ form, update, errors }) => (
       <div className="space-y-5">
