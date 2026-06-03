@@ -11,6 +11,7 @@ import { Footer } from '@/components/layout/footer';
 import { QuickActions } from '@/components/layout/quick-actions';
 import { CookieBanner } from '@/components/layout/cookie-banner';
 import { ScrollProgress } from '@/components/layout/scroll-progress';
+import { IgnitionIntro } from '@/components/home/ignition-intro';
 
 const display = Oswald({
   subsets: ['latin'],
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={cn(display.variable, sans.variable, anton.variable)}>
       <body className="bg-ink-900 font-sans antialiased">
+        <IgnitionIntro />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-red focus:px-5 focus:py-2 focus:font-display focus:text-sm focus:uppercase focus:text-white"
