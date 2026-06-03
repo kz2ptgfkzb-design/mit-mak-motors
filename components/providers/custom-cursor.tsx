@@ -1,104 +1,100 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { useIsDesktop, useMounted } from '@/lib/hooks';
 
-type Variant = 'default' | 'hover' | 'text' | 'drag';
-
-const INTERACTIVE = 'a, button, input, textarea, select, label, [role="button"], [data-cursor]';
-
+/**
+ * A smooth red "racing trail" that follows the normal system cursor.
+ * Canvas-based for performance; the OS cursor stays visible. Disabled on
+ * touch devices and under prefers-reduced-motion.
+ */
 export function CustomCursor() {
   const mounted = useMounted();
   const isDesktop = useIsDesktop();
   const reduce = useReducedMotion();
   const active = mounted && isDesktop && !reduce;
-
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const ringX = useSpring(cursorX, { stiffness: 380, damping: 36, mass: 0.6 });
-  const ringY = useSpring(cursorY, { stiffness: 380, damping: 36, mass: 0.6 });
-  const dotX = useSpring(cursorX, { stiffness: 1100, damping: 60 });
-  const dotY = useSpring(cursorY, { stiffness: 1100, damping: 60 });
-
-  const [variant, setVariant] = useState<Variant>('default');
-  const [label, setLabel] = useState('');
-  const [down, setDown] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!active) return;
-    document.documentElement.classList.add('has-cursor');
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    const move = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0;
+    let h = 0;
+    const resize = () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    const over = (e: MouseEvent) => {
-      const el = (e.target as HTMLElement)?.closest?.(INTERACTIVE) as HTMLElement | null;
-      if (el) {
-        const v = (el.getAttribute('data-cursor') as Variant) || 'hover';
-        setVariant(v);
-        setLabel(el.getAttribute('data-cursor-text') || '');
-      } else {
-        setVariant('default');
-        setLabel('');
+    resize();
+    window.addEventListener('resize', resize);
+
+    const pts: { x: number; y: number }[] = [];
+    const MAX = 18;
+    let mx = -100;
+    let my = -100;
+    let moved = false;
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX;
+      my = e.clientY;
+      moved = true;
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+
+    let raf = 0;
+    const loop = () => {
+      if (moved) {
+        pts.push({ x: mx, y: my });
+        if (pts.length > MAX) pts.shift();
+        moved = false;
+      } else if (pts.length) {
+        pts.shift(); // dissipate when idle
       }
-    };
-    const downFn = () => setDown(true);
-    const upFn = () => setDown(false);
 
-    window.addEventListener('mousemove', move, { passive: true });
-    window.addEventListener('mouseover', over, { passive: true });
-    window.addEventListener('mousedown', downFn);
-    window.addEventListener('mouseup', upFn);
-    return () => {
-      document.documentElement.classList.remove('has-cursor');
-      window.removeEventListener('mousemove', move);
-      window.removeEventListener('mouseover', over);
-      window.removeEventListener('mousedown', downFn);
-      window.removeEventListener('mouseup', upFn);
+      ctx.clearRect(0, 0, w, h);
+      const n = pts.length;
+      if (n > 1) {
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.shadowBlur = 0;
+        for (let i = 1; i < n; i++) {
+          const t = i / n; // 0 tail -> 1 head
+          ctx.beginPath();
+          ctx.moveTo(pts[i - 1].x, pts[i - 1].y);
+          ctx.lineTo(pts[i].x, pts[i].y);
+          ctx.strokeStyle = `rgba(225,6,0,${t * 0.85})`;
+          ctx.lineWidth = t * 4.5 + 0.4;
+          ctx.stroke();
+        }
+        // glowing head
+        const head = pts[n - 1];
+        ctx.beginPath();
+        ctx.arc(head.x, head.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = '#E10600';
+        ctx.shadowColor = 'rgba(225,6,0,0.9)';
+        ctx.shadowBlur = 12;
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(loop);
     };
-  }, [active, cursorX, cursorY]);
+    raf = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMove);
+    };
+  }, [active]);
 
   if (!active) return null;
-
-  const big = variant === 'hover' || variant === 'text' || variant === 'drag';
-  const ringSize = big ? 64 : 30;
-
-  return (
-    <>
-      <motion.div style={{ x: ringX, y: ringY }} className="pointer-events-none fixed left-0 top-0 z-[120]">
-        <motion.div
-          className="flex items-center justify-center rounded-full border border-white/80 mix-blend-difference"
-          animate={{
-            width: ringSize,
-            height: ringSize,
-            marginLeft: -ringSize / 2,
-            marginTop: -ringSize / 2,
-            backgroundColor: big ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0)',
-            scale: down ? 0.85 : 1,
-          }}
-          transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-        >
-          {label && (
-            <span className="font-display text-[9px] uppercase tracking-widest text-white">
-              {label}
-            </span>
-          )}
-        </motion.div>
-      </motion.div>
-      <motion.div style={{ x: dotX, y: dotY }} className="pointer-events-none fixed left-0 top-0 z-[120]">
-        <motion.div
-          className="rounded-full bg-red"
-          animate={{
-            width: big ? 0 : 6,
-            height: big ? 0 : 6,
-            marginLeft: big ? 0 : -3,
-            marginTop: big ? 0 : -3,
-          }}
-          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-        />
-      </motion.div>
-    </>
-  );
+  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[120]" aria-hidden />;
 }

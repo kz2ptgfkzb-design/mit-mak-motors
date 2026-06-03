@@ -28,10 +28,10 @@ export const vehicleCards: Vehicle[] = vehicles.map(toCard);
 export const featuredVehicles = vehicles.filter((v) => v.featured);
 export const featuredCards = vehicleCards.filter((v) => v.featured);
 
-// Hero = a real Porsche from their stock (silver Panamera, studio hero shot).
+// Hero tag = their real BMW M4 (matches the BMW M4 hero image).
 export const heroVehicle =
-  vehicles.find((v) => v.slug === '2012-porsche-panamera-diesel-2') ??
-  vehicles.find((v) => /porsche/i.test(v.make) && v.images.length >= 6) ??
+  vehicles.find((v) => v.slug === '2015-bmw-m4-coupe-auto') ??
+  vehicles.find((v) => /bmw/i.test(v.make) && /m4/i.test(v.model + v.variant)) ??
   [...vehicles].sort((a, b) => b.price - a.price).find((v) => v.images.length >= 6) ??
   vehicles[0];
 

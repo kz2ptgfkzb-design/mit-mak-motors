@@ -35,26 +35,35 @@ export function Header() {
         >
           <div className="container flex items-center justify-between gap-4">
             <Link href="/" aria-label="Mit-Mak Motors home" data-cursor="hover">
-              <Logo />
+              <Logo priority />
             </Link>
 
-            <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+            <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
               {primaryNav.map((link) => {
                 const active = pathname === link.href;
+                const isFomo = !!link.badge;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     data-cursor="hover"
                     className={cn(
-                      'relative font-display text-xs uppercase tracking-[0.14em] transition-colors',
-                      active ? 'text-white' : 'text-graphite-300 hover:text-white',
+                      'relative inline-flex items-center gap-1.5 font-display text-xs uppercase tracking-[0.14em] transition-colors',
+                      isFomo
+                        ? 'text-red hover:text-red-300'
+                        : active
+                          ? 'text-white'
+                          : 'text-graphite-300 hover:text-white',
                     )}
                   >
                     {link.label}
-                    {active && (
-                      <span className="absolute -bottom-1.5 left-0 h-px w-full bg-red" />
+                    {isFomo && (
+                      <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red opacity-75" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red" />
+                      </span>
                     )}
+                    {active && !isFomo && <span className="absolute -bottom-1.5 left-0 h-px w-full bg-red" />}
                   </Link>
                 );
               })}

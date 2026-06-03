@@ -133,14 +133,6 @@ html.lenis body {
   }
 }
 
-/* ─────────────────────── Custom cursor support ─────────────────────── */
-@media (hover: hover) and (pointer: fine) {
-  html.has-cursor,
-  html.has-cursor * {
-    cursor: none !important;
-  }
-}
-
 /* ─────────────────── Reduced motion: respect the user ─────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,

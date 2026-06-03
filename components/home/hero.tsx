@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
@@ -11,9 +10,10 @@ import { formatPrice } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { RevealText, Reveal } from '@/components/ui/reveal';
 import { SpeedLines, Chevron } from '@/components/ui/chevron';
-import { useIsDesktop, useMounted } from '@/lib/hooks';
 
-const HeroScene = dynamic(() => import('./hero-scene'), { ssr: false });
+// High-quality hero shot of a BMW M4 — a model they actually stock & sell.
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=2000&h=1100&q=85';
 
 function HeroRev() {
   const [rev, setRev] = useState(false);
@@ -27,7 +27,6 @@ function HeroRev() {
         setTimeout(() => setRev(false), 720);
       }}
       aria-label="Rev the engine"
-      data-cursor="hover"
       className="group relative hidden h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/15 bg-ink-900/40 backdrop-blur transition-shadow hover:shadow-glow lg:inline-flex"
     >
       <svg viewBox="0 0 64 64" className="h-12 w-12">
@@ -70,23 +69,15 @@ function HeroRev() {
 
 export function Hero({ vehicle }: { vehicle: Vehicle }) {
   const reduce = useReducedMotion();
-  const isDesktop = useIsDesktop();
-  const mounted = useMounted();
-  const enable3D = mounted && isDesktop && !reduce;
   const r = reduce ? 0 : 1;
 
   const mx = useMotionValue(0);
-  const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 60, damping: 18, mass: 0.6 });
-  const sy = useSpring(my, { stiffness: 60, damping: 18, mass: 0.6 });
-  const carX = useTransform(sx, [-0.5, 0.5], [-28 * r, 28 * r]);
-  const carY = useTransform(sy, [-0.5, 0.5], [-18 * r, 18 * r]);
   const linesX = useTransform(sx, [-0.5, 0.5], [50 * r, -50 * r]);
 
   function onMove(e: React.MouseEvent) {
     if (reduce) return;
     mx.set(e.clientX / window.innerWidth - 0.5);
-    my.set(e.clientY / window.innerHeight - 0.5);
   }
 
   return (
@@ -95,25 +86,21 @@ export function Hero({ vehicle }: { vehicle: Vehicle }) {
       className="relative flex h-[100svh] min-h-[660px] w-full items-center overflow-hidden bg-ink-950"
       aria-label="Mit-Mak Motors hero"
     >
-      {/* Car image with parallax */}
-      <motion.div style={{ x: carX, y: carY }} className="absolute inset-0 scale-110">
+      {/* Hero car */}
+      <div className="absolute inset-0">
         <Image
-          src={vehicle.images[0]}
-          alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+          src={HERO_IMAGE}
+          alt="BMW M4 performance coupe at Mit-Mak Motors"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center"
         />
-      </motion.div>
+      </div>
 
-      {/* Cinematic gradients + grid */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/35 to-ink-950/75" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/30 to-transparent" />
-      <div className="absolute inset-0 bg-grid opacity-40" />
-
-      {/* 3D ambient scene */}
-      {enable3D && <div className="absolute inset-0 z-[1]">{<HeroScene />}</div>}
+      {/* Cinematic gradients — keep the car visible; the headline uses a text-shadow for legibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/25" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/35 to-transparent" />
 
       {/* Speed lines */}
       <motion.div style={{ x: linesX }} className="absolute right-[-5%] top-0 z-[1] h-full w-2/3 text-red">
@@ -134,15 +121,15 @@ export function Hero({ vehicle }: { vehicle: Vehicle }) {
           </div>
         </Reveal>
 
-        <h1 className="font-anton text-[clamp(3.4rem,12vw,11rem)] uppercase leading-[0.82] tracking-tight text-white">
+        <h1 className="font-anton text-[clamp(3.4rem,12vw,11rem)] uppercase leading-[0.82] tracking-tight text-white [text-shadow:0_2px_30px_rgba(5,5,5,0.85)]">
           <span className="block overflow-hidden">
-            <RevealText text="Trusted." splitBy="char" stagger={0.035} delay={0.15} />
+            <RevealText text="Trusted." splitBy="char" stagger={0.035} delay={0.1} inView={false} />
           </span>
           <span className="block overflow-hidden text-stroke">
-            <RevealText text="Awarded." splitBy="char" stagger={0.035} delay={0.3} />
+            <RevealText text="Awarded." splitBy="char" stagger={0.035} delay={0.25} inView={false} />
           </span>
           <span className="block overflow-hidden text-red red-glow-text">
-            <RevealText text="Unmatched." splitBy="char" stagger={0.035} delay={0.45} />
+            <RevealText text="Unmatched." splitBy="char" stagger={0.035} delay={0.4} inView={false} />
           </span>
         </h1>
 
@@ -167,12 +154,10 @@ export function Hero({ vehicle }: { vehicle: Vehicle }) {
       {/* Featured vehicle tag */}
       <Link
         href={`/vehicles/${vehicle.slug}`}
-        data-cursor="view"
-        data-cursor-text="Explore"
         className="group absolute bottom-10 right-6 z-10 hidden items-center gap-3 rounded-2xl border border-white/10 bg-ink-900/60 p-2.5 pr-4 backdrop-blur-xl transition-colors hover:border-red/50 lg:flex"
       >
         <div className="relative h-16 w-24 overflow-hidden rounded-xl">
-          <Image src={vehicle.images[1]} alt="" fill sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
+          <Image src={vehicle.images[1] ?? vehicle.images[0]} alt="" fill sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
         </div>
         <div>
           <p className="font-display text-[10px] uppercase tracking-[0.2em] text-red">Now in the showroom</p>

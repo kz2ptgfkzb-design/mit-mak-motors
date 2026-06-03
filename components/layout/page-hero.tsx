@@ -44,7 +44,7 @@ export function PageHero({
           </Reveal>
         )}
         <h1 className="font-anton text-5xl uppercase leading-[0.88] tracking-tight text-white sm:text-6xl lg:text-7xl">
-          <RevealText text={title} splitBy="word" stagger={0.05} />
+          <RevealText text={title} splitBy="word" stagger={0.05} inView={false} />
         </h1>
         {description && (
           <Reveal delay={0.12}>

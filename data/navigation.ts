@@ -4,6 +4,7 @@ export const primaryNav: NavLink[] = [
   { label: 'Showroom', href: '/showroom' },
   { label: 'Finance', href: '/finance' },
   { label: 'Sell Your Car', href: '/sell-your-car' },
+  { label: 'FOMO Zone', href: '/fomo-zone', badge: 'LIVE' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

@@ -45,6 +45,7 @@ export function RevealText({
   stagger = 0.05,
   delay = 0,
   once = true,
+  inView = true,
 }: {
   text: string;
   className?: string;
@@ -52,6 +53,7 @@ export function RevealText({
   stagger?: number;
   delay?: number;
   once?: boolean;
+  inView?: boolean;
 }) {
   const reduce = useReducedMotion();
   if (reduce) return <span className={className}>{text}</span>;
@@ -72,8 +74,7 @@ export function RevealText({
       className={cn('inline-block', className)}
       variants={container}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once, amount: 0.5 }}
+      {...(inView ? { whileInView: 'show', viewport: { once, amount: 0.5 } } : { animate: 'show' })}
       aria-label={text}
     >
       {tokens.map((token, i) => (
