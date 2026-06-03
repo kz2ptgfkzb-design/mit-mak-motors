@@ -81,9 +81,17 @@ types/               # The content model (single source of truth)
 
 ## 🔁 Swapping in real inventory
 
-The whole site is driven by [`data/`](data). To go live with real stock:
+The whole site is driven by [`data/`](data). The showroom ships pre-loaded with the **real, live Mit-Mak inventory** — 401 vehicles, ~30 real photos each — imported from mitmakmotors.co.za and mapped to the correct car.
 
-1. **Vehicles** — edit [`data/vehicles.ts`](data/vehicles.ts). Each vehicle follows the `Vehicle` type in [`types/index.ts`](types/index.ts). Replace each `images` array with your real photo URLs (the gallery supports 30+ images per car). Filters, sort, compare, related vehicles, sitemap and JSON-LD all update automatically.
+**Refresh live stock anytime:**
+
+```bash
+node scripts/scrape-inventory.mjs   # re-scrapes /viewcar/ listings → data/vehicles.json
+```
+
+It reads their sitemap, parses every listing's specs + AutoTrader-hosted gallery, and writes [`data/vehicles.json`](data/vehicles.json). To customise:
+
+1. **Vehicles** — regenerate via the script, or hand-edit [`data/vehicles.json`](data/vehicles.json) (typed by `Vehicle` in [`types/index.ts`](types/index.ts)). Each `images` array holds the full gallery (the detail page supports 30+). Filters, sort, compare, related, sitemap and JSON-LD update automatically. The showroom paginates (24 at a time) so it scales to hundreds of cars; the 1.5 MB dataset stays server-side and only lightweight card data reaches the client.
 2. **Locations** — edit [`data/locations.ts`](data/locations.ts) (addresses, phones, coordinates).
 3. **Branding / contact** — edit [`data/site.ts`](data/site.ts) (name, phone, WhatsApp, hours, socials).
 4. **Navigation & FOMO Zone** — edit [`data/navigation.ts`](data/navigation.ts).

@@ -2,13 +2,13 @@
 
 import { useRef } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { featuredVehicles } from '@/data/vehicles';
+import type { Vehicle } from '@/types';
 import { VehicleCard } from '@/components/vehicle/vehicle-card';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { Button } from '@/components/ui/button';
 import { Magnetic } from '@/components/ui/magnetic';
 
-export function FeaturedInventory() {
+export function FeaturedInventory({ vehicles }: { vehicles: Vehicle[] }) {
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef({ active: false, startX: 0, startScroll: 0, moved: 0 });
   const suppressClick = useRef(false);
@@ -84,7 +84,7 @@ export function FeaturedInventory() {
         data-cursor-text="Drag"
         className="hide-scrollbar mt-12 flex cursor-grab snap-x snap-mandatory gap-5 overflow-x-auto px-5 py-8 select-none active:cursor-grabbing sm:px-8 lg:px-[max(2rem,calc((100vw-1400px)/2+3.5rem))]"
       >
-        {featuredVehicles.map((v, i) => (
+        {vehicles.map((v, i) => (
           <div key={v.id} className="w-[300px] shrink-0 snap-start sm:w-[350px]">
             <VehicleCard vehicle={v} priority={i < 2} />
           </div>

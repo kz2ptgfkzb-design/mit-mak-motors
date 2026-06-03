@@ -1,3 +1,4 @@
+import { featuredCards, heroVehicle, toCard } from '@/data/vehicles';
 import { IgnitionIntro } from '@/components/home/ignition-intro';
 import { Hero } from '@/components/home/hero';
 import { AwardsMarquee } from '@/components/home/awards-marquee';
@@ -12,9 +13,9 @@ export default function HomePage() {
   return (
     <>
       <IgnitionIntro />
-      <Hero />
+      <Hero vehicle={toCard(heroVehicle)} />
       <AwardsMarquee />
-      <FeaturedInventory />
+      <FeaturedInventory vehicles={featuredCards} />
       <ScrollMarquee />
       <BrandPillars />
       <Testimonials />

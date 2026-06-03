@@ -32,6 +32,7 @@ function Tabs({ active }: { active: 'individual' | 'business' }) {
 export default function FinancePage({ searchParams }: { searchParams: { vehicle?: string } }) {
   const vehicle = searchParams.vehicle ? getVehicle(searchParams.vehicle) : undefined;
   const price = vehicle?.price ?? 549900;
+  const vehicleName = vehicle ? `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}` : '';
 
   return (
     <>
@@ -48,7 +49,7 @@ export default function FinancePage({ searchParams }: { searchParams: { vehicle?
         <div className="container grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <div className="rounded-2xl border border-white/10 bg-ink-850 p-6 lg:p-8">
-              <FinanceApplication variant="individual" vehicleSlug={searchParams.vehicle} />
+              <FinanceApplication variant="individual" vehicleName={vehicleName} />
             </div>
           </div>
           <aside className="space-y-6 lg:col-span-5">

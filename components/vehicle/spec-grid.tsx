@@ -30,7 +30,7 @@ export function SpecGrid({ vehicle }: { vehicle: Vehicle }) {
     { label: 'Transmission', value: vehicle.transmission, icon: <Cog className="h-4 w-4" /> },
     { label: 'Fuel', value: vehicle.fuel, icon: <Fuel className="h-4 w-4" /> },
     { label: 'Engine', value: vehicle.engineSize, icon: <Zap className="h-4 w-4" /> },
-    { label: 'Power', value: vehicle.power, icon: <Gauge className="h-4 w-4" /> },
+    { label: 'Power', value: vehicle.power || '—', icon: <Gauge className="h-4 w-4" /> },
     { label: 'Doors', value: vehicle.doors, icon: <DoorOpen className="h-4 w-4" /> },
     { label: 'Seats', value: vehicle.seats, icon: <Users className="h-4 w-4" /> },
     { label: 'Colour', value: vehicle.color, icon: <Palette className="h-4 w-4" /> },

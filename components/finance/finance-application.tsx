@@ -1,6 +1,5 @@
 'use client';
 
-import { getVehicle } from '@/data/vehicles';
 import { TERM_OPTIONS } from '@/lib/finance';
 import { MultiStepForm, type StepDef } from '@/components/forms/multi-step-form';
 import { Field, TextInput, SelectInput, RadioCards } from '@/components/forms/form-controls';
@@ -25,10 +24,7 @@ function emailCheck(form: State, e: Record<string, string>, key = 'email') {
   return e;
 }
 
-export function FinanceApplication({ variant, vehicleSlug }: { variant: 'individual' | 'business'; vehicleSlug?: string }) {
-  const vehicle = vehicleSlug ? getVehicle(vehicleSlug) : undefined;
-  const vehicleName = vehicle ? `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}` : '';
-
+export function FinanceApplication({ variant, vehicleName = '' }: { variant: 'individual' | 'business'; vehicleName?: string }) {
   const initial: State = {
     vehicleOfInterest: vehicleName,
     term: '72',

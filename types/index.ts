@@ -23,7 +23,7 @@ export type Transmission = 'Automatic' | 'Manual' | 'DCT' | 'CVT';
 
 export type FuelType = 'Petrol' | 'Diesel' | 'Hybrid' | 'Electric';
 
-export type Condition = 'New' | 'Demo' | 'Excellent' | 'Very Good' | 'Good';
+export type Condition = 'New' | 'Demo' | 'Used' | 'Excellent' | 'Very Good' | 'Good';
 
 export interface FeatureGroup {
   category: string;
@@ -56,7 +56,7 @@ export interface Vehicle {
   fuel: FuelType;
   mileage: number; // km
   engineSize: string; // e.g. "2.0L Turbo"
-  power: string; // e.g. "135 kW"
+  power?: string; // e.g. "135 kW"
   doors: number;
   seats: number;
   color: string;

@@ -2,19 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { SearchX } from 'lucide-react';
-import type { VehicleFilters, SortKey } from '@/types';
-import {
-  vehicles,
-  allMakes,
-  allBodyTypes,
-  allDriveTypes,
-  allFuelTypes,
-  allTransmissions,
-  modelsByMake,
-  priceBounds,
-  yearBounds,
-  mileageMax,
-} from '@/data/vehicles';
+import type { Vehicle, VehicleFilters, SortKey } from '@/types';
 import { filterVehicles, sortVehicles, defaultFilters, countActiveFilters } from '@/lib/filters';
 import { FilterBar, type FilterMeta } from './filter-bar';
 import { VehicleCard } from '@/components/vehicle/vehicle-card';
@@ -23,22 +11,14 @@ import { VehicleSkeleton } from './vehicle-skeleton';
 import { CompareTray } from './compare-drawer';
 import { Button } from '@/components/ui/button';
 
-const meta: FilterMeta = {
-  makes: allMakes,
-  modelsByMake,
-  bodyTypes: allBodyTypes,
-  driveTypes: allDriveTypes,
-  fuels: allFuelTypes,
-  transmissions: allTransmissions,
-  priceBounds,
-  yearBounds,
-  mileageMax,
-};
-
 export function ShowroomClient({
+  cards,
+  meta,
   initialFilters,
   initialSort,
 }: {
+  cards: Vehicle[];
+  meta: FilterMeta;
   initialFilters: Partial<VehicleFilters>;
   initialSort: SortKey;
 }) {
@@ -47,15 +27,18 @@ export function ShowroomClient({
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const [loading, setLoading] = useState(false);
   const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [visible, setVisible] = useState(24);
 
-  const results = useMemo(() => sortVehicles(filterVehicles(vehicles, filters), sort), [filters, sort]);
+  const results = useMemo(() => sortVehicles(filterVehicles(cards, filters), sort), [cards, filters, sort]);
+  const shown = results.slice(0, visible);
   const activeCount = countActiveFilters(filters);
-  const compareVehicles = vehicles.filter((v) => compareIds.includes(v.id));
+  const compareVehicles = cards.filter((v) => compareIds.includes(v.id));
 
-  // Brief skeleton state on filter/sort change for a polished feel.
+  // Brief skeleton state on filter/sort change for a polished feel; reset paging.
   const sig = JSON.stringify(filters) + sort;
   useEffect(() => {
     setLoading(true);
+    setVisible(24);
     const t = setTimeout(() => setLoading(false), 280);
     return () => clearTimeout(t);
   }, [sig]);
@@ -103,25 +86,40 @@ export function ShowroomClient({
               Clear all filters
             </Button>
           </div>
-        ) : view === 'grid' ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {results.map((v, i) => (
-              <VehicleCard
-                key={v.id}
-                vehicle={v}
-                priority={i < 3}
-                selectable
-                selected={compareIds.includes(v.id)}
-                onSelect={() => toggleCompare(v.id)}
-              />
-            ))}
-          </div>
         ) : (
-          <div className="flex flex-col gap-4">
-            {results.map((v) => (
-              <VehicleListItem key={v.id} vehicle={v} selected={compareIds.includes(v.id)} onSelect={() => toggleCompare(v.id)} />
-            ))}
-          </div>
+          <>
+            {view === 'grid' ? (
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {shown.map((v, i) => (
+                  <VehicleCard
+                    key={v.id}
+                    vehicle={v}
+                    priority={i < 3}
+                    selectable
+                    selected={compareIds.includes(v.id)}
+                    onSelect={() => toggleCompare(v.id)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                {shown.map((v) => (
+                  <VehicleListItem key={v.id} vehicle={v} selected={compareIds.includes(v.id)} onSelect={() => toggleCompare(v.id)} />
+                ))}
+              </div>
+            )}
+
+            {results.length > visible && (
+              <div className="mt-12 flex flex-col items-center gap-3">
+                <p className="text-sm text-graphite-400">
+                  Showing <span className="text-white">{shown.length}</span> of {results.length}
+                </p>
+                <Button onClick={() => setVisible((v) => v + 24)} variant="outline" size="lg">
+                  Load more cars
+                </Button>
+              </div>
+            )}
+          </>
         )}
       </div>
 

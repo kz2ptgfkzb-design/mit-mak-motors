@@ -71,7 +71,7 @@ const jsonLd = {
   url: siteConfig.url,
   telephone: siteConfig.phoneDisplay,
   email: siteConfig.email,
-  priceRange: 'R269 900 – R1 999 900',
+  priceRange: 'R119 900 – R1 999 900',
   areaServed: 'ZA',
   aggregateRating: {
     '@type': 'AggregateRating',

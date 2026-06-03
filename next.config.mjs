@@ -6,6 +6,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'img.autotrader.co.za',
+      },
+      {
+        protocol: 'https',
         hostname: 'images.unsplash.com',
       },
       {

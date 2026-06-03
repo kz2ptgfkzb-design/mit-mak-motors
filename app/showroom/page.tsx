@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { SortKey, VehicleFilters, BodyType } from '@/types';
-import { allBodyTypes, allMakes } from '@/data/vehicles';
+import { allBodyTypes, allMakes, vehicleCards, filterMeta } from '@/data/vehicles';
 import { PageHero } from '@/components/layout/page-hero';
 import { ShowroomClient } from '@/components/showroom/showroom-client';
 
@@ -38,7 +38,7 @@ export default function ShowroomPage({
         description="Every vehicle inspected, reconditioned and ready to drive — then delivered free, anywhere in South Africa. Filter, compare and reserve in minutes."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Showroom', href: '/showroom' }]}
       />
-      <ShowroomClient initialFilters={initialFilters} initialSort={initialSort} />
+      <ShowroomClient cards={vehicleCards} meta={filterMeta} initialFilters={initialFilters} initialSort={initialSort} />
     </>
   );
 }

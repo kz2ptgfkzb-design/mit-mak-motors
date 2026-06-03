@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { heroVehicle } from '@/data/vehicles';
+import type { Vehicle } from '@/types';
 import { formatPrice } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { RevealText, Reveal } from '@/components/ui/reveal';
@@ -68,7 +68,7 @@ function HeroRev() {
   );
 }
 
-export function Hero() {
+export function Hero({ vehicle }: { vehicle: Vehicle }) {
   const reduce = useReducedMotion();
   const isDesktop = useIsDesktop();
   const mounted = useMounted();
@@ -98,8 +98,8 @@ export function Hero() {
       {/* Car image with parallax */}
       <motion.div style={{ x: carX, y: carY }} className="absolute inset-0 scale-110">
         <Image
-          src={heroVehicle.images[0]}
-          alt={`${heroVehicle.year} ${heroVehicle.make} ${heroVehicle.model}`}
+          src={vehicle.images[0]}
+          alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
           fill
           priority
           sizes="100vw"
@@ -166,20 +166,20 @@ export function Hero() {
 
       {/* Featured vehicle tag */}
       <Link
-        href={`/vehicles/${heroVehicle.slug}`}
+        href={`/vehicles/${vehicle.slug}`}
         data-cursor="view"
         data-cursor-text="Explore"
         className="group absolute bottom-10 right-6 z-10 hidden items-center gap-3 rounded-2xl border border-white/10 bg-ink-900/60 p-2.5 pr-4 backdrop-blur-xl transition-colors hover:border-red/50 lg:flex"
       >
         <div className="relative h-16 w-24 overflow-hidden rounded-xl">
-          <Image src={heroVehicle.images[1]} alt="" fill sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
+          <Image src={vehicle.images[1]} alt="" fill sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
         </div>
         <div>
           <p className="font-display text-[10px] uppercase tracking-[0.2em] text-red">Now in the showroom</p>
           <p className="font-display text-sm uppercase tracking-tight text-white">
-            {heroVehicle.make} {heroVehicle.model}
+            {vehicle.make} {vehicle.model}
           </p>
-          <p className="text-xs text-graphite-300">{formatPrice(heroVehicle.price)}</p>
+          <p className="text-xs text-graphite-300">{formatPrice(vehicle.price)}</p>
         </div>
         <ArrowUpRight className="h-4 w-4 text-graphite-400 transition-all group-hover:-translate-y-0.5 group-hover:text-red" />
       </Link>

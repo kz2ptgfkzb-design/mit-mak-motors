@@ -1,11 +1,11 @@
 import type { Vehicle } from '@/types';
-import { relatedVehicles } from '@/data/vehicles';
+import { relatedVehicles, toCard } from '@/data/vehicles';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { Reveal } from '@/components/ui/reveal';
 import { VehicleCard } from './vehicle-card';
 
 export function RelatedVehicles({ vehicle }: { vehicle: Vehicle }) {
-  const related = relatedVehicles(vehicle, 4);
+  const related = relatedVehicles(vehicle, 4).map(toCard);
   if (!related.length) return null;
 
   return (
