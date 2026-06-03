@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────── Base ───────────────────────────── */
+@layer base {
+  :root {
+    --red: 225 6 0;
+    --ink: 10 10 10;
+    --header-h: 84px;
+  }
+
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto; /* Lenis owns smooth scrolling */
+  }
+
+  body {
+    @apply bg-ink-900 text-graphite-100 font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgb(var(--red));
+    color: #fff;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-display uppercase tracking-condensed text-white;
+    text-wrap: balance;
+  }
+
+  /* Focus visibility for keyboard users (WCAG) */
+  :focus-visible {
+    outline: 2px solid rgb(var(--red));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(#b80500, #660300);
+    border-radius: 999px;
+    border: 2px solid #050505;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--red));
+  }
+}
+
+/* ───────────────────────── Lenis smooth scroll ───────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ──────────────────────────── Utilities ──────────────────────────── */
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.55);
+    color: transparent;
+  }
+  .text-stroke-red {
+    -webkit-text-stroke: 1.5px rgb(var(--red));
+    color: transparent;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .glass {
+    background: rgba(16, 16, 16, 0.6);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+  .glass-light {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .red-glow-text {
+    text-shadow: 0 0 18px rgba(225, 6, 0, 0.55);
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+    mask-image: linear-gradient(180deg, #000 60%, transparent);
+  }
+  .perspective {
+    perspective: 1200px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .chrome-text {
+    background: linear-gradient(180deg, #ffffff 0%, #c9cdd3 45%, #7c8088 55%, #ededed 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* ─────────────────────── Custom cursor support ─────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* ─────────────────── Reduced motion: respect the user ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: auto !important;
+  }
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.04) 30%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}

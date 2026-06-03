@@ -1,0 +1,35 @@
+export const siteConfig = {
+  name: 'Mit-Mak Motors',
+  legalName: 'Mit-Mak Motors (Pty) Ltd',
+  shortName: 'Mit-Mak',
+  tagline: 'Trusted. Awarded. Unmatched.',
+  description:
+    "Pretoria's premium pre-owned dealership. Every car inspected & reconditioned, delivered FREE anywhere in South Africa. AutoTrader Dealer of the Year 2024 & 2025, #1 on HelloPeter for 7 years running.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mitmakmotors.co.za',
+  phoneDisplay: process.env.NEXT_PUBLIC_PHONE || '+27 12 004 0000',
+  phoneHref: (process.env.NEXT_PUBLIC_PHONE || '+27 12 004 0000').replace(/[^+\d]/g, ''),
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '27600000000',
+  email: 'sales@mitmakmotors.co.za',
+  financeEmail: 'finance@mitmakmotors.co.za',
+  hours: [
+    { day: 'Monday – Friday', time: '08:00 – 17:30' },
+    { day: 'Saturday', time: '08:00 – 13:00' },
+    { day: 'Sunday', time: 'Closed' },
+    { day: 'Public Holidays', time: '08:00 – 13:00' },
+  ],
+  socials: [
+    { label: 'Facebook', href: 'https://facebook.com', handle: '/mitmakmotors' },
+    { label: 'Instagram', href: 'https://instagram.com', handle: '@mitmakmotors' },
+    { label: 'TikTok', href: 'https://tiktok.com', handle: '@mitmakmotors' },
+    { label: 'YouTube', href: 'https://youtube.com', handle: 'Mit-Mak Motors' },
+  ],
+  helloPeter: { rating: 9.7, years: 7 },
+  delivery: 'Delivered FREE anywhere in South Africa',
+};
+
+export type SiteConfig = typeof siteConfig;
+
+export function whatsappLink(message?: string): string {
+  const base = `https://wa.me/${siteConfig.whatsapp}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
