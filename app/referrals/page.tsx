@@ -1,29 +1,30 @@
 import type { Metadata } from 'next';
-import { Share2, Car, Banknote } from 'lucide-react';
+import { Share2, Car, Gift, MessageCircle } from 'lucide-react';
 import { whatsappLink } from '@/data/site';
 import { PageHero } from '@/components/layout/page-hero';
 import { Reveal } from '@/components/ui/reveal';
-import { Button } from '@/components/ui/button';
+import { ReferralForm } from '@/components/referrals/referral-form';
 
 export const metadata: Metadata = {
-  title: 'Referrals, Refer & Earn',
-  description: 'Refer a friend to Mit-Mak Motors. When they buy, you both earn. Simple, generous and paid out fast.',
+  title: 'Referrals, Refer a Friend',
+  description:
+    'Refer a friend to Mit-Mak Motors. Tell us who sent them and the car they are after, and when they drive away happy, we look after you too.',
   alternates: { canonical: '/referrals' },
 };
 
 const steps = [
-  { icon: Share2, title: 'Refer a friend', text: 'Send them our way, by WhatsApp, a quick message, or in person. Tell us who to expect.' },
-  { icon: Car, title: 'They buy & take delivery', text: 'Your friend finds their car, we deliver it free, everyone’s happy.' },
-  { icon: Banknote, title: 'You both get paid', text: 'You each receive a R2,000 reward once the deal is finalised. No catch.' },
+  { icon: Share2, title: 'Send them our way', text: 'Tell a friend about Mit-Mak, then drop both your details in the form so we know who to thank.' },
+  { icon: Car, title: 'They find their car', text: 'We help them find the right car and deliver it free, anywhere in South Africa.' },
+  { icon: Gift, title: 'You get looked after', text: 'Once their purchase goes through, we say thank you. Refer as many people as you like, there is no limit.' },
 ];
 
 export default function ReferralsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Refer & Earn"
-        title="Good Cars, Shared"
-        description="Know someone in the market? Refer them to Mit-Mak. When they buy, you both pocket R2,000, our way of saying thanks."
+        eyebrow="Refer a Friend"
+        title="Great Service, Shared"
+        description="Know someone in the market for a car? Send them to Mit-Mak. When they drive away happy, we make sure you do too."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Referrals', href: '/referrals' }]}
       />
 
@@ -44,19 +45,32 @@ export default function ReferralsPage() {
             ))}
           </div>
 
-          <div className="mt-12 overflow-hidden rounded-2xl border border-red/30 bg-gradient-to-br from-red/15 to-ink-900 p-8 text-center lg:p-12">
-            <p className="font-display text-sm uppercase tracking-[0.2em] text-red">The Reward</p>
-            <p className="mt-3 font-anton text-5xl uppercase tracking-tight text-white sm:text-6xl">R2 000 each</p>
-            <p className="mx-auto mt-4 max-w-md text-graphite-300">Paid to both you and your friend once their purchase is finalised. Refer as many people as you like, there’s no limit.</p>
-            <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <Button href={whatsappLink('Hi Mit-Mak, I’d like to refer a friend.')} target="_blank" rel="noopener noreferrer" size="lg" magnetic>
-                Refer via WhatsApp
-              </Button>
-              <Button href="/contact" variant="outline" size="lg">
-                Refer via the form
-              </Button>
+          <div className="mt-12 grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <div className="rounded-2xl border border-white/10 bg-ink-850 p-6 lg:p-8">
+                <ReferralForm />
+              </div>
             </div>
-            <p className="mt-4 text-xs text-graphite-600">Terms apply. Reward paid after the referred purchase is settled and delivered.</p>
+            <aside className="lg:col-span-5">
+              <div className="rounded-2xl border border-red/30 bg-gradient-to-br from-red/15 to-ink-900 p-8">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-red text-white">
+                  <MessageCircle className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 font-display text-xl uppercase tracking-tight text-white">Prefer WhatsApp?</h3>
+                <p className="mt-2 text-sm leading-relaxed text-graphite-300">
+                  Skip the form. Send us their name and number on WhatsApp and we will take it from there, then keep you posted.
+                </p>
+                <a
+                  href={whatsappLink('Hi Mit-Mak, I would like to refer a friend.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-white/[0.08] px-6 font-display text-xs uppercase tracking-wide text-white transition-colors hover:bg-red"
+                >
+                  Refer via WhatsApp
+                </a>
+              </div>
+            </aside>
           </div>
         </div>
       </section>

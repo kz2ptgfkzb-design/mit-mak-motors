@@ -44,7 +44,7 @@ export const megaMenu: NavGroup[] = [
     links: [
       { label: 'Win-a-Car Raffle', href: '/fomo-zone/raffle', description: 'Tickets selling fast', badge: 'LIVE' },
       { label: 'BobElz Auction', href: '/fomo-zone/auction', description: 'No reserve, big steals' },
-      { label: 'UB Drip Merch', href: '/fomo-zone/merch', description: 'Wear the brand' },
+      { label: 'UB Drip Merch', href: '/merch', description: 'Wear the brand' },
       { label: 'Mit-Mak Masterclass', href: '/fomo-zone/masterclass', description: 'Learn the game' },
     ],
   },
@@ -99,7 +99,7 @@ export const fomoZone: FomoItem[] = [
     title: 'The Merch',
     blurb: 'Limited-run apparel built for the culture. Wear the speed. Rep the brand on every street.',
     cta: 'Shop the Drop',
-    href: '/fomo-zone/merch',
+    href: '/merch',
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
   },
   {
@@ -148,7 +148,7 @@ export const footerGroups: NavGroup[] = [
     links: [
       { label: 'Win-a-Car Raffle', href: '/fomo-zone/raffle' },
       { label: 'BobElz Auction', href: '/fomo-zone/auction' },
-      { label: 'UB Drip Merch', href: '/fomo-zone/merch' },
+      { label: 'UB Drip Merch', href: '/merch' },
       { label: 'Masterclass', href: '/fomo-zone/masterclass' },
       { label: 'Newsletter', href: '/newsletter' },
     ],

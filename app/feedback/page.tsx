@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { ThumbsUp, MessageSquareWarning, Phone } from 'lucide-react';
 import { siteConfig } from '@/data/site';
 import { PageHero } from '@/components/layout/page-hero';
-import { ContactForm } from '@/components/contact/contact-form';
+import { FeedbackForm } from '@/components/feedback/feedback-form';
 
 export const metadata: Metadata = {
   title: 'Compliment / Complaint',
-  description: 'Tell us how we did. Mit-Mak Motors takes every compliment and complaint seriously, it’s how we’ve stayed #1 on HelloPeter for 7 years.',
+  description:
+    'Tell us how we did. Mit-Mak Motors takes every compliment and complaint seriously, it’s how we’ve stayed #1 on HelloPeter for 7 years.',
   alternates: { canonical: '/feedback' },
 };
 
@@ -24,7 +25,7 @@ export default function FeedbackPage() {
         <div className="container grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <div className="rounded-2xl border border-white/10 bg-ink-850 p-6 lg:p-8">
-              <ContactForm prefillSubject="Feedback: " />
+              <FeedbackForm />
             </div>
           </div>
           <aside className="space-y-6 lg:col-span-5">
