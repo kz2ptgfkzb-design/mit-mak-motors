@@ -45,10 +45,9 @@ export function FinanceExtras({ variant }: { variant: 'individual' | 'business' 
         href="/finance#credit-score"
       />
       <Card
-        id="insurance"
         icon={<ShieldCheck className="h-5 w-5" />}
         title="King Price Insurance"
-        blurb="Cover from the moment you drive off. Premiums that decrease as your car’s value does, exclusive to Mit-Mak buyers."
+        blurb="One month of cover sponsored by Mit-Mak, then premiums that decrease as your car’s value does. Underwritten by King Price."
         cta="Get an insurance quote"
         href="/finance#insurance"
       />

@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { PageHero } from '@/components/layout/page-hero';
 import { FinanceApplication } from '@/components/finance/finance-application';
 import { FinanceExtras } from '@/components/finance/finance-extras';
+import { KingPriceForm } from '@/components/finance/king-price-form';
 import { FinanceCalculator } from '@/components/vehicle/finance-calculator';
 import { CtaBand } from '@/components/layout/cta-band';
 
@@ -47,9 +48,12 @@ export default function FinancePage({ searchParams }: { searchParams: { vehicle?
 
       <section className="py-16 lg:py-24">
         <div className="container grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
+          <div className="space-y-6 lg:col-span-7">
             <div className="rounded-2xl border border-white/10 bg-ink-850 p-6 lg:p-8">
               <FinanceApplication variant="individual" vehicleName={vehicleName} />
+            </div>
+            <div id="insurance" className="scroll-mt-28 rounded-2xl border border-white/10 bg-ink-850 p-6 lg:p-8">
+              <KingPriceForm />
             </div>
           </div>
           <aside className="space-y-6 lg:col-span-5">

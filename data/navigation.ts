@@ -15,9 +15,7 @@ export const megaMenu: NavGroup[] = [
     links: [
       { label: 'Full Showroom', href: '/showroom', description: 'Every car, fully filterable' },
       { label: 'New Arrivals', href: '/showroom?sort=newest', description: 'Freshly reconditioned' },
-      { label: 'SUVs & Crossovers', href: '/showroom?type=SUV', description: 'Family-ready' },
-      { label: 'Bakkies & 4x4', href: '/showroom?type=Double+Cab', description: 'Work & play' },
-      { label: 'Compare Vehicles', href: '/showroom?compare=1', description: 'Up to 4 side-by-side' },
+      { label: 'Compare Vehicles', href: '/compare', description: 'Up to 4 side-by-side' },
     ],
   },
   {
@@ -121,9 +119,7 @@ export const footerGroups: NavGroup[] = [
     links: [
       { label: 'Showroom', href: '/showroom' },
       { label: 'New Arrivals', href: '/showroom?sort=newest' },
-      { label: 'SUVs & 4x4', href: '/showroom?type=SUV' },
-      { label: 'Bakkies', href: '/showroom?type=Double+Cab' },
-      { label: 'Compare', href: '/showroom?compare=1' },
+      { label: 'Compare', href: '/compare' },
     ],
   },
   {
