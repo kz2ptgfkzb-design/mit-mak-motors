@@ -26,6 +26,7 @@ export default function ReferralsPage() {
         title="Great Service, Shared"
         description="Know someone in the market for a car? Send them to Mit-Mak. When they drive away happy, we make sure you do too."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Referrals', href: '/referrals' }]}
+        image="https://img.autotrader.co.za/47508834/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

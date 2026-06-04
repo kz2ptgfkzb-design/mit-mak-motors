@@ -29,6 +29,7 @@ export default function SellPage() {
         title="Get the Best Cash Price"
         description="Skip the strangers at your gate. Get a fair, market-related cash offer for your car, free valuation, instant callback, money the same day."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Sell Your Car', href: '/sell-your-car' }]}
+        image="https://img.autotrader.co.za/46961221/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

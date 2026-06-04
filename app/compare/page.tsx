@@ -25,6 +25,7 @@ export default function ComparePage({ searchParams }: { searchParams: { ids?: st
         title="Compare Vehicles"
         description="Line up to four cars side by side, price, spec, power and mileage, then reserve the one that fits. Add cars from the showroom or search below."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Compare', href: '/compare' }]}
+        image="https://img.autotrader.co.za/47470545/Crop1024x576.jpg"
       />
       <CompareClient cards={vehicleCards} initialIds={initialIds} />
     </>

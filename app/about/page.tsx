@@ -111,6 +111,7 @@ export default function AboutPage() {
         title="Trusted. Awarded. Unmatched."
         description="What started as a single bay in Pretoria North is now South Africa’s most-awarded pre-owned dealership, built on one stubborn idea: tell the truth, fix the car properly, deliver it free."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }]}
+        image="https://img.autotrader.co.za/47544621/Crop1024x576.jpg"
       />
 
       {/* Story */}

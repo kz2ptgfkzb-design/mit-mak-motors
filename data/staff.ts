@@ -374,7 +374,7 @@ export const staffDepartments: StaffDepartment[] = [
       {
         "name": "Ryian Joseph",
         "role": "Call Centre Agent",
-        "image": ""
+        "image": "/staff/image_67c6ad15bc5290.95599183.png"
       },
       {
         "name": "Monique Mariano",
@@ -669,7 +669,7 @@ export const staffDepartments: StaffDepartment[] = [
       {
         "name": "Hans Strydom",
         "role": "Driver",
-        "image": ""
+        "image": "/staff/image_67b4dd7988b311.91811143.png"
       }
     ]
   },
@@ -734,7 +734,7 @@ export const staffDepartments: StaffDepartment[] = [
       {
         "name": "Kealeboga Ndlovu",
         "role": "Cadet",
-        "image": ""
+        "image": "/staff/image_69c3bb7d9865c2.23125649.png"
       },
       {
         "name": "Jason Louw",

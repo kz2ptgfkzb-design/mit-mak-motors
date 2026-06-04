@@ -17,6 +17,7 @@ export default function TermsPage() {
         title="Terms & Conditions"
         description="The terms that govern your use of this website and our services. Sample content for this demonstration site."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Terms', href: '/terms' }]}
+        image="https://img.autotrader.co.za/42344871/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

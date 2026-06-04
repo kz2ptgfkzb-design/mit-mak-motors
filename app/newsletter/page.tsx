@@ -24,6 +24,7 @@ export default function NewsletterPage() {
         title="Join the Newsletter"
         description="Fresh stock, real offers and first dibs on everything in the FOMO Zone. No spam, unsubscribe in one click."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Newsletter', href: '/newsletter' }]}
+        image="https://img.autotrader.co.za/47498816/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

@@ -37,6 +37,7 @@ export default function FomoDetailPage({ params }: { params: { slug: string } })
           { label: 'FOMO Zone', href: '/fomo-zone' },
           { label: d.title, href: `/fomo-zone/${d.slug}` },
         ]}
+        image="https://img.autotrader.co.za/47470885/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

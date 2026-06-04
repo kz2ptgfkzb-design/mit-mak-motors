@@ -33,6 +33,7 @@ export default function FomoZonePage() {
         title="The FOMO Zone"
         description="More than a dealership. Win a car, steal an auction deal, rep the merch and learn the game, this is where the Mit-Mak community lives."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'FOMO Zone', href: '/fomo-zone' }]}
+        image="https://img.autotrader.co.za/47129441/Crop1024x576.jpg"
       />
 
       <div className="py-16 lg:py-24">

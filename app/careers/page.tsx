@@ -29,6 +29,7 @@ export default function CareersPage() {
         title="Build the Standard"
         description="We’re Pretoria’s fastest-growing, most-awarded pre-owned dealership, and we’re hiring people who care as much as we do."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Careers', href: '/careers' }]}
+        image="https://img.autotrader.co.za/47379297/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

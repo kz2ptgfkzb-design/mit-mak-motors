@@ -55,6 +55,7 @@ export default function StaffPage() {
         title="Meet the Team"
         description="Awards don’t answer WhatsApps at 7pm, people do. Meet the team that earned us 7 years at #1 on HelloPeter, every floor, every department."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Our Team', href: '/staff' }]}
+        image="https://img.autotrader.co.za/47208073/Crop1024x576.jpg"
       />
 
       {/* Leadership */}

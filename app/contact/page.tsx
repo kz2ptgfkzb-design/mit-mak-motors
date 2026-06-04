@@ -27,6 +27,7 @@ export default function ContactPage({ searchParams }: { searchParams: { vehicle?
         title="Come Say Hello"
         description="Six locations across Pretoria North, open six days a week. Call, WhatsApp, or send us a message, wherever you are in South Africa, we’ll come to you."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact' }]}
+        image="https://img.autotrader.co.za/46814371/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

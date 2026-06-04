@@ -22,6 +22,7 @@ export default function BlogPage() {
         title="Guides, News & Tips"
         description="Straight talk on buying, selling and financing cars in South Africa, plus the occasional look behind the Mit-Mak curtain."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }]}
+        image="https://img.autotrader.co.za/47437140/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

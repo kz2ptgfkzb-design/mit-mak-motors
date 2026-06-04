@@ -69,7 +69,7 @@ Call Centre|Lerato Tshotetsi|Call Centre Agent|image_6900cda92fb7e0.15952507.png
 Call Centre|Perseverance Munyai|Call Centre Agent|image_69ce306105c938.36921083.png
 Call Centre|Amanda Mthimunye|Call Centre Agent|image_69ce307a685d88.26292587.png
 Call Centre|Nomsa Mkhize|Call Centre Agent|image_6900c93b26d8c6.48522852.png
-Call Centre|Ryian Joseph|Call Centre Agent|image_67c6ad15bc5290.95583.png
+Call Centre|Ryian Joseph|Call Centre Agent|image_67c6ad15bc5290.95599183.png
 Call Centre|Monique Mariano|Call Centre Agent|image_67c6ad59a7cc30.31272501.png
 Call Centre|Jeane Cronje|Call Centre Agent|image_67c6e6a88f31b3.89765817.png
 Call Centre|Lucas Mfolo|Call Centre Agent|image_6900c9c1d6a374.82511887.png
@@ -123,7 +123,7 @@ Drivers|Buthelezi Mpho Francis|Driver|image_696b3cc26e42b1.79897952.png
 Drivers|James Mojelele|Driver|image_69eb1b301679e0.74102958.png
 Drivers|James Manganye|Driver|image_67b4d7edf3c9c9.60269589.png
 Drivers|Jack Aphane|Driver|image_67b4dca6ef3880.95158542.png
-Drivers|Hans Strydom|Driver|image_67b4dd7988b311.91143.png
+Drivers|Hans Strydom|Driver|image_67b4dd7988b311.91811143.png
 Logistics|Sello Mathonsi|Natis Controller|image_6968b2876f0186.15623924.png
 Logistics|Nikita Kelly|Administrator|image_697874a47b33b4.44756600.png
 Logistics|Cecilia van Staden|Workshop Costing Clerk, Logistics|image_67c6e9f17ae451.55929155.png
@@ -134,7 +134,7 @@ Cadet Program|Garth Mahlakoane|Cadet|image_69c3ad002df317.26270128.png
 Cadet Program|Halle Khazamula|Cadet|image_69c3b20ed01ad3.21317136.png
 Cadet Program|Charity Nyakane|Cadet|image_69c3b22aea3be8.47080989.png
 Cadet Program|Nelson Sibiya|Cadet|image_69c3c54227da76.42022295.png
-Cadet Program|Kealeboga Ndlovu|Cadet|image_69c3bb7d9865c2.23135649.png
+Cadet Program|Kealeboga Ndlovu|Cadet|image_69c3bb7d9865c2.23125649.png
 Cadet Program|Jason Louw|Cadet|image_69c3bb928f1370.76685668.png
 Cadet Program|Osego Khomo|Cadet|image_67c71b24e66073.34319150.png
 Cadet Program|Tshidiso Mogale|Cadet|image_67bdad6dd06c79.12805181.png

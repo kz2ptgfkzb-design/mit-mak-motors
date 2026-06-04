@@ -19,6 +19,7 @@ export default function FeedbackPage() {
         title="Compliment or Complaint"
         description="Good or bad, we want to hear it, every piece of feedback makes us sharper. It’s exactly how we’ve held #1 on HelloPeter for seven years."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Feedback', href: '/feedback' }]}
+        image="https://img.autotrader.co.za/47459322/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">

@@ -42,6 +42,7 @@ export default function FinancePage({ searchParams }: { searchParams: { vehicle?
         title="Apply in Minutes"
         description="One application. Every major bank. We do the legwork to land you the best rate, with pre-approval, most applicants hear back within one business day."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Finance', href: '/finance' }]}
+        image="https://img.autotrader.co.za/47517076/Crop1024x576.jpg"
       >
         <Tabs active="individual" />
       </PageHero>

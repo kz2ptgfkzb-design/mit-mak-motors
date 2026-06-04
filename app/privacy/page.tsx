@@ -17,6 +17,7 @@ export default function PrivacyPage() {
         title="Privacy Policy"
         description="How we collect, use and protect your personal information, in line with the Protection of Personal Information Act (POPIA)."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy', href: '/privacy' }]}
+        image="https://img.autotrader.co.za/47096868/Crop1024x576.jpg"
       />
 
       <section className="py-16 lg:py-24">
