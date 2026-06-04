@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Eyebrow } from '@/components/ui/section-heading';
@@ -12,6 +13,7 @@ export function PageHero({
   align = 'left',
   children,
   crumbs,
+  image,
 }: {
   eyebrow?: string;
   title: string;
@@ -19,10 +21,27 @@ export function PageHero({
   align?: 'left' | 'center';
   children?: ReactNode;
   crumbs?: { label: string; href: string }[];
+  /** Optional darkened backdrop photo behind the hero. */
+  image?: string;
 }) {
   const center = align === 'center';
   return (
     <section className="relative overflow-hidden border-b border-white/10 bg-ink-fade pb-12 pt-32 lg:pb-16 lg:pt-40">
+      {image && (
+        <>
+          <Image
+            src={image}
+            alt=""
+            fill
+            aria-hidden
+            priority
+            sizes="100vw"
+            className="pointer-events-none select-none object-cover object-center opacity-40"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/80 to-ink-950/35" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/70" />
+        </>
+      )}
       <div className="absolute inset-0 bg-grid opacity-40" />
       <SpeedLines className="absolute right-0 top-0 h-full w-1/3 text-red/20" />
       <div className={cn('container relative', center && 'text-center')}>

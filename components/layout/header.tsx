@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Phone } from 'lucide-react';
@@ -30,13 +31,31 @@ export function Header() {
             'border-b transition-all duration-500 ease-out-expo',
             scrolled
               ? 'border-white/10 bg-ink-950/80 py-2.5 backdrop-blur-xl'
-              : 'border-transparent bg-gradient-to-b from-ink-950/70 to-transparent py-4',
+              : 'border-transparent bg-transparent py-4',
           )}
         >
           <div className="container flex items-center justify-between gap-4">
-            <Link href="/" aria-label="Mit-Mak Motors home" data-cursor="hover">
-              <Logo priority />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link href="/" aria-label="Mit-Mak Motors home" data-cursor="hover">
+                <Logo priority />
+              </Link>
+              <a
+                href="https://courses.mitmakmasterclass.co.za/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Mit-Mak Masterclass, click here"
+                data-cursor="hover"
+                className="shrink-0 transition-transform duration-300 ease-out-expo hover:scale-105"
+              >
+                <Image
+                  src="/masterclass-badge.png"
+                  alt="Mit-Mak Masterclass"
+                  width={114}
+                  height={114}
+                  className="h-10 w-10 sm:h-12 sm:w-12"
+                />
+              </a>
+            </div>
 
             <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
               {primaryNav.map((link) => {

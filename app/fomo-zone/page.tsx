@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { fomoZone } from '@/data/navigation';
 import { cn } from '@/lib/utils';
 import { PageHero } from '@/components/layout/page-hero';
@@ -55,14 +55,11 @@ export default function FomoZonePage() {
                   <p className="font-display text-xs uppercase tracking-[0.24em] text-red">{item.eyebrow}</p>
                   <h2 className="mt-2 font-anton text-4xl uppercase leading-none tracking-tight text-white sm:text-5xl">{item.title}</h2>
                   <p className="mt-5 max-w-md text-base leading-relaxed text-graphite-300">{detail[item.id] ?? item.blurb}</p>
-                  <button
-                    data-cursor="hover"
-                    className="group mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-red px-6 font-display text-xs uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5 hover:shadow-glow"
-                  >
-                    {item.cta}
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </button>
-                  <p className="mt-3 text-xs text-graphite-600">Launching soon, drop your email below to get first access.</p>
+                  <div className="mt-7">
+                    <Button href={item.href} arrow>
+                      {item.cta}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -18,8 +18,6 @@ const nextConfig = {
       },
     ],
   },
-  // three.js / @react-three/fiber transpile for clean ESM interop
-  transpilePackages: ['three'],
 };
 
 export default nextConfig;

@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 import { Counter } from '@/components/ui/counter';
 import { Chevron } from '@/components/ui/chevron';
 
-const img = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1900&q=80`;
+const img = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=80`;
 
 const PILLARS = [
   {
@@ -72,6 +72,7 @@ export function BrandPillars() {
             initial={false}
             animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1 : 1.08 }}
             transition={{ duration: 0.9, ease: EASE }}
+            style={{ willChange: 'opacity, transform' }}
           >
             <Image src={p.image} alt="" fill sizes="100vw" className="object-cover" />
           </motion.div>

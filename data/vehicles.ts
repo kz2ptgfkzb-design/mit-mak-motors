@@ -66,6 +66,17 @@ export const modelsByMake: Record<string, string[]> = vehicles.reduce(
   {} as Record<string, string[]>,
 );
 
+// Variants keyed by `${make}__${model}` so the quick-finder's Variant dropdown
+// can narrow to a model's real trims.
+export const variantsByMakeModel: Record<string, string[]> = vehicles.reduce(
+  (acc, v) => {
+    const key = `${v.make}__${v.model}`;
+    acc[key] = Array.from(new Set([...(acc[key] ?? []), v.variant])).filter(Boolean).sort();
+    return acc;
+  },
+  {} as Record<string, string[]>,
+);
+
 export const priceBounds = {
   min: Math.min(...vehicles.map((v) => v.price)),
   max: Math.max(...vehicles.map((v) => v.price)),
@@ -80,6 +91,7 @@ export const mileageMax = Math.max(...vehicles.map((v) => v.mileage));
 export const filterMeta = {
   makes: allMakes,
   modelsByMake,
+  variantsByMakeModel,
   bodyTypes: allBodyTypes,
   driveTypes: allDriveTypes,
   fuels: allFuelTypes,

@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useLenis } from 'lenis/react';
 import { SearchX } from 'lucide-react';
 import type { Vehicle, VehicleFilters, SortKey } from '@/types';
 import { filterVehicles, sortVehicles, defaultFilters, countActiveFilters } from '@/lib/filters';
 import { FilterBar, type FilterMeta } from './filter-bar';
+import { CarFinder, type FinderSelection } from './car-finder';
 import { VehicleCard } from '@/components/vehicle/vehicle-card';
 import { VehicleListItem } from './vehicle-list-item';
 import { VehicleSkeleton } from './vehicle-skeleton';
@@ -28,6 +30,7 @@ export function ShowroomClient({
   const [loading, setLoading] = useState(false);
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [visible, setVisible] = useState(24);
+  const lenis = useLenis();
 
   const results = useMemo(() => sortVehicles(filterVehicles(cards, filters), sort), [cards, filters, sort]);
   const shown = results.slice(0, visible);
@@ -49,12 +52,37 @@ export function ShowroomClient({
   function clear() {
     setFilters(defaultFilters());
   }
+  // The quick-finder is the headline entry point: it is authoritative over the
+  // fields it owns (a specific variant rides in as a keyword), then drops you on
+  // the results.
+  function finderSearch(sel: FinderSelection) {
+    setFilters((f) => ({
+      ...f,
+      bodyType: sel.bodyType ? [sel.bodyType] : [],
+      make: sel.make ? [sel.make] : [],
+      model: sel.model ? [sel.model] : [],
+      q: sel.variant ?? '',
+      maxPrice: sel.maxPrice ?? null,
+    }));
+    const el = typeof document !== 'undefined' ? document.getElementById('showroom-results') : null;
+    if (el) {
+      // Route through Lenis so its smoothing doesn't fight the browser's native scroll.
+      if (lenis) lenis.scrollTo(el, { offset: -140 });
+      else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
   function toggleCompare(id: string) {
     setCompareIds((ids) => (ids.includes(id) ? ids.filter((x) => x !== id) : ids.length < 4 ? [...ids, id] : ids));
   }
 
   return (
     <>
+      <section className="border-b border-white/10 bg-ink-950">
+        <div className="container py-8 lg:py-10">
+          <CarFinder meta={meta} onSearch={finderSearch} />
+        </div>
+      </section>
+
       <FilterBar
         filters={filters}
         onChange={patch}
@@ -68,7 +96,7 @@ export function ShowroomClient({
         onView={setView}
       />
 
-      <div className="container py-10 lg:py-12">
+      <div id="showroom-results" className="container scroll-mt-40 py-10 lg:py-12">
         {loading ? (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (

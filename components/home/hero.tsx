@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
@@ -15,52 +15,176 @@ import { SpeedLines, Chevron } from '@/components/ui/chevron';
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=2000&h=1100&q=85';
 
+// ── M4 Competition (S58) digital rev display ───────────────────────────────
+// A curved arc rev bar with crowning shift-lights and a digital rpm readout,
+// styled after the G82 cluster. Revs blip to the limiter and decay to idle.
+const REV_MAX = 8000;
+const REV_IDLE = 800;
+const IDLE_FRAC = REV_IDLE / REV_MAX;
+const SWEEP_DEG = 260;
+const START_DEG = -130;
+const G_CX = 40;
+const G_CY = 41;
+const G_R = 29;
+
+function gaugePoint(deg: number, r = G_R): [number, number] {
+  const rad = (deg * Math.PI) / 180;
+  return [G_CX + r * Math.sin(rad), G_CY - r * Math.cos(rad)];
+}
+
+const [ARC_X0, ARC_Y0] = gaugePoint(START_DEG);
+const [ARC_X1, ARC_Y1] = gaugePoint(START_DEG + SWEEP_DEG);
+const REV_ARC = `M ${ARC_X0.toFixed(2)} ${ARC_Y0.toFixed(2)} A ${G_R} ${G_R} 0 1 1 ${ARC_X1.toFixed(2)} ${ARC_Y1.toFixed(2)}`;
+
+// BMW M tricolour cascade: blue -> violet -> red.
+const SHIFT_PIPS = Array.from({ length: 7 }, (_, i) => {
+  const [x, y] = gaugePoint(-48 + i * 16, G_R + 5);
+  const color = i < 3 ? '#1CA7E8' : i < 5 ? '#8A4FD6' : '#FF2A1B';
+  return { x, y, color, threshold: 0.5 + i * 0.072, isFlash: i >= 5 };
+});
+
+// rpm scale ticks; the top of the scale (redline) reads in M red.
+const RPM_TICKS = Array.from({ length: 9 }, (_, k) => {
+  const a = START_DEG + (k / 8) * SWEEP_DEG;
+  const [x1, y1] = gaugePoint(a, G_R - 5.5);
+  const [x2, y2] = gaugePoint(a, G_R - 2.5);
+  return { x1, y1, x2, y2, red: k >= 7 };
+});
+
+const easeOutCirc = (k: number) => Math.sqrt(1 - (k - 1) * (k - 1));
+const easeInOutSine = (k: number) => 0.5 - 0.5 * Math.cos(Math.PI * k);
+const mix = (a: number, b: number, k: number) => a + (b - a) * k;
+
+// The throttle blip: snap to the limiter, bounce off, then decay to idle.
+function blipFrac(p: number): number {
+  if (p <= 0.15) return mix(IDLE_FRAC, 1, easeOutCirc(p / 0.15));
+  if (p <= 0.3) return mix(1, 0.84, (p - 0.15) / 0.15);
+  return mix(0.84, IDLE_FRAC, easeInOutSine((p - 0.3) / 0.7));
+}
+
 function HeroRev() {
-  const [rev, setRev] = useState(false);
   const reduce = useReducedMotion();
+  const [frac, setFrac] = useState(IDLE_FRAC);
+  const [elapsed, setElapsed] = useState(0);
+  const raf = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+
+  function blip() {
+    if (reduce) return;
+    cancelAnimationFrame(raf.current);
+    const DUR = 1100;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = now - start;
+      const p = Math.min(t / DUR, 1);
+      setFrac(blipFrac(p));
+      setElapsed(t);
+      if (p < 1) raf.current = requestAnimationFrame(tick);
+      else setFrac(IDLE_FRAC);
+    };
+    raf.current = requestAnimationFrame(tick);
+  }
+
+  const clamped = Math.min(Math.max(frac, 0), 1);
+  const angle = START_DEG + clamped * SWEEP_DEG;
+  const rpm = Math.round((clamped * REV_MAX) / 100) * 100;
+  const redline = clamped >= 0.9;
+  const flashOn = redline && Math.floor(elapsed / 70) % 2 === 0;
+
   return (
     <button
-      onMouseEnter={() => setRev(true)}
-      onMouseLeave={() => setRev(false)}
-      onClick={() => {
-        setRev(true);
-        setTimeout(() => setRev(false), 720);
-      }}
+      onMouseEnter={blip}
+      onClick={blip}
       aria-label="Rev the engine"
-      className="group relative hidden h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/15 bg-ink-900/40 backdrop-blur transition-shadow hover:shadow-glow lg:inline-flex"
+      className="group relative hidden h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-ink-900/50 backdrop-blur transition-shadow hover:shadow-glow lg:inline-flex"
     >
-      <svg viewBox="0 0 64 64" className="h-12 w-12">
-        <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="2" />
-        <path d="M32 32 L32 12" stroke="#E10600" strokeWidth="1.5" opacity="0.3" />
-        {[...Array(9)].map((_, i) => {
-          const a = (-120 + i * 30) * (Math.PI / 180);
+      <svg viewBox="0 0 80 80" className="h-[68px] w-[68px]">
+        <defs>
+          <linearGradient id="revFill" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#16A5E6" />
+            <stop offset="44%" stopColor="#7A3FB8" />
+            <stop offset="80%" stopColor="#E2001A" />
+            <stop offset="100%" stopColor="#FF2A1B" />
+          </linearGradient>
+          <filter id="pipBlur" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="1.5" />
+          </filter>
+        </defs>
+
+        <path d={REV_ARC} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={3.4} strokeLinecap="round" />
+        {RPM_TICKS.map((t, i) => (
+          <line
+            key={`tick-${i}`}
+            x1={t.x1}
+            y1={t.y1}
+            x2={t.x2}
+            y2={t.y2}
+            stroke={t.red ? '#E2001A' : '#FFFFFF'}
+            strokeWidth={1}
+            strokeLinecap="round"
+            opacity={t.red ? 0.5 : 0.22}
+          />
+        ))}
+        <path
+          d={REV_ARC}
+          fill="none"
+          stroke="url(#revFill)"
+          strokeWidth={3.4}
+          strokeLinecap="round"
+          pathLength={1}
+          strokeDasharray={1}
+          strokeDashoffset={1 - clamped}
+        />
+
+        {SHIFT_PIPS.map((p, i) => {
+          const on = clamped >= p.threshold || (p.isFlash && flashOn);
           return (
-            <line
-              key={i}
-              x1={32 + Math.sin(a) * 22}
-              y1={32 - Math.cos(a) * 22}
-              x2={32 + Math.sin(a) * 26}
-              y2={32 - Math.cos(a) * 26}
-              stroke={i > 6 ? '#E10600' : 'rgba(255,255,255,0.4)'}
-              strokeWidth="1.5"
-            />
+            <g key={i}>
+              <circle cx={p.x} cy={p.y} r={3.6} fill={p.color} filter="url(#pipBlur)" opacity={on ? 0.85 : 0} />
+              <circle cx={p.x} cy={p.y} r={2} fill={p.color} opacity={on ? 1 : 0.14} />
+            </g>
           );
         })}
-        <motion.line
-          x1="32"
-          y1="32"
-          x2="32"
-          y2="14"
-          stroke="#E10600"
-          strokeWidth="2.5"
+
+        <line
+          x1={G_CX}
+          y1={G_CY - (G_R - 4)}
+          x2={G_CX}
+          y2={G_CY - (G_R + 2.5)}
+          stroke={redline ? '#FF2A1B' : '#FFFFFF'}
+          strokeWidth={2}
           strokeLinecap="round"
-          style={{ originX: '32px', originY: '32px' }}
-          animate={{ rotate: reduce ? -110 : rev ? [-110, 70, 28, 96, -100] : -110 }}
-          transition={{ duration: 0.72, ease: 'easeOut' }}
+          transform={`rotate(${angle.toFixed(2)} ${G_CX} ${G_CY})`}
         />
-        <circle cx="32" cy="32" r="3" fill="#E10600" />
+
+        <text
+          x={G_CX}
+          y={G_CY + 2}
+          textAnchor="middle"
+          fill="#FFFFFF"
+          style={{ fontFamily: 'var(--font-display), sans-serif', fontSize: '15px', fontWeight: 700 }}
+        >
+          {(rpm / 1000).toFixed(1)}
+        </text>
+        <text
+          x={G_CX}
+          y={G_CY + 11}
+          textAnchor="middle"
+          fill="#7C8088"
+          style={{ fontFamily: 'var(--font-display), sans-serif', fontSize: '5px', letterSpacing: '0.18em' }}
+        >
+          X1000
+        </text>
+
+        {/* BMW M tricolour stripe */}
+        <g transform="translate(35.5 62.5) skewX(-15)">
+          <rect x={0} y={0} width={3} height={9} rx={0.6} fill="#16A5E6" />
+          <rect x={4} y={0} width={3} height={9} rx={0.6} fill="#6E3A9E" />
+          <rect x={8} y={0} width={3} height={9} rx={0.6} fill="#E2001A" />
+        </g>
       </svg>
-      <span className="absolute -bottom-5 font-display text-[9px] uppercase tracking-[0.2em] text-graphite-400">
+      <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 font-display text-[9px] uppercase tracking-[0.2em] text-graphite-400">
         Rev
       </span>
     </button>
@@ -99,7 +223,7 @@ export function Hero({ vehicle }: { vehicle: Vehicle }) {
       </div>
 
       {/* Cinematic gradients — keep the car visible; the headline uses a text-shadow for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/45" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/35 to-transparent" />
 
       {/* Speed lines */}

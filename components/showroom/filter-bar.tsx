@@ -10,6 +10,7 @@ import { SORT_OPTIONS } from '@/lib/filters';
 export interface FilterMeta {
   makes: string[];
   modelsByMake: Record<string, string[]>;
+  variantsByMakeModel: Record<string, string[]>;
   bodyTypes: BodyType[];
   driveTypes: DriveType[];
   fuels: FuelType[];

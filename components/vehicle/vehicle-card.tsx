@@ -51,7 +51,7 @@ export function VehicleCard({
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={reduce ? undefined : { rotateX, rotateY, transformPerspective: 1000 }}
+      style={reduce ? undefined : { rotateX, rotateY, transformPerspective: 1000, willChange: 'transform' }}
       className={cn(
         'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-850 transition-colors duration-300 hover:border-white/25 hover:shadow-card',
         selected && 'border-red/70 shadow-glow-sm',
