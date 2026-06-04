@@ -5,571 +5,1287 @@ export interface MerchProduct {
   name: string;
   price: string;
   category: string;
+  sizes: string[];
+  colours: string[];
+  description: string;
   image: string;
-  href: string;
 }
-
-export const merchStoreUrl = 'https://merch.mitmakmotors.co.za/';
 
 export const merchProducts: MerchProduct[] = [
   {
     "name": "Anarra Level Corduroy Cap",
     "price": "R460",
     "category": "Caps",
-    "image": "/merch/anarra-level-corduroy-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/anarra-level-corduroy-cap/"
+    "sizes": [],
+    "colours": [
+      "Blue",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/anarra-level-corduroy-cap.png"
   },
   {
     "name": "Phone Case",
     "price": "R250",
     "category": "Phone Case",
-    "image": "/merch/adventure-tough-phone-case-pvc.png",
-    "href": "https://merch.mitmakmotors.co.za/product/adventure-tough-phone-case-pvc/"
+    "sizes": [],
+    "colours": [],
+    "description": "",
+    "image": "/merch/adventure-tough-phone-case-pvc.png"
   },
   {
     "name": "Lion’s Roar T-Shirt",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/lions-roar-t-shirt.png",
-    "href": "https://merch.mitmakmotors.co.za/product/lions-roar-t-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/lions-roar-t-shirt.png"
   },
   {
     "name": "UB Drip Embroidery",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/ub-drip-embroidery.png",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-drip-embroidery/"
+    "sizes": [],
+    "colours": [
+      "Blue",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/ub-drip-embroidery.png"
   },
   {
     "name": "UB Drip White Cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/ub-drip-white-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-drip-white-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/ub-drip-white-cap.png"
   },
   {
     "name": "UB Drip Trucker Cap",
     "price": "R397",
     "category": "Caps",
-    "image": "/merch/ub-drip-trucker-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-drip-trucker-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/ub-drip-trucker-cap.png"
   },
   {
     "name": "UB Air-Tech Sky-Blue cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/ub-air-tech-sky-blue-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-air-tech-sky-blue-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/ub-air-tech-sky-blue-cap.png"
   },
   {
     "name": "Mit-Mak Graffiti Lanyard",
     "price": "R150",
     "category": "Rim Scratchers",
-    "image": "/merch/mit-mak-graffiti-key-chain.png",
-    "href": "https://merch.mitmakmotors.co.za/product/mit-mak-graffiti-key-chain/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/mit-mak-graffiti-key-chain.png"
   },
   {
     "name": "ANARRA LEVEL! Short Sleeve Female Cut",
     "price": "R329.50",
     "category": "Rim Scratchers",
-    "image": "/merch/anarra-level-short-sleeve.png",
-    "href": "https://merch.mitmakmotors.co.za/product/anarra-level-short-sleeve/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/anarra-level-short-sleeve.png"
   },
   {
     "name": "Adventure Tough Girl T-Shirt",
     "price": "R329.50",
     "category": "Rim Scratchers",
-    "image": "/merch/adventure-tough-girl-t-shirt.png",
-    "href": "https://merch.mitmakmotors.co.za/product/adventure-tough-girl-t-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/adventure-tough-girl-t-shirt.png"
   },
   {
     "name": "Be A Man Salute Belt",
     "price": "R1500",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/be-a-man-salute-belt-copy.png",
-    "href": "https://merch.mitmakmotors.co.za/product/be-a-man-salute-belt-copy/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/be-a-man-salute-belt-copy.png"
   },
   {
     "name": "Be A Man Shap Belt",
     "price": "R1500",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/be-a-man-shap-belt.png",
-    "href": "https://merch.mitmakmotors.co.za/product/be-a-man-shap-belt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/be-a-man-shap-belt.png"
   },
   {
     "name": "Strong Mind, Body And Wallet sweats",
     "price": "R1300",
     "category": "No Excuses Gear",
-    "image": "/merch/strong-mind-body-and-wallet-sweats.png",
-    "href": "https://merch.mitmakmotors.co.za/product/strong-mind-body-and-wallet-sweats/"
+    "sizes": [
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/strong-mind-body-and-wallet-sweats.png"
   },
   {
     "name": "Strong Mind, Body And Wallet T-Shirt",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/strong-mind-body-and-wallet-t-shirt.png",
-    "href": "https://merch.mitmakmotors.co.za/product/strong-mind-body-and-wallet-t-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/strong-mind-body-and-wallet-t-shirt.png"
   },
   {
     "name": "Lion’s Mindset T-Shirt",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/lions-mindset-t-shirt-copy.png",
-    "href": "https://merch.mitmakmotors.co.za/product/lions-mindset-t-shirt-copy/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Gray",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/lions-mindset-t-shirt-copy.png"
   },
   {
     "name": "Respect Is Earned T-Shirt",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/respect-is-earned-t-shirt.png",
-    "href": "https://merch.mitmakmotors.co.za/product/respect-is-earned-t-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Gray"
+    ],
+    "description": "",
+    "image": "/merch/respect-is-earned-t-shirt.png"
   },
   {
     "name": "Lion’s Mindset Hoodie",
     "price": "R1500",
     "category": "No Excuses Gear",
-    "image": "/merch/lions-mindset-hoodie.png",
-    "href": "https://merch.mitmakmotors.co.za/product/lions-mindset-hoodie/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/lions-mindset-hoodie.png"
   },
   {
     "name": "Unbreakable hoodie",
     "price": "R1500",
     "category": "No Excuses Gear",
-    "image": "/merch/unbreakable-hoodie.png",
-    "href": "https://merch.mitmakmotors.co.za/product/unbreakable-hoodie/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/unbreakable-hoodie.png"
   },
   {
     "name": "Outsmart Everyone Hoodie",
     "price": "R1500",
     "category": "No Excuses Gear",
-    "image": "/merch/outsmart-everyone-hoodie.png",
-    "href": "https://merch.mitmakmotors.co.za/product/outsmart-everyone-hoodie/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/outsmart-everyone-hoodie.png"
   },
   {
     "name": "Uncle Bobby Too Cool Track Jacket",
     "price": "R1500",
     "category": "Rim Scratchers",
-    "image": "/merch/uncle-bobby-too-cool-track-jacket.png",
-    "href": "https://merch.mitmakmotors.co.za/product/uncle-bobby-too-cool-track-jacket/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/uncle-bobby-too-cool-track-jacket.png"
   },
   {
     "name": "UB Track Jacket",
     "price": "R1500",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/ub-track-jacket-copy.png",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-track-jacket-copy/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/ub-track-jacket-copy.png"
   },
   {
     "name": "Uncle Bobby’s Track Jacket",
     "price": "R1500",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/uncle-bobbys-track-jacket.png",
-    "href": "https://merch.mitmakmotors.co.za/product/uncle-bobbys-track-jacket/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/uncle-bobbys-track-jacket.png"
   },
   {
     "name": "bobby Is My Hobby Socks",
     "price": "R150",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/bobby-is-my-hobby-socks.png",
-    "href": "https://merch.mitmakmotors.co.za/product/bobby-is-my-hobby-socks/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/bobby-is-my-hobby-socks.png"
   },
   {
     "name": "Rimscratcher Socks",
     "price": "R150",
     "category": "Rim Scratchers",
-    "image": "/merch/rimscratcher-socks.png",
-    "href": "https://merch.mitmakmotors.co.za/product/rimscratcher-socks/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/rimscratcher-socks.png"
   },
   {
     "name": "Noise Lady shirt",
     "price": "R429.50",
     "category": "Rim Scratchers",
-    "image": "/merch/noise-lady-shirt.png",
-    "href": "https://merch.mitmakmotors.co.za/product/noise-lady-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/noise-lady-shirt.png"
   },
   {
     "name": "Unbreakable Mindset T-Shirt - Female",
     "price": "R429.50",
     "category": "Rim Scratchers",
-    "image": "/merch/unbreakable-mindset.png",
-    "href": "https://merch.mitmakmotors.co.za/product/unbreakable-mindset/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/unbreakable-mindset.png"
   },
   {
     "name": "It’s A Boy Cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/its-a-boy-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/its-a-boy-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/its-a-boy-cap.png"
   },
   {
     "name": "Rimscratcher Graffiti Cap",
     "price": "R600",
     "category": "Caps",
-    "image": "/merch/rimscratcher-graffiti-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/rimscratcher-graffiti-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/rimscratcher-graffiti-cap.png"
   },
   {
     "name": "Cheese Boy Cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/cheese-boy-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/cheese-boy-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/cheese-boy-cap.png"
   },
   {
     "name": "Full On Drug Dealer Cap - Cool Dog Edition",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/full-on-drug-dealer-cap-cool-dog-edition.png",
-    "href": "https://merch.mitmakmotors.co.za/product/full-on-drug-dealer-cap-cool-dog-edition/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/full-on-drug-dealer-cap-cool-dog-edition.png"
   },
   {
     "name": "UB Blue Print Cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/ub-blue-print-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-blue-print-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/ub-blue-print-cap.png"
   },
   {
     "name": "Full-on Drug Dealer Cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/full-on-drug-dealer-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/full-on-drug-dealer-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "Full on drug dealer cap with blue detailing",
+    "image": "/merch/full-on-drug-dealer-cap.png"
   },
   {
     "name": "Rimscratcher - Trucker Levell",
     "price": "R600",
     "category": "Caps",
-    "image": "/merch/stupid-low-cap.png",
-    "href": "https://merch.mitmakmotors.co.za/product/stupid-low-cap/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/stupid-low-cap.png"
   },
   {
     "name": "Stupid low cap",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/stupid-low-cap-2.png",
-    "href": "https://merch.mitmakmotors.co.za/product/stupid-low-cap-2/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/stupid-low-cap-2.png"
   },
   {
     "name": "UB Drip - Say it in Pink!",
     "price": "R300",
     "category": "Caps",
-    "image": "/merch/ub-drip-say-it-in-pink.jpeg",
-    "href": "https://merch.mitmakmotors.co.za/product/ub-drip-say-it-in-pink/"
+    "sizes": [],
+    "colours": [
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/ub-drip-say-it-in-pink.jpeg"
   },
   {
     "name": "Tune Tune Baboon - Pink Female",
     "price": "R340",
     "category": "Rim Scratchers",
-    "image": "/merch/tune-tune-baboon-pink-female.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/tune-tune-baboon-pink-female/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/tune-tune-baboon-pink-female.jpg"
   },
   {
     "name": "Anarra Level Shirt - Female",
     "price": "R340",
     "category": "Rim Scratchers",
-    "image": "/merch/anarra-level-shirt-female.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/anarra-level-shirt-female/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/anarra-level-shirt-female.jpg"
   },
   {
     "name": "Mug - Outwork, Outperform, Outsmart, Outlast",
     "price": "R220",
     "category": "Mug",
-    "image": "/merch/mug-outwork-outperform-outsmart-outlast.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/mug-outwork-outperform-outsmart-outlast/"
+    "sizes": [],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/mug-outwork-outperform-outsmart-outlast.jpg"
   },
   {
     "name": "Mug - Noice",
     "price": "R220",
     "category": "Mug",
-    "image": "/merch/mug-noice.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/mug-noice/"
+    "sizes": [],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/mug-noice.jpg"
   },
   {
     "name": "Mug - Anarra Level",
     "price": "R220",
     "category": "Mug",
-    "image": "/merch/mug-anarra-level.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/mug-anarra-level/"
+    "sizes": [],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/mug-anarra-level.jpg"
   },
   {
     "name": "Mug - Rimscratcher",
     "price": "R220",
     "category": "Mug",
-    "image": "/merch/mug-rimscratcher.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/mug-rimscratcher/"
+    "sizes": [],
+    "colours": [
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/mug-rimscratcher.jpg"
   },
   {
     "name": "Stuupid Low Shirt - Slim Fit",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/stuupid-low-shirt.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/stuupid-low-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/stuupid-low-shirt.jpg"
   },
   {
     "name": "Unbreakable Mindset - No Excuses Gear",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/unbreakable-mindset-no-excuses-gear.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/unbreakable-mindset-no-excuses-gear/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/unbreakable-mindset-no-excuses-gear.jpg"
   },
   {
     "name": "Rimscratcher Cap",
     "price": "R250",
     "category": "Caps",
-    "image": "/merch/rimscratcher-cap.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/rimscratcher-cap/"
+    "sizes": [],
+    "colours": [
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/rimscratcher-cap.jpg"
   },
   {
     "name": "Anarra Level Shirt",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/anarra-level-shirt.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/anarra-level-shirt/"
+    "sizes": [
+      "4XL",
+      "5XL",
+      "XXXL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/anarra-level-shirt.jpg"
   },
   {
     "name": "Anarra Level! - Trucker Cap",
     "price": "R250",
     "category": "Caps",
-    "image": "/merch/anarra-level-trucker-cap.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/anarra-level-trucker-cap/"
+    "sizes": [],
+    "colours": [
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/anarra-level-trucker-cap.jpg"
   },
   {
     "name": "Slim Fit Gym Fit - Uncle Bobby Shirt",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/slim-fit-gym-fit-uncle-bobby-shirt.jpeg",
-    "href": "https://merch.mitmakmotors.co.za/product/slim-fit-gym-fit-uncle-bobby-shirt/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/slim-fit-gym-fit-uncle-bobby-shirt.jpeg"
   },
   {
     "name": "Graffiti What Kind - Mug",
     "price": "R220",
     "category": "Mug",
-    "image": "/merch/graffiti-what-kind-mug.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/graffiti-what-kind-mug/"
+    "sizes": [],
+    "colours": [],
+    "description": "",
+    "image": "/merch/graffiti-what-kind-mug.jpg"
   },
   {
     "name": "Bucket Hat Spotty - Don’t Panic Just Look Up",
     "price": "R220",
     "category": "Caps",
-    "image": "/merch/bucket-hat-yellow-spotty-dont-panic-just-look-up.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/bucket-hat-yellow-spotty-dont-panic-just-look-up/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/bucket-hat-yellow-spotty-dont-panic-just-look-up.jpg"
   },
   {
     "name": "Tottie Doppie - It’s a Boy",
     "price": "R150",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/tottie-doppie-its-a-boy.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/tottie-doppie-its-a-boy/"
+    "sizes": [],
+    "colours": [
+      "Blue",
+      "Gray",
+      "Red",
+      "Yellow"
+    ],
+    "description": "",
+    "image": "/merch/tottie-doppie-its-a-boy.jpg"
   },
   {
     "name": "Sunny South Africa- Men",
     "price": "R450",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/sunny-south-africa-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/sunny-south-africa-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/sunny-south-africa-men.jpg"
   },
   {
     "name": "Al My Geld - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/al-my-geld-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/al-my-geld-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/al-my-geld-men.jpg"
   },
   {
     "name": "Kies Tussen ‘n Goeie vrou en ‘n Bakkie - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/kies-tussen-n-goeie-vrou-en-n-bakkie-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/kies-tussen-n-goeie-vrou-en-n-bakkie-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/kies-tussen-n-goeie-vrou-en-n-bakkie-men.jpg"
   },
   {
     "name": "Blessed From Above - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/blessed-from-above-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/blessed-from-above-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/blessed-from-above-men.jpg"
   },
   {
     "name": "Tune Tune Baboon - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/tune-tune-baboon-men.png",
-    "href": "https://merch.mitmakmotors.co.za/product/tune-tune-baboon-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/tune-tune-baboon-men.png"
   },
   {
     "name": "Uncle Bobby Out Soft-Shell Hoodie-Men",
     "price": "R1500",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/uncle-bobby-out-soft-shell-hoodie-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/uncle-bobby-out-soft-shell-hoodie-men/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/uncle-bobby-out-soft-shell-hoodie-men.jpg"
   },
   {
     "name": "Buy A Belt Be The Man Of The House - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/buy-a-belt-be-the-man-of-the-house-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/buy-a-belt-be-the-man-of-the-house-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/buy-a-belt-be-the-man-of-the-house-men.jpg"
   },
   {
     "name": "What’s Cutting - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/bmw-men-copy.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/bmw-men-copy/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/bmw-men-copy.jpg"
   },
   {
     "name": "BMW - Men",
     "price": "R430",
     "category": "Mit-Mak Motors",
-    "image": "/merch/bmw-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/bmw-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/bmw-men.jpg"
   },
   {
     "name": "Outwork, Outperform, Outsmart, Outlast- Men",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/outwork-outperform-outsmart-outlast-men.png",
-    "href": "https://merch.mitmakmotors.co.za/product/outwork-outperform-outsmart-outlast-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/outwork-outperform-outsmart-outlast-men.png"
   },
   {
     "name": "Full On! Drug Dealer Tint - Ladies",
     "price": "R350",
     "category": "Rim Scratchers",
-    "image": "/merch/full-on-drug-dealer-tint-ladies.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/full-on-drug-dealer-tint-ladies/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/full-on-drug-dealer-tint-ladies.jpg"
   },
   {
     "name": "Future Rim Scratcher -Kiddies",
     "price": "R280",
     "category": "Kids",
-    "image": "/merch/future-rim-scratcher.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/future-rim-scratcher/"
+    "sizes": [
+      "New Born",
+      "0-3 months",
+      "3-6 months",
+      "6-9 months",
+      "9-12 months",
+      "12-18 months",
+      "18-24 months",
+      "2-3 years",
+      "3-4 years",
+      "4-5 years",
+      "5-6 years"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/future-rim-scratcher.jpg"
   },
   {
     "name": "Level Up Get A BMW - Kiddies",
     "price": "R280",
     "category": "Kids",
-    "image": "/merch/level-up-get-a-bmw.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/level-up-get-a-bmw/"
+    "sizes": [
+      "New Born",
+      "0-3 months",
+      "3-6 months",
+      "6-9 months",
+      "9-12 months",
+      "12-18 months",
+      "18-24 months",
+      "2-3 years",
+      "3-4 years",
+      "4-5 years",
+      "5-6 years"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/level-up-get-a-bmw.jpg"
   },
   {
     "name": "My Dad Drives A BMW - Kiddies",
     "price": "R280",
     "category": "Kids",
-    "image": "/merch/my-dad-drives-a-bmw.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/my-dad-drives-a-bmw/"
+    "sizes": [
+      "New Born",
+      "0-3 months",
+      "3-6 months",
+      "6-9 months",
+      "9-12 months",
+      "12-18 months",
+      "18-24 months",
+      "2-3 years",
+      "3-4 years",
+      "4-5 years",
+      "5-6 years"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/my-dad-drives-a-bmw.jpg"
   },
   {
     "name": "Bob’s Your Uncle - Kiddies",
     "price": "R280",
     "category": "Kids",
-    "image": "/merch/bobs-your-uncle.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/bobs-your-uncle/"
+    "sizes": [
+      "New Born",
+      "0-3 months",
+      "3-6 months",
+      "6-9 months",
+      "9-12 months",
+      "12-18 months",
+      "18-24 months",
+      "2-3 years",
+      "3-4 years",
+      "4-5 years",
+      "5-6 years"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/bobs-your-uncle.jpg"
   },
   {
     "name": "Bob’s Your Uncle - Kiddies Tote Bag",
     "price": "R170",
     "category": "Kids",
-    "image": "/merch/bobs-your-uncle-tote-bag.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/bobs-your-uncle-tote-bag/"
+    "sizes": [],
+    "colours": [],
+    "description": "",
+    "image": "/merch/bobs-your-uncle-tote-bag.jpg"
   },
   {
     "name": "Let Him Drive - Ladies",
     "price": "R350",
     "category": "Rim Scratchers",
-    "image": "/merch/let-him-drive-ladies.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/let-him-drive-ladies/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/let-him-drive-ladies.jpg"
   },
   {
     "name": "#1 Rimscratcher Shirt - Ladies",
     "price": "R480",
     "category": "Rim Scratchers",
-    "image": "/merch/1-rim-scratcher-shirt-ladies.png",
-    "href": "https://merch.mitmakmotors.co.za/product/1-rim-scratcher-shirt-ladies/"
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/1-rim-scratcher-shirt-ladies.png"
   },
   {
     "name": "Buy Your Wife A Car - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/buy-your-wife-a-car-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/buy-your-wife-a-car-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/buy-your-wife-a-car-men.jpg"
   },
   {
     "name": "Bobby Is My Hobby - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/bobby-is-my-hobby-men.png",
-    "href": "https://merch.mitmakmotors.co.za/product/bobby-is-my-hobby-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White"
+    ],
+    "description": "",
+    "image": "/merch/bobby-is-my-hobby-men.png"
   },
   {
     "name": "Drug Dealer Tint - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/drug-dealer-tint.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/drug-dealer-tint/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/drug-dealer-tint.jpg"
   },
   {
     "name": "Its A Boy - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/its-a-boy-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/its-a-boy-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/its-a-boy-men.jpg"
   },
   {
     "name": "What Audi Drivers See - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/what-audi-drivers-see-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/what-audi-drivers-see-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/what-audi-drivers-see-men.jpg"
   },
   {
     "name": "Its An Old Boy - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/its-an-old-boy-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/its-an-old-boy-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/its-an-old-boy-men.jpg"
   },
   {
     "name": "Howzit Boss - Men",
     "price": "R430",
     "category": "Uncle Bobby Humour",
-    "image": "/merch/howzit-boss-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/howzit-boss-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [
+      "Black",
+      "White",
+      "Grey",
+      "Blue"
+    ],
+    "description": "",
+    "image": "/merch/howzit-boss-men.jpg"
   },
   {
     "name": "Uncle Bobby Out - Yellow Spottie Print",
     "price": "R250",
     "category": "Caps",
-    "image": "/merch/uncle-bobby-out-yellow.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/uncle-bobby-out-yellow/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink",
+      "Gray"
+    ],
+    "description": "",
+    "image": "/merch/uncle-bobby-out-yellow.jpg"
   },
   {
     "name": "Uncle Bobby Out - Bobby Salute Print",
     "price": "R250",
     "category": "Caps",
-    "image": "/merch/uncle-bobby-out-black.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/uncle-bobby-out-black/"
+    "sizes": [],
+    "colours": [
+      "Black",
+      "Pink"
+    ],
+    "description": "",
+    "image": "/merch/uncle-bobby-out-black.jpg"
   },
   {
     "name": "No Handouts Cap - Blue",
     "price": "R250",
     "category": "Caps",
-    "image": "/merch/no-handouts-cap-blue.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/no-handouts-cap-blue/"
+    "sizes": [],
+    "colours": [],
+    "description": "",
+    "image": "/merch/no-handouts-cap-blue.jpg"
   },
   {
     "name": "No Handouts Cap - Black",
     "price": "R320",
     "category": "Caps",
-    "image": "/merch/no-handouts-cap-black.png",
-    "href": "https://merch.mitmakmotors.co.za/product/no-handouts-cap-black/"
+    "sizes": [],
+    "colours": [],
+    "description": "",
+    "image": "/merch/no-handouts-cap-black.png"
   },
   {
     "name": "Outwork Everyone - Men",
     "price": "R430",
     "category": "No Excuses Gear",
-    "image": "/merch/the-only-formula-to-success-men.jpg",
-    "href": "https://merch.mitmakmotors.co.za/product/the-only-formula-to-success-men/"
+    "sizes": [
+      "3XL",
+      "4XL",
+      "5XL",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "colours": [],
+    "description": "",
+    "image": "/merch/the-only-formula-to-success-men.jpg"
   }
 ];

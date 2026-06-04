@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight } from 'lucide-react';
-import { merchProducts, merchStoreUrl } from '@/data/merch';
+import { ArrowDown } from 'lucide-react';
+import { merchProducts } from '@/data/merch';
 import { PageHero } from '@/components/layout/page-hero';
 import { MerchStore } from '@/components/merch/merch-store';
 import { CtaBand } from '@/components/layout/cta-band';
@@ -23,24 +23,24 @@ export default function MerchPage() {
         image="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80"
       >
         <a
-          href={merchStoreUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#store"
           data-cursor="hover"
           className="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-red px-7 font-display text-xs uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5 hover:shadow-glow"
         >
-          Shop the Full Store <ArrowUpRight className="h-4 w-4" />
+          Shop the Collection <ArrowDown className="h-4 w-4" />
         </a>
       </PageHero>
 
-      <MerchStore products={merchProducts} />
+      <div id="store" className="scroll-mt-24">
+        <MerchStore products={merchProducts} />
+      </div>
 
       <CtaBand
         eyebrow="UB Drip"
-        title="Rep the brand"
-        description="Every cap, tee and hoodie ships from Pretoria. Browse the full collection and check out securely on the UB Drip store."
-        primary={{ label: 'Shop the Full Store', href: merchStoreUrl, external: true }}
-        secondary={{ label: 'Back to FOMO Zone', href: '/fomo-zone' }}
+        title="Never miss a drop"
+        description="New caps, tees and hoodies land all the time. Join the list and be first in line for every release and FOMO Zone reward."
+        primary={{ label: 'Get Drop Alerts', href: '/newsletter' }}
+        secondary={{ label: 'FOMO Zone', href: '/fomo-zone' }}
       />
     </>
   );
