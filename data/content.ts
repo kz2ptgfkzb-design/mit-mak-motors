@@ -65,8 +65,8 @@ export const staff: StaffMember[] = [
   { name: 'Mike Makua', role: 'Founder & Managing Director', branch: 'Flagship, Gerrit Maritz', image: '', bio: 'Built Mit-Mak from a single bay into Pretoria’s most-awarded used dealership. Still test-drives every hero car.' },
   { name: 'Katlego Mahlangu', role: 'Head of Sales', branch: 'Flagship, Gerrit Maritz', image: '', bio: 'Leads the sales floor with one rule: tell the truth, move fast, deliver free.' },
   { name: 'René Botha', role: 'Finance & Insurance Manager', branch: 'Finance House', image: '', bio: 'Knows every bank’s scorecard by heart. Has saved customers millions in interest.' },
-  { name: 'Sibusiso Nkosi', role: 'Bakkie & 4x4 Specialist', branch: 'Bakkie & 4x4 Centre', image: '', bio: 'If it has low-range and a tow bar, Sbu has driven it through a river.' },
-  { name: 'Chantel Pretorius', role: 'Reconditioning Lead', branch: 'Delivery Hub', image: '', bio: 'Runs the 212-point process. Nothing leaves the floor until it meets her standard.' },
+  { name: 'Sibusiso Nkosi', role: 'Bakkie & 4x4 Specialist', branch: 'Flagship, Gerrit Maritz', image: '', bio: 'If it has low-range and a tow bar, Sbu has driven it through a river.' },
+  { name: 'Chantel Pretorius', role: 'Reconditioning Lead', branch: 'Flagship, Gerrit Maritz', image: '', bio: 'Runs the 212-point process. Nothing leaves the floor until it meets her standard.' },
   { name: 'Ayanda Zwane', role: 'Customer Experience Lead', branch: 'Premium & Performance', image: '', bio: 'The reason we’re #1 on HelloPeter. Answers WhatsApps faster than you can type them.' },
 ];
 

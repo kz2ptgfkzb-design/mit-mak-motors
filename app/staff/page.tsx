@@ -6,7 +6,7 @@ import { CtaBand } from '@/components/layout/cta-band';
 
 export const metadata: Metadata = {
   title: 'Our Staff, Meet the Team',
-  description: 'The people behind Mit-Mak Motors’ 7-year #1 HelloPeter streak, sales, finance, reconditioning and customer experience experts across six branches.',
+  description: 'The people behind Mit-Mak Motors’ 7-year #1 HelloPeter streak, sales, finance, reconditioning and customer experience experts across three branches.',
   alternates: { canonical: '/staff' },
 };
 

@@ -123,7 +123,7 @@ export default function AboutPage() {
             </div>
           </Reveal>
           <div>
-            <SectionHeading eyebrow="Our Story" title="From one bay to six branches" />
+            <SectionHeading eyebrow="Our Story" title="From one bay to three branches" />
             <Reveal delay={0.1}>
               <div className="mt-6 space-y-4 text-graphite-300">
                 <p>
@@ -131,7 +131,7 @@ export default function AboutPage() {
                   cars one at a time, and refused to let a single one leave below standard.
                 </p>
                 <p>
-                  That obsession scaled. Today we run six branches across Gerrit Maritz and Rachel de Beer Streets in
+                  That obsession scaled. Today we run three branches across Gerrit Maritz and Rachel de Beer Streets in
                   Pretoria North, a dedicated reconditioning hub, and a delivery operation that reaches all nine
                   provinces, free.
                 </p>

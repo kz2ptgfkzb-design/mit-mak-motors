@@ -71,7 +71,7 @@ export function Footer() {
         <div className="mt-14 grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <h3 className="mb-5 flex items-center gap-2 font-display text-sm uppercase tracking-wide text-white">
-              <MapPin className="h-4 w-4 text-red" /> 6 Locations · Pretoria North
+              <MapPin className="h-4 w-4 text-red" /> 3 Locations · Pretoria North
             </h3>
             <div className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
               {locations.map((loc) => (

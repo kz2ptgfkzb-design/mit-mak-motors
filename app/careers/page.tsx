@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 const roles = [
   { title: 'Sales Executive', branch: 'Flagship, Gerrit Maritz', type: 'Full-time', blurb: 'Own the floor. Help customers find the right car and close with honesty and pace.' },
   { title: 'F&I Business Manager', branch: 'Finance House', type: 'Full-time', blurb: 'Structure finance and insurance, secure the best bank rates, protect the deal.' },
-  { title: 'Reconditioning Technician', branch: 'Delivery Hub', type: 'Full-time', blurb: 'Run cars through the 212-point process. Detail, repair, sign off, to the standard.' },
-  { title: 'Nationwide Delivery Driver', branch: 'Delivery Hub', type: 'Full-time', blurb: 'Get reconditioned cars to customers’ doors across all nine provinces, spotless.' },
+  { title: 'Reconditioning Technician', branch: 'Flagship, Gerrit Maritz', type: 'Full-time', blurb: 'Run cars through the 212-point process. Detail, repair, sign off, to the standard.' },
+  { title: 'Nationwide Delivery Driver', branch: 'Flagship, Gerrit Maritz', type: 'Full-time', blurb: 'Get reconditioned cars to customers’ doors across all nine provinces, spotless.' },
   { title: 'Digital Marketing Coordinator', branch: 'Flagship, Gerrit Maritz', type: 'Full-time', blurb: 'Run the content, the socials and the FOMO Zone. Make the brand impossible to ignore.' },
   { title: 'Customer Experience Agent', branch: 'Premium & Performance', type: 'Full-time', blurb: 'Be the reason we stay #1 on HelloPeter. Fast, warm, relentless follow-through.' },
 ];

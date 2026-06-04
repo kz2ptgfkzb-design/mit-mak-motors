@@ -7,9 +7,9 @@ import { PageHero } from '@/components/layout/page-hero';
 import { ContactForm } from '@/components/contact/contact-form';
 
 export const metadata: Metadata = {
-  title: 'Contact, 6 Locations in Pretoria',
+  title: 'Contact, 3 Locations in Pretoria',
   description:
-    'Visit Mit-Mak Motors across six branches on Gerrit Maritz & Rachel de Beer Streets, Pretoria North. Call, WhatsApp or send a message, open 6 days a week.',
+    'Visit Mit-Mak Motors across three branches on Gerrit Maritz & Rachel de Beer Streets, Pretoria North. Call, WhatsApp or send a message, open 6 days a week.',
   alternates: { canonical: '/contact' },
 };
 
@@ -25,7 +25,7 @@ export default function ContactPage({ searchParams }: { searchParams: { vehicle?
       <PageHero
         eyebrow="Get in Touch"
         title="Come Say Hello"
-        description="Six branches across Pretoria North, open six days a week. Call, WhatsApp, or send us a message, wherever you are in South Africa, we’ll come to you."
+        description="Three branches across Pretoria North, open six days a week. Call, WhatsApp, or send us a message, wherever you are in South Africa, we’ll come to you."
         crumbs={[{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact' }]}
       />
 
@@ -88,7 +88,7 @@ export default function ContactPage({ searchParams }: { searchParams: { vehicle?
         <div className="container">
           <div className="flex items-center gap-3">
             <MapPin className="h-5 w-5 text-red" />
-            <h2 className="font-anton text-3xl uppercase tracking-tight text-white sm:text-4xl">6 Locations · Pretoria North</h2>
+            <h2 className="font-anton text-3xl uppercase tracking-tight text-white sm:text-4xl">3 Locations · Pretoria North</h2>
           </div>
 
           <div className="mt-8 overflow-hidden rounded-2xl border border-white/10">
