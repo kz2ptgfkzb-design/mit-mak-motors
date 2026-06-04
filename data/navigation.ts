@@ -52,11 +52,11 @@ export const megaMenu: NavGroup[] = [
     title: 'Company',
     links: [
       { label: 'Why Mit-Mak', href: '/about', description: 'Trusted. Awarded. Unmatched.' },
-      { label: 'Meet the Team', href: '/staff', description: '3 branches of experts' },
+      { label: 'Meet the Team', href: '/staff', description: 'The people behind the standard' },
       { label: 'Careers', href: '/careers', description: 'Join the fastest in PTA' },
       { label: 'Blog', href: '/blog', description: 'Guides, news & tips' },
       { label: 'Referrals', href: '/referrals', description: 'Refer & earn cash' },
-      { label: 'Contact', href: '/contact', description: '3 locations + map' },
+      { label: 'Contact', href: '/contact', description: '6 locations + map' },
     ],
   },
 ];
