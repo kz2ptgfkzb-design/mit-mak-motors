@@ -28,6 +28,7 @@ export function VehicleListItem({
       <Link href={href} data-cursor="view" data-cursor-text="View" className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl sm:aspect-[4/3] sm:w-64">
         <Image
           src={vehicle.images[0]}
+          unoptimized
           alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
           fill
           sizes="(max-width:640px) 90vw, 256px"

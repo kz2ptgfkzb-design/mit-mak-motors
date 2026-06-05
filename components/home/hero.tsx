@@ -281,7 +281,7 @@ export function Hero({ vehicle }: { vehicle: Vehicle }) {
         className="group absolute bottom-10 right-6 z-10 hidden items-center gap-3 rounded-2xl border border-white/10 bg-ink-900/60 p-2.5 pr-4 backdrop-blur-xl transition-colors hover:border-red/50 lg:flex"
       >
         <div className="relative h-16 w-24 overflow-hidden rounded-xl">
-          <Image src={vehicle.images[1] ?? vehicle.images[0]} alt="" fill sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
+          <Image src={vehicle.images[1] ?? vehicle.images[0]} alt="" fill unoptimized sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
         </div>
         <div>
           <p className="font-display text-[10px] uppercase tracking-[0.2em] text-red">Now in the showroom</p>

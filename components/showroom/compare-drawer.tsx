@@ -57,7 +57,7 @@ export function CompareTray({
               <div className="flex flex-1 items-center gap-2 overflow-x-auto hide-scrollbar">
                 {vehicles.map((v) => (
                   <div key={v.id} className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg border border-white/10">
-                    <Image src={v.images[0]} alt={v.model} fill sizes="64px" className="object-cover" />
+                    <Image src={v.images[0]} alt={v.model} fill unoptimized sizes="64px" className="object-cover" />
                     <button
                       onClick={() => onRemove(v.id)}
                       aria-label={`Remove ${v.model}`}
@@ -117,7 +117,7 @@ export function CompareTray({
                     {vehicles.map((v) => (
                       <div key={v.id} className="px-2">
                         <div className="relative mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10">
-                          <Image src={v.images[0]} alt={v.model} fill sizes="200px" className="object-cover" />
+                          <Image src={v.images[0]} alt={v.model} fill unoptimized sizes="200px" className="object-cover" />
                           <button onClick={() => onRemove(v.id)} aria-label="Remove" className="absolute right-1.5 top-1.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-ink-950/80 text-white hover:bg-red">
                             <X className="h-3.5 w-3.5" />
                           </button>

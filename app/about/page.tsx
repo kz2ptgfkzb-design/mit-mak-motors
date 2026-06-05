@@ -178,6 +178,7 @@ export default function AboutPage() {
                       <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-white/10">
                         <Image
                           src={s.image}
+                          unoptimized
                           alt={s.imageAlt}
                           fill
                           sizes="(max-width:1024px) 100vw, 50vw"

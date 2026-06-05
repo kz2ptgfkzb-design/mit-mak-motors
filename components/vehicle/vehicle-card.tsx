@@ -80,6 +80,7 @@ export function VehicleCard({
         <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
           <Image
             src={vehicle.images[0]}
+            unoptimized
             alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}`}
             fill
             sizes="(max-width:640px) 90vw, (max-width:1024px) 45vw, 30vw"
@@ -89,6 +90,7 @@ export function VehicleCard({
           {vehicle.images[1] && (
             <Image
               src={vehicle.images[1]}
+              unoptimized
               alt=""
               fill
               sizes="(max-width:640px) 90vw, (max-width:1024px) 45vw, 30vw"

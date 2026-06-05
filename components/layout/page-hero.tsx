@@ -31,6 +31,7 @@ export function PageHero({
         <>
           <Image
             src={image}
+            unoptimized={image.includes('autotrader.co.za')}
             alt=""
             fill
             aria-hidden
