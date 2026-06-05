@@ -48,6 +48,15 @@ const PILLARS = [
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+function Eyebrow() {
+  return (
+    <div className="flex items-center gap-3">
+      <Chevron size={11} className="text-red" />
+      <span className="font-display text-[11px] uppercase tracking-[0.3em] text-graphite-300">Why Mit-Mak</span>
+    </div>
+  );
+}
+
 export function BrandPillars() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
@@ -62,122 +71,143 @@ export function BrandPillars() {
   const pillar = PILLARS[active];
 
   return (
-    <section ref={ref} className="relative" style={{ height: `${PILLARS.length * 100}vh` }} aria-label="Why Mit-Mak">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        {/* Crossfading backgrounds */}
-        {PILLARS.map((p, i) => (
-          <motion.div
-            key={p.n}
-            className="absolute inset-0"
-            initial={false}
-            animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1 : 1.08 }}
-            transition={{ duration: 0.9, ease: EASE }}
-            style={{ willChange: 'opacity, transform' }}
-          >
-            <Image src={p.image} alt="" fill sizes="100vw" className="object-cover" />
-          </motion.div>
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/80 to-ink-950/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 to-transparent" />
+    <>
+      {/* MOBILE / TABLET: stacked cards (no scroll-pinning) */}
+      <section className="border-b border-white/10 py-16 lg:hidden" aria-label="Why Mit-Mak">
+        <div className="container">
+          <Eyebrow />
+          <div className="mt-8 space-y-12">
+            {PILLARS.map((p) => (
+              <div key={p.n}>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10">
+                  <Image src={p.image} alt="" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/30 to-transparent" />
+                  <span className="absolute right-4 top-2 font-anton text-6xl leading-none text-white/15">{p.n}</span>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="font-anton text-4xl leading-none text-red">
+                      <Counter value={p.metric.value} decimals={p.metric.decimals} suffix={p.metric.suffix} />
+                    </div>
+                    <p className="mt-1 text-[11px] uppercase tracking-wide text-graphite-300">{p.metric.label}</p>
+                  </div>
+                </div>
+                <h2 className="mt-4 font-anton text-3xl uppercase leading-[0.9] tracking-tight text-white">{p.title.join(' ')}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-graphite-300">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <div className="container relative z-10 grid w-full items-center gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <div className="mb-6 flex items-center gap-3">
-              <Chevron size={11} className="text-red" />
-              <span className="font-display text-[11px] uppercase tracking-[0.3em] text-graphite-300">
-                Why Mit-Mak
-              </span>
+      {/* DESKTOP: scroll-pinned crossfade */}
+      <section ref={ref} className="relative hidden lg:block" style={{ height: `${PILLARS.length * 100}vh` }} aria-label="Why Mit-Mak">
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+          {/* Crossfading backgrounds */}
+          {PILLARS.map((p, i) => (
+            <motion.div
+              key={p.n}
+              className="absolute inset-0"
+              initial={false}
+              animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1 : 1.08 }}
+              transition={{ duration: 0.9, ease: EASE }}
+              style={{ willChange: 'opacity, transform' }}
+            >
+              <Image src={p.image} alt="" fill sizes="100vw" className="object-cover" />
+            </motion.div>
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/80 to-ink-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 to-transparent" />
+
+          <div className="container relative z-10 grid w-full items-center gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <div className="mb-6">
+                <Eyebrow />
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.55, ease: EASE }}
+                >
+                  <span className="font-anton text-[18vw] leading-none text-white/[0.06] lg:text-[10rem]">{pillar.n}</span>
+                  <h2 className="-mt-[8vw] font-anton text-5xl uppercase leading-[0.85] tracking-tight text-white sm:text-6xl lg:-mt-28 lg:text-8xl">
+                    {pillar.title.map((line, i) => (
+                      <span key={i} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </h2>
+                  <p className="mt-6 max-w-md text-base leading-relaxed text-graphite-200 md:text-lg">{pillar.body}</p>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.55, ease: EASE }}
-              >
-                <span className="font-anton text-[18vw] leading-none text-white/[0.06] lg:text-[10rem]">
-                  {pillar.n}
-                </span>
-                <h2 className="-mt-[8vw] font-anton text-5xl uppercase leading-[0.85] tracking-tight text-white sm:text-6xl lg:-mt-28 lg:text-8xl">
-                  {pillar.title.map((line, i) => (
-                    <span key={i} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </h2>
-                <p className="mt-6 max-w-md text-base leading-relaxed text-graphite-200 md:text-lg">{pillar.body}</p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Metric + progress list */}
-          <div className="lg:col-span-5 lg:pl-10">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`m-${active}`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: EASE }}
-                className="mb-10 rounded-2xl border border-white/10 bg-ink-900/50 p-7 backdrop-blur-xl"
-              >
-                <div className="font-anton text-6xl leading-none text-red lg:text-7xl">
-                  <Counter value={pillar.metric.value} decimals={pillar.metric.decimals} suffix={pillar.metric.suffix} />
-                </div>
-                <p className="mt-3 text-sm text-graphite-300">{pillar.metric.label}</p>
-              </motion.div>
-            </AnimatePresence>
-
-            <ul className="space-y-3">
-              {PILLARS.map((p, i) => (
-                <li
-                  key={p.n}
-                  className={cn(
-                    'flex items-center gap-3 border-l-2 pl-4 transition-all duration-300',
-                    active === i ? 'border-red' : 'border-white/10',
-                  )}
+            {/* Metric + progress list */}
+            <div className="lg:col-span-5 lg:pl-10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`m-${active}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: EASE }}
+                  className="mb-10 rounded-2xl border border-white/10 bg-ink-900/50 p-7 backdrop-blur-xl"
                 >
-                  <span className={cn('font-display text-xs', active === i ? 'text-red' : 'text-graphite-500')}>{p.n}</span>
-                  <span
+                  <div className="font-anton text-6xl leading-none text-red lg:text-7xl">
+                    <Counter value={pillar.metric.value} decimals={pillar.metric.decimals} suffix={pillar.metric.suffix} />
+                  </div>
+                  <p className="mt-3 text-sm text-graphite-300">{pillar.metric.label}</p>
+                </motion.div>
+              </AnimatePresence>
+
+              <ul className="space-y-3">
+                {PILLARS.map((p, i) => (
+                  <li
+                    key={p.n}
                     className={cn(
-                      'font-display text-sm uppercase tracking-wide transition-colors',
-                      active === i ? 'text-white' : 'text-graphite-500',
+                      'flex items-center gap-3 border-l-2 pl-4 transition-all duration-300',
+                      active === i ? 'border-red' : 'border-white/10',
                     )}
                   >
-                    {p.title.join(' ')}
-                  </span>
-                </li>
-              ))}
-            </ul>
+                    <span className={cn('font-display text-xs', active === i ? 'text-red' : 'text-graphite-500')}>{p.n}</span>
+                    <span
+                      className={cn(
+                        'font-display text-sm uppercase tracking-wide transition-colors',
+                        active === i ? 'text-white' : 'text-graphite-500',
+                      )}
+                    >
+                      {p.title.join(' ')}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
 
-        {/* Chevron scroll-progress fill */}
-        <div className="absolute inset-x-0 bottom-7 z-10">
-          <div className="container flex items-center gap-4">
-            <span className="font-display text-xs text-graphite-400">
-              0{active + 1} <span className="text-graphite-600">/ 0{PILLARS.length}</span>
-            </span>
-            <div className="relative h-4 flex-1">
-              <div className="absolute inset-0 flex items-center justify-between text-white/15">
-                {Array.from({ length: 26 }).map((_, i) => (
-                  <Chevron key={i} size={8} className="shrink-0" />
-                ))}
+          {/* Chevron scroll-progress fill */}
+          <div className="absolute inset-x-0 bottom-7 z-10">
+            <div className="container flex items-center gap-4">
+              <span className="font-display text-xs text-graphite-400">
+                0{active + 1} <span className="text-graphite-600">/ 0{PILLARS.length}</span>
+              </span>
+              <div className="relative h-4 flex-1">
+                <div className="absolute inset-0 flex items-center justify-between text-white/15">
+                  {Array.from({ length: 26 }).map((_, i) => (
+                    <Chevron key={i} size={8} className="shrink-0" />
+                  ))}
+                </div>
+                <motion.div className="absolute inset-0 flex items-center justify-between text-red" style={{ clipPath: fillClip }}>
+                  {Array.from({ length: 26 }).map((_, i) => (
+                    <Chevron key={i} size={8} className="shrink-0" />
+                  ))}
+                </motion.div>
               </div>
-              <motion.div
-                className="absolute inset-0 flex items-center justify-between text-red"
-                style={{ clipPath: fillClip }}
-              >
-                {Array.from({ length: 26 }).map((_, i) => (
-                  <Chevron key={i} size={8} className="shrink-0" />
-                ))}
-              </motion.div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
