@@ -40,9 +40,7 @@ export function Header() {
                 <Logo priority />
               </Link>
               <a
-                href="https://courses.mitmakmasterclass.co.za/"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/masterclass"
                 aria-label="Mit-Mak Masterclass, click here"
                 data-cursor="hover"
                 className="shrink-0 transition-transform duration-300 ease-out-expo hover:scale-105"

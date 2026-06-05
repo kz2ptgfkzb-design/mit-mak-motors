@@ -86,7 +86,7 @@ export const fomoDetails: Record<string, FomoDetail> = {
     tagline: 'Everything we know about buying, selling and financing, taught straight, no gatekeeping.',
     lead: 'Learn from Bobby Petkov and a team that moves around 200 cars a month. 18+ years in the trade, distilled into live seminars and online modules, backed by a 100% money-back guarantee.',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
-    external: { label: 'Browse Courses', url: 'https://courses.mitmakmasterclass.co.za/' },
+    external: { label: 'Browse Courses', url: '/masterclass' },
     blocksLabel: 'Courses & seminars',
     blocks: [
       { meta: 'R7,999', title: 'Sales Training Seminar', body: 'A live session on the sales skills and techniques that actually close deals.' },
