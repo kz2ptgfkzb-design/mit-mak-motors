@@ -161,7 +161,7 @@ export default function AboutPage() {
       </section>
 
       {/* Why Mit-Mak, alternating feature series */}
-      <section className="py-16 lg:py-24">
+      <section id="the-standard" className="scroll-mt-28 py-16 lg:py-24">
         <div className="container">
           <SectionHeading
             eyebrow="What We Stand For"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -143,12 +143,17 @@ export function RevealText({
       aria-label={text}
     >
       {tokens.map((token, i) => (
-        <span key={i} className="inline-flex overflow-hidden pb-[0.06em] align-bottom" aria-hidden>
-          <motion.span className="inline-block" variants={child}>
-            {token === ' ' ? ' ' : token}
-            {splitBy === 'word' && i < tokens.length - 1 ? ' ' : ''}
-          </motion.span>
-        </span>
+        <Fragment key={i}>
+          <span className="inline-flex overflow-hidden pb-[0.06em] align-bottom" aria-hidden>
+            <motion.span className="inline-block" variants={child}>
+              {token === ' ' ? ' ' : token}
+            </motion.span>
+          </span>
+          {/* Render the inter-word space as a sibling text node so it is not
+              trimmed inside the clip span (the cause of run-together headings),
+              while still allowing the title to wrap. */}
+          {splitBy === 'word' && i < tokens.length - 1 ? ' ' : null}
+        </Fragment>
       ))}
     </motion.span>
   );
