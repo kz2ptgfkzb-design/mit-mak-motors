@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { notFound } from 'next/navigation';
 import { fomoSlugs, getFomoDetail } from '@/data/fomo';
 import { PageHero } from '@/components/layout/page-hero';
@@ -44,7 +45,7 @@ export default function FomoDetailPage({ params }: { params: { slug: string } })
         <div className="container grid items-center gap-10 lg:grid-cols-2">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10">
-              <Image src={d.image} alt={d.title} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+              <Image src={d.image} alt={d.title} fill placeholder="blur" blurDataURL={BLUR} sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" />
               {d.badge && (
                 <span className="absolute left-4 top-4 rounded-full bg-red px-3 py-1 font-display text-[10px] font-semibold uppercase tracking-widest text-white">

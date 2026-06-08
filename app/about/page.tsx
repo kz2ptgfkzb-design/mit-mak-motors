@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { stats } from '@/data/awards';
@@ -119,7 +120,7 @@ export default function AboutPage() {
         <div className="container grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10">
-              <Image src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1400&q=80" alt="Inside the Mit-Mak reconditioning workshop" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+              <Image src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1400&q=80" alt="Inside the Mit-Mak reconditioning workshop" fill placeholder="blur" blurDataURL={BLUR} sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/40 to-transparent" />
             </div>
           </Reveal>
@@ -181,6 +182,8 @@ export default function AboutPage() {
                           unoptimized
                           alt={s.imageAlt}
                           fill
+                          placeholder="blur"
+                          blurDataURL={BLUR}
                           sizes="(max-width:1024px) 100vw, 50vw"
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />

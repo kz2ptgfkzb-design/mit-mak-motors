@@ -33,9 +33,15 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     headline: post.title,
     image: post.image,
     datePublished: post.date,
+    dateModified: post.date,
     author: { '@type': 'Person', name: post.author },
-    publisher: { '@type': 'Organization', name: siteConfig.name },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      logo: { '@type': 'ImageObject', url: `${siteConfig.url}/mit-mak-logo.png` },
+    },
     description: post.excerpt,
+    mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
   };
 
   return (

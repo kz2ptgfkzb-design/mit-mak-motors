@@ -47,10 +47,12 @@ export function CustomCursor() {
       mx = e.clientX;
       my = e.clientY;
       moved = true;
+      start();
     };
     window.addEventListener('mousemove', onMove, { passive: true });
 
     let raf = 0;
+    let running = false;
     const loop = () => {
       if (moved) {
         pts.push({ x: mx, y: my });
@@ -84,14 +86,37 @@ export function CustomCursor() {
         ctx.shadowBlur = 12;
         ctx.fill();
       }
+
+      // Nothing left to draw: park the loop instead of spinning rAF forever.
+      // onMove restarts it on the next pointer movement.
+      if (!moved && pts.length === 0) {
+        running = false;
+        return;
+      }
       raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+
+    function start() {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(loop);
+    }
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+        running = false;
+        pts.length = 0;
+        ctx.clearRect(0, 0, w, h);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, [active]);
 

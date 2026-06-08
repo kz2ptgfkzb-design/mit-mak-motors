@@ -62,10 +62,13 @@ export function BrandPillars() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
   const fillClip = useTransform(scrollYProgress, [0, 1], ['inset(0 100% 0 0)', 'inset(0 0% 0 0)']);
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     const idx = Math.min(PILLARS.length - 1, Math.max(0, Math.floor(v * PILLARS.length)));
+    if (idx === activeRef.current) return; // only re-render when the pillar actually changes
+    activeRef.current = idx;
     setActive(idx);
   });
 
@@ -110,7 +113,6 @@ export function BrandPillars() {
               initial={false}
               animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1 : 1.08 }}
               transition={{ duration: 0.9, ease: EASE }}
-              style={{ willChange: 'opacity, transform' }}
             >
               <Image src={p.image} alt="" fill priority={i === 0} sizes="100vw" placeholder="blur" blurDataURL={BLUR} className="object-cover" />
             </motion.div>

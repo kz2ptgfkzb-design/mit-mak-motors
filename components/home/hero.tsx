@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { RevealText, Reveal } from '@/components/ui/reveal';
 import { SpeedLines, Chevron } from '@/components/ui/chevron';
 
-// High-quality hero shot of a BMW M4 — a model they actually stock & sell.
+// High-quality hero shot of a BMW M4 - a model they actually stock & sell.
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=2000&h=1100&q=85';
 
@@ -225,7 +225,7 @@ export function Hero({ vehicle }: { vehicle: Vehicle }) {
         />
       </div>
 
-      {/* Cinematic gradients — keep the car visible; the headline uses a text-shadow for legibility */}
+      {/* Cinematic gradients - keep the car visible; the headline uses a text-shadow for legibility */}
       <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/45" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/35 to-transparent" />
 

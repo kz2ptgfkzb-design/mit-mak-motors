@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -17,6 +17,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled(20);
   const pathname = usePathname();
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setOpen(false);
@@ -91,7 +92,7 @@ export function Header() {
                 href={`tel:${siteConfig.phoneHref}`}
                 aria-label="Call us"
                 data-cursor="hover"
-                className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/15 text-graphite-200 transition-colors hover:border-red hover:text-white sm:inline-flex"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-graphite-200 transition-colors hover:border-red hover:text-white"
               >
                 <Phone className="h-4 w-4" />
               </a>
@@ -100,9 +101,12 @@ export function Header() {
               </Button>
 
               <button
+                ref={triggerRef}
                 onClick={() => setOpen(true)}
                 data-cursor="hover"
                 aria-label="Open menu"
+                aria-haspopup="dialog"
+                aria-controls="main-menu"
                 aria-expanded={open}
                 className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 py-2 pl-4 pr-2 text-white transition-colors hover:border-white/40"
               >
@@ -117,7 +121,7 @@ export function Header() {
         </div>
       </header>
 
-      <MegaMenu open={open} onClose={() => setOpen(false)} />
+      <MegaMenu open={open} onClose={() => setOpen(false)} triggerRef={triggerRef} />
     </>
   );
 }

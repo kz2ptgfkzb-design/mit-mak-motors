@@ -57,6 +57,7 @@ export const megaMenu: NavGroup[] = [
       { label: 'Blog', href: '/blog', description: 'Guides, news & tips' },
       { label: 'Referrals', href: '/referrals', description: 'Refer & earn cash' },
       { label: 'Contact', href: '/contact', description: '6 locations + map' },
+      { label: 'Compliment / Complaint', href: '/feedback', description: 'Tell us how we did' },
     ],
   },
 ];

@@ -31,6 +31,8 @@ export function IgnitionIntro() {
     document.documentElement.style.overflow = 'hidden';
     const t1 = setTimeout(() => {
       setPlay(false);
+      // Unlock scrolling as soon as the curtain starts lifting, not after it finishes.
+      document.documentElement.style.overflow = '';
       try {
         sessionStorage.setItem('mm-loaded', '1');
       } catch {
@@ -39,7 +41,6 @@ export function IgnitionIntro() {
     }, 2350);
     const t2 = setTimeout(() => {
       setRender(false);
-      document.documentElement.style.overflow = '';
     }, 3300);
     return () => {
       clearTimeout(t1);

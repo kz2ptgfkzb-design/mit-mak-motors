@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { Calendar, Monitor, Users, GraduationCap, ArrowDown, ShieldCheck, Infinity as InfinityIcon, ArrowUpRight } from 'lucide-react';
 import { masterclassCourses, masterclassCredentials, masterclassSkills, masterclassInstructor } from '@/data/masterclass';
 import { PageHero } from '@/components/layout/page-hero';
@@ -57,7 +58,7 @@ export default function MasterclassPage() {
         <div className="container grid items-center gap-10 lg:grid-cols-12">
           <Reveal className="lg:col-span-5">
             <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-graphite-800/40 to-ink-900">
-              <Image src={masterclassInstructor.image} alt={masterclassInstructor.name} fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" />
+              <Image src={masterclassInstructor.image} alt={masterclassInstructor.name} fill placeholder="blur" blurDataURL={BLUR} sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 to-transparent" />
               <div className="absolute bottom-5 left-5">
                 <p className="font-anton text-2xl uppercase tracking-tight text-white">{masterclassInstructor.name}</p>

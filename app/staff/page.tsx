@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { staffDepartments, staffCount } from '@/data/staff';
 import { PageHero } from '@/components/layout/page-hero';
 import { Reveal } from '@/components/ui/reveal';
@@ -34,6 +35,8 @@ function Photo({ image, name, className }: { image: string; name: string; classN
           src={image}
           alt={name}
           fill
+          placeholder="blur"
+          blurDataURL={BLUR}
           sizes="(max-width:640px) 45vw, (max-width:1024px) 30vw, 18vw"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />

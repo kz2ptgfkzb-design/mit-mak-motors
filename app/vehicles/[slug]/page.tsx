@@ -83,6 +83,7 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
     model: vehicle.model,
     vehicleConfiguration: vehicle.variant,
     productionDate: `${vehicle.year}`,
+    vehicleModelDate: `${vehicle.year}`,
     mileageFromOdometer: { '@type': 'QuantitativeValue', value: vehicle.mileage, unitCode: 'KMT' },
     fuelType: vehicle.fuel,
     vehicleTransmission: vehicle.transmission,
@@ -93,9 +94,25 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
       '@type': 'Offer',
       price: vehicle.price,
       priceCurrency: 'ZAR',
+      itemCondition: 'https://schema.org/UsedCondition',
       availability: vehicle.reserved ? 'https://schema.org/PreOrder' : 'https://schema.org/InStock',
       seller: { '@type': 'AutoDealer', name: siteConfig.name },
     },
+  };
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.url },
+      { '@type': 'ListItem', position: 2, name: 'Showroom', item: `${siteConfig.url}/showroom` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `${vehicle.make} ${vehicle.model}`,
+        item: `${siteConfig.url}/vehicles/${vehicle.slug}`,
+      },
+    ],
   };
 
   return (
@@ -160,6 +177,7 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
       />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
     </>
   );
 }

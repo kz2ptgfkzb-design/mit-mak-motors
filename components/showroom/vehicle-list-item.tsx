@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { Gauge, CalendarDays, Fuel, Cog, ArrowRight, Check, GitCompare } from 'lucide-react';
 import type { Vehicle } from '@/types';
 import { cn, formatPrice, formatMileage } from '@/lib/utils';
@@ -31,6 +32,8 @@ export function VehicleListItem({
           unoptimized
           alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
           fill
+          placeholder="blur"
+          blurDataURL={BLUR}
           sizes="(max-width:640px) 90vw, 256px"
           className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
         />

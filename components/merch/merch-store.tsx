@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 import { X, ShoppingBag, Plus, Minus, SearchX, Check } from 'lucide-react';
@@ -99,7 +100,7 @@ export function MerchStore({ products }: { products: MerchProduct[] }) {
           <button key={p.name} onClick={() => open(p)} data-cursor="hover" className="group flex flex-col text-left">
             <div className="relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-graphite-800/40 to-ink-900 transition-colors group-hover:border-white/25">
               {p.image && (
-                <Image src={p.image} alt={p.name} fill sizes="(max-width:640px) 45vw, (max-width:1024px) 30vw, 22vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image src={p.image} alt={p.name} fill placeholder="blur" blurDataURL={BLUR} sizes="(max-width:640px) 45vw, (max-width:1024px) 30vw, 22vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
               )}
               <span className="absolute left-3 top-3 rounded-full bg-ink-950/70 px-2.5 py-1 font-display text-[9px] uppercase tracking-widest text-graphite-200 backdrop-blur">{p.category}</span>
               <div className="absolute inset-x-0 bottom-0 flex justify-end bg-gradient-to-t from-ink-950/85 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -159,7 +160,7 @@ export function MerchStore({ products }: { products: MerchProduct[] }) {
               </button>
               <div className="grid sm:grid-cols-2">
                 <div className="relative aspect-square bg-gradient-to-b from-graphite-800/40 to-ink-950">
-                  {selected.image && <Image src={selected.image} alt={selected.name} fill sizes="(max-width:640px) 100vw, 384px" className="object-cover" />}
+                  {selected.image && <Image src={selected.image} alt={selected.name} fill placeholder="blur" blurDataURL={BLUR} sizes="(max-width:640px) 100vw, 384px" className="object-cover" />}
                 </div>
                 <div className="p-6 lg:p-8">
                   <p className="font-display text-[11px] uppercase tracking-[0.16em] text-red">{selected.category}</p>
@@ -247,7 +248,7 @@ export function MerchStore({ products }: { products: MerchProduct[] }) {
                     {bag.map((b) => (
                       <li key={b.key} className="flex gap-3">
                         <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-ink-950">
-                          {b.image && <Image src={b.image} alt={b.name} fill sizes="80px" className="object-cover" />}
+                          {b.image && <Image src={b.image} alt={b.name} fill placeholder="blur" blurDataURL={BLUR} sizes="80px" className="object-cover" />}
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="font-display text-[13px] uppercase leading-tight tracking-tight text-white">{b.name}</p>
