@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { fomoZone } from '@/data/navigation';
@@ -28,6 +29,8 @@ export function FomoTeasers() {
                   src={item.image}
                   alt={item.title}
                   fill
+                  placeholder="blur"
+                  blurDataURL={BLUR}
                   sizes="(max-width:768px) 100vw, 25vw"
                   className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-110"
                 />

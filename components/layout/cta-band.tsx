@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { Button } from '@/components/ui/button';
 import { Eyebrow } from '@/components/ui/section-heading';
 import { Reveal, RevealText } from '@/components/ui/reveal';
@@ -33,7 +34,7 @@ export function CtaBand({
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
+        <Image src={image} alt="" fill sizes="100vw" placeholder="blur" blurDataURL={BLUR} className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/85 to-ink-950/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 to-transparent" />
       </div>

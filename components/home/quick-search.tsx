@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { useRouter } from 'next/navigation';
 import { CarFinder, type FinderSelection } from '@/components/showroom/car-finder';
 import type { FilterMeta } from '@/components/showroom/filter-bar';
@@ -29,6 +30,8 @@ export function QuickSearch({ meta }: { meta: FilterMeta }) {
         alt=""
         fill
         aria-hidden
+        placeholder="blur"
+        blurDataURL={BLUR}
         sizes="100vw"
         className="pointer-events-none select-none object-cover object-center opacity-[0.55]"
       />

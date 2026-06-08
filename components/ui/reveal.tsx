@@ -13,7 +13,7 @@ export function Reveal({
   delay = 0,
   y = 26,
   once = true,
-  amount = 0.3,
+  amount = 0.01,
 }: {
   children: ReactNode;
   className?: string;
@@ -74,7 +74,7 @@ export function RevealText({
       className={cn('inline-block', className)}
       variants={container}
       initial="hidden"
-      {...(inView ? { whileInView: 'show', viewport: { once, amount: 0.5 } } : { animate: 'show' })}
+      {...(inView ? { whileInView: 'show', viewport: { once, amount: 0.2 } } : { animate: 'show' })}
       aria-label={text}
     >
       {tokens.map((token, i) => (

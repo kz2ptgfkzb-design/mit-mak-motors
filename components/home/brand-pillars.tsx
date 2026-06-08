@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import {
   AnimatePresence,
   motion,
@@ -80,7 +81,7 @@ export function BrandPillars() {
             {PILLARS.map((p) => (
               <div key={p.n}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10">
-                  <Image src={p.image} alt="" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+                  <Image src={p.image} alt="" fill sizes="(max-width:1024px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR} className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/30 to-transparent" />
                   <span className="absolute right-4 top-2 font-anton text-6xl leading-none text-white/15">{p.n}</span>
                   <div className="absolute bottom-4 left-4 right-4">
@@ -100,7 +101,7 @@ export function BrandPillars() {
 
       {/* DESKTOP: scroll-pinned crossfade */}
       <section ref={ref} className="relative hidden lg:block" style={{ height: `${PILLARS.length * 100}vh` }} aria-label="Why Mit-Mak">
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden bg-ink-950">
           {/* Crossfading backgrounds */}
           {PILLARS.map((p, i) => (
             <motion.div
@@ -111,7 +112,7 @@ export function BrandPillars() {
               transition={{ duration: 0.9, ease: EASE }}
               style={{ willChange: 'opacity, transform' }}
             >
-              <Image src={p.image} alt="" fill sizes="100vw" className="object-cover" />
+              <Image src={p.image} alt="" fill priority={i === 0} sizes="100vw" placeholder="blur" blurDataURL={BLUR} className="object-cover" />
             </motion.div>
           ))}
           <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/80 to-ink-950/30" />

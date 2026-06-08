@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BLUR } from '@/lib/blur';
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 import { Gauge, CalendarDays, Fuel, Cog, ArrowRight, Check, GitCompare } from 'lucide-react';
 import type { Vehicle } from '@/types';
@@ -77,10 +78,12 @@ export function VehicleCard({
         </button>
       )}
       <Link href={href} data-cursor="view" data-cursor-text="View" className="block">
-        <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
+        <div className="relative aspect-[4/3] overflow-hidden bg-ink-700">
           <Image
             src={vehicle.images[0]}
             unoptimized
+            placeholder="blur"
+            blurDataURL={BLUR}
             alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}`}
             fill
             sizes="(max-width:640px) 90vw, (max-width:1024px) 45vw, 30vw"
@@ -91,6 +94,8 @@ export function VehicleCard({
             <Image
               src={vehicle.images[1]}
               unoptimized
+              placeholder="blur"
+              blurDataURL={BLUR}
               alt=""
               fill
               sizes="(max-width:640px) 90vw, (max-width:1024px) 45vw, 30vw"
