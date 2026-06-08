@@ -1,129 +1,138 @@
 # Mit-Mak Motors — Session Handoff
 
-Everything a fresh session needs to continue this build. Updated end of the "finder + FOMO pages + QA/polish" session.
+Everything a fresh session needs to continue. Updated end of the "full-site build + image/mobile/black-space fixes" session.
 
 ---
 
-## 0. READ FIRST — current state in one breath
+## 0. READ FIRST — state in one breath
 
-- **Live (public, share this):** https://mit-mak-motors.vercel.app — fully deployed, smooth, QA'd.
-- **⚠️ All of this session's work is UNCOMMITTED.** It lives in the working tree only. The live site is **ahead of git**. See §3. First thing a new session should consider: commit + push.
-- **✅ Vercel CLI is still logged in** (`kz2ptgfkzb-design`, scope `jordan-marcus-projects`). You can deploy with **no token** (see §2). The old note about "revoke tokens / need fresh ones to deploy" no longer blocks deploys — the CLI login session is valid.
-- **Build:** `npm run build` must stay green — now **437 static pages** (was 433; +4 FOMO detail pages).
+- **Our build (public, share this):** https://mit-mak-motors.vercel.app — fully deployed & current.
+- **The REAL company site is https://www.mitmakmotors.co.za** — a WordPress/Elementor site behind Cloudflare. It is NOT our build; it is the reference we mirror. (Our build is the Next.js app on vercel.app.) Chrome can open co.za but BLOCKS vercel.app (see §6).
+- **Everything is committed + pushed + LIVE.** `main` == `origin/main`. The home **black-space fix (`a1fca3d`) is committed, pushed, and DEPLOYED** — verified by the blur data-URI (37×) + `bg-ink-700` markers in the live home HTML. Remaining on it: a human eyeball scroll-through, since tooling can't screenshot the live deploy (§6).
+- **Social reroutes FIXED (`data/site.ts`):** the footer/mega-menu/contact social links now point to the real Mit-Mak profiles — FB `/MitMakMotors`, IG `/mitmakmotors`, YouTube `@MitMakMasterclass`, TikTok `@mitmakmotors`, X `mit_mak_motors` — matched 1:1 against the real co.za footer. (Previously they were placeholder bare domains, e.g. `https://facebook.com`.)
+- **Build must stay green.** `npm run build` compiles all routes.
+- ⛔ **Don't share the long `mit-mak-motors-…-jordan-marcus-projects.vercel.app` URLs** — those require a Vercel login (per-deploy protection). The short alias above is public.
 
 ## 1. TL;DR
 
-- **What:** Awwwards-level site for **Mit-Mak Motors** (premium pre-owned dealership, Pretoria, SA).
+- **What:** Awwwards-level site for **Mit-Mak Motors** (premium pre-owned dealership, Pretoria, SA) + the UB Drip merch store + the Mit-Mak Masterclass, all self-contained.
 - **Path:** `/Users/jordanmarcus/mit-mak-motors`
-- **Live:** https://mit-mak-motors.vercel.app (production alias — **public**). Per-deploy hashed URLs are Vercel-auth protected (401 for anyone not on the team) — never share those.
-- **GitHub:** https://github.com/kz2ptgfkzb-design/mit-mak-motors (branch `main`) — **behind**: 3 unpushed commits + this whole session uncommitted.
-- **Stack:** Next.js 14.2.35 (App Router) · TS · Tailwind · Framer Motion · Lenis · GSAP/ScrollTrigger · lucide-react. **Removed this session:** `@react-three/fiber` + `three` (were unused).
-- **Node** v24 · **npm** v11.
+- **GitHub:** https://github.com/kz2ptgfkzb-design/mit-mak-motors (branch `main`). Push works via the **macOS keychain credential** for `kz2ptgfkzb-design` — **no PAT needed** (`git push origin main` just works).
+- **Stack:** Next.js 14.2.x (App Router) · TS · Tailwind · Framer Motion · Lenis · lucide-react. Node v24 · npm v11.
+- **Brand:** racing red `#E10600`, ink blacks (`bg-ink-950/900/850/800`), white, graphite. Fonts: Anton (hero), Oswald (`font-display`), Inter. **Copy rule: NO em-dashes (—) / en-dashes (–) anywhere; hyphens + middot (·) fine.**
 
 ## 2. Run / build / deploy
 
 ```bash
 cd /Users/jordanmarcus/mit-mak-motors      # ALWAYS cd first — cwd resets to home between shell calls
-npm install                                # if node_modules missing / after dep changes
-npm run dev                                # http://localhost:3000 (preview uses 3040)
-npm run build                              # must stay green (437 pages)
+npm install                                # if node_modules missing
+npm run dev                                # localhost:3000 (preview tool uses :3040)
+./node_modules/.bin/tsc --noEmit           # type-check (a bare `npx tsc` from home pulls a BOGUS package)
+npm run build                              # must stay green
 ```
 
-> **Gotcha (important):** `npx tsc` from the home dir installs a BOGUS `tsc` package. Type-check with the local binary: `./node_modules/.bin/tsc --noEmit`.
+**Push** (keychain credential, no token): `git push origin main`
 
-**Deploy (Vercel CLI — already authenticated, no token needed):**
+**Deploy (Vercel CLI, already authenticated — no token):**
 ```bash
 npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects
 ```
-- Auto-aliases to **mit-mak-motors.vercel.app**. `--scope` required. GitHub↔Vercel auto-deploy still NOT connected (CLI upload deploys the working tree, including uncommitted changes).
-- Verify a deploy: `curl -s -o /dev/null -w "%{http_code}" https://mit-mak-motors.vercel.app`.
+- Auto-aliases to **mit-mak-motors.vercel.app**. Uploads the working tree (so the live site = whatever's on disk at deploy time, committed or not). Verify: `curl -s -o /dev/null -w "%{http_code}" https://mit-mak-motors.vercel.app`.
+- GitHub↔Vercel auto-deploy is NOT connected (still a manual CLI deploy).
 
-**GitHub push** (token via credential helper so it never lands in `.git/config`):
+## 3. Git state — clean (all shipped)
+
+`main` == `origin/main`. All work is committed + pushed + deployed. Recent:
+- `a1fca3d` — home black-space fix (blur placeholders + reveal threshold). **LIVE.**
+- this session — social-link reroute fix in `data/site.ts` + this HANDOFF update.
+
+Standard ship loop (deploy uploads the working tree, so commit first):
 ```bash
-export GH=<github_pat>
-git -c credential.helper='!f(){ echo username=x-access-token; echo "password=$GH"; }; f' push origin main
+cd /Users/jordanmarcus/mit-mak-motors
+git add -A && git commit -m "..."
+git push origin main
+npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects
 ```
 
-**Preview tool:** `preview_start({name:"mitmak"})` runs `npm run dev` on :3040. The preview browser is **sandboxed to localhost** — `location.href = 'https://...'` reverts; you can't point it at the live site.
+## 4. The home "black spaces on scroll" fix (what it does — VERIFY LIVE)
 
-## 3. Git state — ⚠️ UNCOMMITTED WORK
+Diagnosed (parallel workflow) → two root causes of dark gaps while scrolling the dark-theme home page:
+1. **Unoptimized vehicle-card images flashed their near-black container** before loading (the recent AutoTrader `unoptimized` change removed blur placeholders).
+2. **The shared `Reveal` threshold** (`amount: 0.3`; `RevealText` `0.5`) left tall blocks stuck at `opacity:0` over the dark bg on fast scroll / over-tall sections.
 
-`HEAD` = `5466aa7` (Add HANDOFF.md). Branch `main` is **3 commits ahead of origin** AND the entire current session is **uncommitted in the working tree**.
+The staged fix:
+- **`lib/blur.ts`** — a tiny dark (#16161a) blur-placeholder data URI. Added `placeholder="blur" blurDataURL={BLUR}` to every lazy/unoptimized image: vehicle cards, brand-pillars (desktop crossfade + mobile), quick-search backdrop, fomo teasers, cta band, hero (main + inset). Images now fade in from a dark tile, never pure black.
+- `vehicle-card` container `bg-ink-800` → `bg-ink-700`; `brand-pillars` sticky stage given a `bg-ink-950` base + `priority` on the first crossfade image.
+- `reveal.tsx`: `amount 0.3 → 0.01`, `RevealText 0.5 → 0.2` so content always reveals (no permanently-invisible blocks).
+- **Still to verify (couldn't headless-test — see §6):** a real **scroll-through of the live home on desktop + mobile** to confirm zero black flashes. This is the single manual check before managers view.
 
-**This session's uncommitted changes:**
-- *Modified:* `app/{page,showroom/page,fomo-zone/page}.tsx`, `components/home/{hero,brand-pillars}.tsx`, `components/layout/{header,page-hero,quick-actions,cta-band}.tsx`, `components/showroom/{showroom-client,filter-bar}.tsx`, `components/vehicle/vehicle-card.tsx`, `data/{vehicles,navigation}.ts`, `next.config.mjs`, `package.json`, `package-lock.json`. *Deleted:* `components/home/hero-scene.tsx`.
-- *New (untracked):* `app/fomo-zone/[slug]/page.tsx`, `components/home/quick-search.tsx`, `components/showroom/car-finder.tsx`, `components/ui/body-type-icons.tsx`, `data/fomo.ts`, `public/body-types/*.svg` (8), `public/masterclass-badge.png`.
+## 5. What's built / changed THIS session (all committed + live unless noted)
 
-> Nothing is lost by starting fresh — it's all on disk. But it's **not in git**. Recommended new-session step #1: `git add -A && git commit` then push (needs a PAT). Then connect Vercel↔GitHub auto-deploy.
+1. **/compare** — dedicated page: search/select up to 4 cars, side-by-side spec table, shareable `?ids=`. Nav/footer "Compare" → `/compare`.
+2. **King Price Insurance form** on `/finance` (left column, `#insurance` anchor) — real fields + Terms/Consent legal copy. `/api/insurance`.
+3. **Nav prune** — removed SUVs & Bakkies from mega-menu + footer.
+4. **/about rebuilt** — premium alternating "The Mit-Mak Standard" series (6 sections) using real inventory cars; "We are looking forward to seeing you" branches block; finance CTAs.
+5. **Branch vs location wording** — site says **3 branches** (showrooms) on About but **6 locations** (footer/contact). `data/locations.ts` has the real 6 (590/591 Gerrit Maritz; 446/450/565/566 Rachel de Beer). (An earlier over-trim to 3 was reverted.)
+6. **/staff** — full premium directory: **130 real people across 21 departments**, leadership featured, headcount strip. Real headshots in `public/staff` (`scripts/fetch-staff.mjs`). Hero image added.
+7. **/referrals, /careers, /feedback** — rebuilt from the real site: referral form, the one real job (Sales Executive / CRM / Mechanic) + CV-upload apply form, compliment/complaint form. New `/api/{referral,careers,feedback}`.
+8. **/merch** — self-contained premium store: 80 real UB Drip products (`scripts/fetch-merch.mjs`, `data/merch.ts`, images in `public/merch`), category filter pills, click → **product modal (sizes/colours/qty) → local bag drawer** with "checkout coming soon". **No external reroute.**
+9. **/masterclass** — self-contained premium page from courses.mitmakmasterclass.co.za: hero, credentials, Bobby Petkov instructor (reuses his staff headshot), curriculum, 6 programmes + register-interest form (`/api/masterclass`). **No external reroute.** Header badge + nav + footer + FOMO all repoint here.
+10. **Hero image on every PageHero page** (16 pages) — real inventory cars (apparel shot for merch). `PageHero` conditionally `unoptimized` for AutoTrader src.
+11. **Mobile fix** — `BrandPillars` was a 400vh scroll-pinned crossfade (desktop); now `lg:hidden` mobile gets a stacked card layout (killed the long dark dead-scroll on phones).
+12. **Vehicle images** — AutoTrader's CDN intermittently **502'd Vercel's image optimizer** (~2.5% = "missing images"). All AutoTrader `<Image>` set to **`unoptimized`** → load direct (all 9769 URLs are 200). Local staff/merch + Unsplash keep optimization (verified ~48KB WebP).
+13. **Home black-space fix** (committed `a1fca3d`, deployed + live) — see §4.
+14. **Social-link reroute fix** — `data/site.ts` socials repointed from placeholder bare domains (`https://facebook.com`, etc.) to the real Mit-Mak profiles: FB `/MitMakMotors`, IG `/mitmakmotors`, YouTube `@MitMakMasterclass`, TikTok `@mitmakmotors`, X `mit_mak_motors`. Added **X** (was missing) and matched order to the real co.za footer. Rendered in footer, mega-menu, and contact page.
 
-## 4. What's built / changed THIS session (all live, all uncommitted)
+## 6. Gotchas for the next agent (READ — these cost hours)
 
-1. **"Find Your Perfect Car" finder** (`components/showroom/car-finder.tsx`) — reusable: Type / Make / Model / Variant / Max-Price dropdowns (dependent: make→model→variant) + a body-style shortcut icon row + red Search.
-   - **Home:** `components/home/quick-search.tsx` wraps it (heading "FIND YOUR **PERFECT** CAR", a darkened showroom-cars backdrop image) → builds `/showroom?type=&make=&model=&q=&maxPrice=` and routes there.
-   - **Showroom:** `showroom-client.tsx` renders it above the sticky `FilterBar`, driving the live filters via `finderSearch` (a chosen Variant rides in as the `q` keyword so it shows/clears in the search box).
-   - **Deep-link seeding** in `app/showroom/page.tsx` (`type`/`make`/`model`/`q`/`maxPrice`).
-   - **Body-type icons** (`components/ui/body-type-icons.tsx`): the REAL white filled-silhouette SVGs lifted from mitmakmotors.co.za, saved in `public/body-types/{sedan,coupe,suv,hatchback,cabriolet,single-cab,extended-cab,double-cab}.svg`, rendered as `<img>`. (Source site mislabels Hatchback as "Hatcback"; cab SVGs had no fill so root `fill="#ffffff"` was injected.)
-   - Data: `variantsByMakeModel` added to `data/vehicles.ts` + `filterMeta` (and the `FilterMeta` interface in `filter-bar.tsx`).
-2. **Hero rev gauge** (`components/home/hero.tsx` → `HeroRev`) — a **digital G82-style cluster**: curved arc rev bar, **BMW M tricolour** shift-lights (blue→violet→red) + arc gradient, rpm tick scale, an M tricolour stripe, digital `X1000` readout. Throttle-blip on hover/click. **NO SOUND** (the synth + `lib/rev-sound.ts` + `public/sounds/` were removed on request). **Impl notes:** driven by a manual `requestAnimationFrame` tween (framer's imperative `animate()` on a motion value did NOT drive anything in this setup); the marker rotates via the SVG `transform` attribute (framer `style={{ rotate }}` produced no transform on the `<line>`).
-3. **FOMO Zone landing pages** — `app/fomo-zone/[slug]/page.tsx` (SSG over `data/fomo.ts`: `raffle`, `auction`, `merch`, `masterclass`). Each = `PageHero` + feature (image + primary CTA → external, new tab) + blocks grid + `CtaBand`. Content mirrors the real external sites. **External targets:** raffle → `raffles.mitmakmotors.co.za/product/pologti-lv-his-hers/`, auction → `www.mitmakmotors.co.za/auction/`, merch → `merch.mitmakmotors.co.za/`, masterclass → `courses.mitmakmasterclass.co.za/`. All internal FOMO links (home teasers, `mega-menu`, `footer`, `/fomo-zone` overview) now route to `/fomo-zone/{slug}`. `CtaBand` gained an optional `external` flag on its links (opens new tab).
-4. **Header** (`components/layout/header.tsx`) — **transparent at the top** (blends into the hero; previously a darkening gradient band caused a visible "line"). On scroll it still gets its solid bg. Added the **Masterclass badge** (`public/masterclass-badge.png`, pulled from their site) beside the logo → links to `courses.mitmakmasterclass.co.za` (new tab).
-5. **PageHero** (`components/layout/page-hero.tsx`) — optional `image` prop (darkened backdrop + legibility gradients). Enabled only on the **showroom** hero.
-6. **Quick-actions** (`components/layout/quick-actions.tsx`) — removed the floating WhatsApp + phone (they're in the header); only **back-to-top** remains (routes via Lenis).
-7. **Hero backdrop / gradient** — home hero top gradient deepened (`/25 → /45`) for nav legibility after the header went transparent. The home finder section has a showroom-cars backdrop image.
-8. **QA / polish pass** — showroom finder scroll + back-to-top now use **Lenis** (`useLenis()` from `lenis/react`) instead of native smooth-scroll (no fight/stutter); `will-change` added to the `vehicle-card` tilt + `brand-pillars` crossfade; removed dead `hero-scene.tsx` + `three`/`@react-three/fiber` deps + `transpilePackages`; trimmed oversized Unsplash `w` params. Verified: tsc clean, build green (437), zero console errors across home/showroom/FOMO/vehicle-detail.
+- **cwd resets to home between Bash calls** → prefix shell calls with `cd /Users/jordanmarcus/mit-mak-motors &&`. Type-check with **`./node_modules/.bin/tsc --noEmit`** (bare `npx tsc` from home installs a bogus package).
+- **The preview tool (`preview_start`, :3040) is SANDBOXED:** it reverts sub-route navigation back to `/` (can only reliably show the home page) AND `next/image` composites **BLACK** in its headless screenshots. So **screenshots are NOT reliable for images** — verify via `curl` of the SSR HTML, the `/_next/image` endpoint, and DOM/accessibility snapshots (text) instead. The home console can be checked there.
+- **"Claude in Chrome" blocks navigation** to `vercel.app`, `*.mitmakmotors.online` (the staff portal), and `merch.mitmakmotors.co.za` — but the MAIN `www.mitmakmotors.co.za` works. So you **cannot drive the live site or screenshot it in-tool** → ask the user to eyeball live, or verify via `curl`.
+- **Scraping the real site:** `WebFetch` gets **403** from `www.mitmakmotors.co.za` and `merch.…` (WAF). Use Chrome (`browser_batch` navigate + `get_page_text`/`read_page`) for `co.za` pages, `WebFetch` for the courses/portal subdomains, and `curl` (browser UA) for the WooCommerce Store API (`/wp-json/wc/store/v1/products`).
+- **Vehicle images = `unoptimized` on purpose** (§5.12). Don't "re-enable optimization" without first mirroring the images to our own storage, or AutoTrader's CDN will 502 the optimizer again. The clean long-term fix: download inventory images into `public/` like staff/merch.
+- **Deploy = working-tree upload.** Uncommitted changes go live. So commit before/with deploys to keep git == live.
+- **Branches (3) ≠ locations (6).** Don't "fix" one to match the other; both are intentional (3 customer showrooms, 6 physical sites).
+- **Repo is ~76MB of real photos** (`public/staff` 47MB, `public/merch` 29MB). Fine; Next serves optimized WebP for those (they're local, never 502).
+- Framer dev-only warnings (React DevTools info, useScroll "non-static position") are **stripped from production** — the live console is clean.
 
-## 5. Carried over from earlier (still true)
+## 7. Open items / next steps (priority order)
 
-- **401 real vehicles** in `data/vehicles.json` (1.4 MB, server-only). Refresh: `node scripts/scrape-inventory.mjs`. Real phone `+27 12 546 5878`, 6 branches (`data/locations.ts`), real logo `public/mit-mak-logo.png`.
-- **Data-layer rule (don't break):** the full `vehicles`/`vehicles.json` is server-only. Client components get trimmed `toCard()`/`vehicleCards`/`featuredCards`/`filterMeta` as props (images sliced to 2). Never `import { vehicles }` into a `'use client'` file.
-- **Brand:** racing red `#E10600`, ink blacks, white, graphite. Fonts: Anton (hero), Oswald (`--font-display`), Inter (body). **Copy rule:** NO em-dashes (—) / en-dashes (–) anywhere (hyphens fine).
-- Premium loader (`ignition-intro.tsx`), BMW M4 hero, racing-trail cursor, smooth scroll (Lenis), SEO (metadata/OG/JSON-LD/sitemap/robots).
+1. **Black-space fix is shipped + live.** Remaining: a **human desktop + mobile scroll-through** of the live home (https://mit-mak-motors.vercel.app) to confirm zero black flashes — tooling can't screenshot the live deploy (Chrome blocks vercel.app, preview renders next/image black; §6), so this needs a person's eyes.
+2. **Forms don't deliver yet** — all `/api/*` routes log + echo success unless `FORM_WEBHOOK_URL` is set (`lib/api.ts`). The **King Price insurance form collects ID numbers + consent (PII)** — wire it to a real CRM/Zapier before real traffic.
+3. Optional pitch polish: connect **GitHub↔Vercel auto-deploy**; a **custom domain** (`demo.mitmakmotors.co.za`); mirror vehicle images to own storage to re-enable optimization.
+4. The About **"Our Story"** narrative + founder name ("Mike Makua") and some staff bios are **placeholder fiction** from an early session — swap for real info if the client provides it. (The /staff directory IS real.)
+5. `/fomo-zone/merch` + `/fomo-zone/masterclass` detail pages are now orphaned (nav points to `/merch` + `/masterclass`); harmless, can be removed.
 
-## 6. Gotchas for the next agent (READ)
-
-- **cwd resets to home** between Bash calls → prefix every shell call with `cd /Users/jordanmarcus/mit-mak-motors &&`. Type-check with **`./node_modules/.bin/tsc --noEmit`** (a bare `npx tsc` from home pulls a bogus package).
-- **Changing deps?** Run `npm install` to sync `package-lock.json`, or Vercel's `npm ci` fails on lockfile mismatch.
-- **Preview screenshots are unreliable** (the §8 trap): `next/image`, the cursor canvas, and SVGs with filters/transforms composite **black** in headless screenshots. Verify instead by: removing canvases + **pixel-sampling** (draw to a canvas, `getImageData`) or DOM/HTML/`curl` checks. The preview browser is **sandboxed to localhost** (can't navigate to the live site).
-- **`requestAnimationFrame` is throttled in the headless preview** (page not foregrounded) → rAF-driven motion (the rev gauge, Lenis `scrollTo`) and any audio **cannot be observed/measured** there. They work for real users — verify the *logic + endpoints*, not the motion. Confirm visuals live in a real browser.
-- **framer-motion `useScroll`** emits a dev-only "container has a non-static position" warning — **stripped from production**, harmless.
-- **Deploy = working-tree upload.** `vercel deploy` ships whatever's on disk (incl. uncommitted changes), so the live site can diverge from git.
-- Tailwind: `h-13`/`w-13` invalid. Next 14 pinned `^14.2.35` (patched) — don't downgrade.
-
-## 7. Open items / next steps
-
-1. **⚠️ Commit + push** this session's work (see §3) — needs a GitHub PAT. Live is ahead of git.
-2. **The "major add-ins"** the owner has planned (this is why they wanted a fresh session).
-3. **Connect GitHub↔Vercel auto-deploy** (Vercel → Project → Settings → Git) so pushes redeploy.
-4. **Custom domain** `mitmakmotors.co.za` (or `demo.` subdomain) — Vercel → Settings → Domains.
-5. **Forms:** set `FORM_WEBHOOK_URL` to forward `/api/{finance,sell,contact,newsletter}` to a real CRM/Zapier (`lib/api.ts` currently logs + echoes success).
-6. Optional polish: lazy-load GSAP (~50 KB off the homepage initial JS, slight hydration-timing change); real raffle/merch imagery + the **raffle ticket price** on `/fomo-zone/raffle`; real staff photos; Lighthouse pass.
-
-## 8. File map (key + new)
+## 8. File map (key)
 
 ```
 app/
-  layout.tsx, page.tsx (home: Hero + QuickSearch + ...), template.tsx
-  showroom/page.tsx                     server: cards + filterMeta + URL seeding → ShowroomClient (+ PageHero image)
-  vehicles/[slug]/page.tsx              SSG detail (401)
-  fomo-zone/page.tsx                    overview hub (cards → detail pages)
-  fomo-zone/[slug]/page.tsx             NEW: 4 themed landing pages (raffle/auction/merch/masterclass)
-  finance, sell-your-car, about, contact, blog/[slug], staff, careers, referrals, feedback, newsletter, privacy, terms, not-found
-  api/{finance,sell,contact,newsletter}/route.ts → lib/api.ts
-  opengraph-image.tsx, sitemap.ts, robots.ts, icon.png
+  page.tsx            home: IgnitionIntro + Hero + QuickSearch + AwardsMarquee + FeaturedInventory
+                      + BrandPillars + ScrollMarquee + Testimonials + FomoTeasers + CtaBand
+  showroom, compare, finance(+/business), sell-your-car, about, staff, careers, referrals,
+  feedback, contact, merch, masterclass, blog(+/[slug]), newsletter, privacy, terms,
+  fomo-zone(+/[slug]), vehicles/[slug]
+  api/{finance,insurance,referral,careers,feedback,masterclass,contact,newsletter,sell}/route.ts → lib/api.ts
 components/
-  layout/   header (transparent-top + masterclass badge), page-hero (optional image prop), footer,
-            mega-menu, quick-actions (back-to-top only), scroll-progress, cta-band (external links), logo, newsletter-form
-  home/     hero (+ HeroRev digital gauge), quick-search (NEW), brand-pillars, featured-inventory,
-            scroll-marquee, awards-marquee, testimonials, fomo-teasers  [hero-scene.tsx DELETED]
-  showroom/ showroom-client (CarFinder + Lenis scroll), car-finder (NEW), filter-bar, vehicle-list-item, vehicle-skeleton, compare-drawer
-  vehicle/  vehicle-card (will-change tilt), vehicle-gallery, spec-grid, detail-accordion, sticky-action-panel, trust-block, related-vehicles, finance-calculator
-  ui/       body-type-icons (NEW: <img> → public/body-types/*.svg), button, magnetic, reveal, counter, marquee, section-heading, badge, chevron, prose
-  providers/ smooth-scroll (Lenis), custom-cursor (racing trail)
-data/   vehicles.ts (+variantsByMakeModel), vehicles.json (401), fomo.ts (NEW), navigation.ts (FOMO hrefs → /fomo-zone/{slug}), locations.ts, site.ts, awards.ts, content.ts
-public/ body-types/*.svg (8, NEW), masterclass-badge.png (NEW), mit-mak-logo.png
-lib/    utils, finance, filters, hooks, api      [rev-sound.ts DELETED]
+  home/   hero (BMW M4 + rev gauge), quick-search, awards-marquee, featured-inventory,
+          brand-pillars (responsive: lg pinned crossfade / mobile stacked), scroll-marquee,
+          testimonials, fomo-teasers, ignition-intro
+  layout/ header (Masterclass badge → /masterclass), page-hero (image prop), footer, mega-menu,
+          cta-band, quick-actions, scroll-progress, logo, newsletter-form
+  vehicle/ vehicle-card, vehicle-gallery, spec-grid, detail-accordion, sticky-action-panel,
+           trust-block, related-vehicles, finance-calculator
+  showroom/ showroom-client, car-finder, filter-bar, vehicle-list-item, vehicle-skeleton, compare-drawer
+  compare/ compare-client      merch/ merch-store      masterclass/ masterclass-enquiry
+  referrals/ careers/ feedback/ forms (referral-form, careers-form, feedback-form, form-success)
+  ui/      reveal, section-heading, counter, button, magnetic, marquee, badge, chevron, prose, body-type-icons
+  providers/ smooth-scroll (Lenis), custom-cursor
+data/   vehicles.json (401 cars, server-only) + vehicles.ts, staff.ts, merch.ts, masterclass.ts,
+        locations.ts (6), navigation.ts, content.ts, awards.ts, site.ts, fomo.ts
+lib/    utils, finance, filters, compare, api, blur (NEW)
+scripts/ scrape-inventory.mjs, fetch-staff.mjs, fetch-merch.mjs, audit-images.mjs
+public/  staff/*.png (130), merch/*.png (80), body-types/*.svg, mit-mak-logo.png, masterclass-badge.png
 ```
 
 ## 9. Suggested first message for the new session
 
-> "Continue the Mit-Mak Motors build at `/Users/jordanmarcus/mit-mak-motors`. Read `HANDOFF.md` first (note §0 + §3: all the last session's work is uncommitted and the Vercel CLI is already logged in, so deploys need no token). It's a Next.js 14 dealership site, live at https://mit-mak-motors.vercel.app. First, commit + push the working tree so git matches what's live [give me a GitHub PAT, or do it yourself if you have one]. Then: [the major add-ins]."
+> "Continue the Mit-Mak Motors build at `/Users/jordanmarcus/mit-mak-motors`. Read `HANDOFF.md` first. Step 1 (§7.1): there's an uncommitted, build-green **home black-space fix** on disk — commit + push + deploy it (`git push origin main` works via keychain; deploy with `npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects`), then we'll do a live scroll-through. The site is live + public at https://mit-mak-motors.vercel.app. Then: [next task]."
