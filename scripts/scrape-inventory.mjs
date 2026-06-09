@@ -245,6 +245,24 @@ async function main() {
     if (ok[0]) console.log('DEBUG sample:', JSON.stringify({ make: ok[0].make, model: ok[0].model, price: ok[0].price, imgs: ok[0].images.length, body: ok[0].bodyType }));
   }
 
+  // Strip dealer banner / promo images injected into every listing's page
+  // chrome. Real car photos are unique to one listing; banners appear on ~all
+  // of them, so any image present on a large share of the inventory is a banner.
+  {
+    const freq = {};
+    for (const c of raw) if (c) for (const im of c.images || []) freq[im] = (freq[im] || 0) + 1;
+    const total = raw.filter(Boolean).length || 1;
+    const banners = new Set(
+      Object.entries(freq)
+        .filter(([, n]) => n >= Math.max(20, total * 0.1))
+        .map(([u]) => u),
+    );
+    if (banners.size) {
+      for (const c of raw) if (c) c.images = (c.images || []).filter((im) => !banners.has(im));
+      console.log(`Stripped ${banners.size} cross-listing banner image(s) from galleries.`);
+    }
+  }
+
   let cars = raw.filter((c) => c && c.price >= 10000 && c.images.length > 0);
 
   // De-dup slugs, assign location round-robin, sort by date desc
