@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { carImage } from '@/lib/img';
 import { Eyebrow } from '@/components/ui/section-heading';
 import { Reveal, RevealText } from '@/components/ui/reveal';
 import { SpeedLines } from '@/components/ui/chevron';
@@ -30,7 +31,7 @@ export function PageHero({
       {image && (
         <>
           <Image
-            src={image}
+            src={carImage(image, 1600)}
             unoptimized={image.includes('autotrader.co.za')}
             alt=""
             fill

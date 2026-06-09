@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 import { ChevronLeft, ChevronRight, Expand, X, RotateCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { carImage } from '@/lib/img';
 
 export function VehicleGallery({ images, alt }: { images: string[]; alt: string }) {
   const [index, setIndex] = useState(0);
@@ -65,7 +66,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
-            <Image src={images[index]} alt={`${alt}, image ${index + 1}`} fill priority unoptimized sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
+            <Image src={carImage(images[index], 1800)} alt={`${alt}, image ${index + 1}`} fill priority unoptimized sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" />
           </motion.div>
         </AnimatePresence>
 
@@ -129,7 +130,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
               i === index ? 'border-red opacity-100' : 'border-transparent opacity-50 hover:opacity-100',
             )}
           >
-            <Image src={src} alt="" fill unoptimized sizes="96px" className="object-cover" />
+            <Image src={carImage(src, 220)} alt="" fill unoptimized sizes="96px" className="object-cover" />
           </button>
         ))}
       </div>
@@ -156,7 +157,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
                 <ChevronLeft className="h-6 w-6" />
               </button>
               <div className="relative h-full w-full max-w-5xl">
-                <Image src={images[index]} alt={`${alt}, image ${index + 1}`} fill unoptimized sizes="90vw" className="object-contain" />
+                <Image src={carImage(images[index], 2200)} alt={`${alt}, image ${index + 1}`} fill unoptimized sizes="90vw" className="object-contain" />
               </div>
               <button onClick={() => go(1)} aria-label="Next" data-cursor="hover" className="absolute right-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-ink-900/60 text-white hover:border-red">
                 <ChevronRight className="h-6 w-6" />
@@ -169,7 +170,7 @@ export function VehicleGallery({ images, alt }: { images: string[]; alt: string 
                   onClick={() => setIndex(i)}
                   className={cn('relative h-12 w-16 shrink-0 overflow-hidden rounded-md border-2', i === index ? 'border-red' : 'border-transparent opacity-50')}
                 >
-                  <Image src={src} alt="" fill unoptimized sizes="64px" className="object-cover" />
+                  <Image src={carImage(src, 140)} alt="" fill unoptimized sizes="64px" className="object-cover" />
                 </button>
               ))}
             </div>

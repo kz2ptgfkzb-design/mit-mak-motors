@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { BLUR } from '@/lib/blur';
+import { carImage } from '@/lib/img';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLenis } from 'lenis/react';
@@ -117,7 +118,7 @@ export function CompareClient({ cards, initialIds }: { cards: Vehicle[]; initial
                   <div key={v.id} className="px-2">
                     <div className="relative mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-ink-900">
                       {v.images[0] && (
-                        <Image src={v.images[0]} alt={`${v.make} ${v.model}`} fill placeholder="blur" blurDataURL={BLUR} unoptimized sizes="220px" className="object-cover" />
+                        <Image src={carImage(v.images[0], 480)} alt={`${v.make} ${v.model}`} fill placeholder="blur" blurDataURL={BLUR} unoptimized sizes="220px" className="object-cover" />
                       )}
                       <button
                         onClick={() => remove(v.id)}
@@ -230,7 +231,7 @@ export function CompareClient({ cards, initialIds }: { cards: Vehicle[]; initial
                       >
                         <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-ink-900">
                           {v.images[0] && (
-                            <Image src={v.images[0]} alt={`${v.make} ${v.model}`} fill placeholder="blur" blurDataURL={BLUR} unoptimized sizes="64px" className="object-cover" />
+                            <Image src={carImage(v.images[0], 160)} alt={`${v.make} ${v.model}`} fill placeholder="blur" blurDataURL={BLUR} unoptimized sizes="64px" className="object-cover" />
                           )}
                         </div>
                         <div className="min-w-0 flex-1">

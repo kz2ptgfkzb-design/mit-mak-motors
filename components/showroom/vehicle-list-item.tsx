@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { BLUR } from '@/lib/blur';
+import { carImage } from '@/lib/img';
 import { Gauge, CalendarDays, Fuel, Cog, ArrowRight, Check, GitCompare } from 'lucide-react';
 import type { Vehicle } from '@/types';
 import { cn, formatPrice, formatMileage } from '@/lib/utils';
@@ -28,7 +29,7 @@ export function VehicleListItem({
     >
       <Link href={href} data-cursor="view" data-cursor-text="View" className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl sm:aspect-[4/3] sm:w-64">
         <Image
-          src={vehicle.images[0]}
+          src={carImage(vehicle.images[0], 700)}
           unoptimized
           alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
           fill

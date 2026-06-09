@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BLUR } from '@/lib/blur';
+import { carImage } from '@/lib/img';
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 import { Gauge, CalendarDays, Fuel, Cog, ArrowRight, Check, GitCompare } from 'lucide-react';
 import type { Vehicle } from '@/types';
@@ -80,7 +81,7 @@ export function VehicleCard({
       <Link href={href} data-cursor="view" data-cursor-text="View" className="block">
         <div className="relative aspect-[4/3] overflow-hidden bg-ink-700">
           <Image
-            src={vehicle.images[0]}
+            src={carImage(vehicle.images[0], 800)}
             unoptimized
             placeholder="blur"
             blurDataURL={BLUR}
@@ -92,7 +93,7 @@ export function VehicleCard({
           />
           {vehicle.images[1] && (
             <Image
-              src={vehicle.images[1]}
+              src={carImage(vehicle.images[1], 800)}
               unoptimized
               placeholder="blur"
               blurDataURL={BLUR}

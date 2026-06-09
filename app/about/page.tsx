@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { BLUR } from '@/lib/blur';
+import { carImage } from '@/lib/img';
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { stats } from '@/data/awards';
@@ -178,7 +179,7 @@ export default function AboutPage() {
                     <Link href={s.href} data-cursor="hover" className="group block">
                       <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-white/10">
                         <Image
-                          src={s.image}
+                          src={carImage(s.image, 900)}
                           unoptimized
                           alt={s.imageAlt}
                           fill
