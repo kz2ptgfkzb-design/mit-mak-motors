@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { cache } from 'react';
 import crypto from 'node:crypto';
 import { getStore } from '@/lib/inventory/store';
+import { isDbConfigured } from '@/lib/db/client';
 import { toSafeUser, type SafeUser } from '@/lib/inventory/types';
 import { hashPassword, verifyPassword } from './password';
 import {
@@ -24,16 +25,17 @@ export function ensureSeedAdmin(): Promise<void> {
     globalForSeed.__mmAdminSeeded = (async () => {
       const store = getStore();
       if ((await store.countUsers()) > 0) return;
-      const isProd = process.env.NODE_ENV === 'production';
+      // Never ship a known default password to a real (database-backed)
+      // production deployment. If ADMIN_PASSWORD is unset there, generate a
+      // random one (no usable default). The keyless, no-database demo keeps a
+      // known default so it is loginable out of the box (ephemeral, no real data).
+      const secureSeed = process.env.NODE_ENV === 'production' && isDbConfigured();
       const email = (process.env.ADMIN_EMAIL || 'admin@mitmakmotors.co.za').toLowerCase();
-      // Never ship a known default password to production. If ADMIN_PASSWORD is
-      // unset in prod, generate a random one (no usable default) and tell the
-      // operator to use "Forgot password" to set their own.
       const password =
         process.env.ADMIN_PASSWORD ||
-        (isProd ? crypto.randomBytes(24).toString('base64url') : 'MitMak@Admin2026');
+        (secureSeed ? crypto.randomBytes(24).toString('base64url') : 'MitMak@Admin2026');
       const name = process.env.ADMIN_NAME || 'Mit-Mak Admin';
-      if (!process.env.ADMIN_PASSWORD && isProd) {
+      if (!process.env.ADMIN_PASSWORD && secureSeed) {
         console.warn(
           `[mit-mak] No ADMIN_PASSWORD set. Seeded ${email} with a RANDOM password. Use "Forgot password" at /admin/login to set your own.`,
         );
