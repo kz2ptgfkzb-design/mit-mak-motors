@@ -1,6 +1,21 @@
 # Mit-Mak Motors — Session Handoff
 
-Everything a fresh session needs to continue. Updated end of the "social + menu redesign + polish + vehicle-image correctness" session.
+Everything a fresh session needs to continue. Updated end of the "Private Inventory Management System" session.
+
+---
+
+## NEW: Private Vehicle Inventory Management System (this session)
+
+A full dealership-grade admin was added on top of the public site. Staff manage stock + enquiries at **`/admin`** (login required, hidden from public + search engines); every change flows to the public showroom. See **`ADMIN_SETUP.md`** for the full setup + production checklist.
+
+- **Keyless-first + non-disruptive.** With no env vars, the public site serves the bundled inventory (unchanged) and the admin runs in a local-file "demo mode". Set env vars to go live. Public site NEVER renders empty (seed fallback only when the store is genuinely empty/unreachable).
+- **Stack added:** `postgres` (Neon/Vercel Postgres) with a file-store fallback · `jose` JWT httpOnly sessions + `bcryptjs` · `@vercel/blob` uploads (URL-paste fallback) · `zod` validation. Data layer: `lib/inventory/*` (store-pg / store-file / public read layer / mappers / seed). Auth: `lib/auth/*` + `middleware.ts`.
+- **DB auto-initialises**: on first use with `POSTGRES_URL` set, it creates tables and imports the current inventory (no migration step). `scripts/setup-db.mjs` is an optional explicit path.
+- **RBAC:** Super Admin / Manager / Sales / Viewer (`lib/auth/rbac.ts`), enforced in middleware + every API route + the UI.
+- **Public reads are now async + store-backed** (`lib/inventory/public.ts`), cached with tag `vehicles`, revalidated on admin writes. The 8 public consumers (home, showroom, vehicles/[slug], compare, contact, finance, sitemap, related) were converted. `data/vehicles.json` is now the SEED (still 406 cars).
+- **Enquiries persist**: public forms (contact/finance/sell + the new on-page vehicle enquiry/test-drive/callback form) save leads shown under Admin > Enquiries, with email notify (Resend, keyless-fallback logs).
+- **Security:** an adversarial multi-agent review ran; all 13 actionable findings fixed and re-verified via live curl tests, incl. two criticals: (1) production now **fails closed without `AUTH_SECRET`** (no forgeable sessions), (2) **no known default admin password ships to prod** (random if `ADMIN_PASSWORD` unset). Also: image-URL allowlist (blocks javascript:/data:), JSON-LD `<` escaping, int overflow bounds, atomic file writes, login rate-limiting, empty-image placeholder. Two low/cosmetic findings accepted (dead `vehicle:publish` perm has no escalation impact; featured-carousel now orders by date-added).
+- **REQUIRED to go live (Jordan/Vercel):** add a Postgres store + set `AUTH_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` (+ optional Blob store + `RESEND_API_KEY`), then redeploy. Full steps in `ADMIN_SETUP.md`.
 
 ---
 
@@ -8,7 +23,7 @@ Everything a fresh session needs to continue. Updated end of the "social + menu 
 
 - **Our build (public, share this):** https://mit-mak-motors.vercel.app — fully deployed & current. `main` == `origin/main`; everything below is committed, pushed, and LIVE.
 - **The REAL company site is https://www.mitmakmotors.co.za** — a WordPress/Elementor site behind Cloudflare. NOT our build; it's the reference we mirror. Chrome can open co.za but BLOCKS vercel.app (§6).
-- **Inventory: 400 cars** (`data/vehicles.json`) — down from 401 after dropping one photo-less listing (see below).
+- **Inventory: 406 cars** (`data/vehicles.json`, refreshed this session) + a **private admin dashboard at `/admin`** (see the NEW section above).
 - **This session's changes (all LIVE), newest first:**
   - **Vehicle images corrected (`d2c63c7`).** A scraper bug had injected 4 dealer *banner* images into EVERY car's gallery, so cars showed photos belonging to no car (and 5 had a banner as their hero/card image). Stripped the banners from all cars (`scripts/fix-vehicle-images.mjs`), dropped 1 photo-less listing (`2026 FAW FAW TIGER`, 401→400), and added a recurrence guard to `scripts/scrape-inventory.mjs`. Verified: 0 cars now share a photo with a different make/model.
   - **Image "enhancement" via Cloudinary was tried and REVERTED (`e8d9368` → `4150925`).** AutoTrader serves one master per photo (~1024×768–1440×1080) and IGNORES the size token in the URL, so a CDN transform can't add resolution; routing through Cloudinary fetch also added a per-image cold-load penalty. Reverted to direct AutoTrader images. **Do NOT retry a CDN transform for "quality"** — see §6. (Genuine quality would need better source photos or self-hosted AI-upscaled images.)

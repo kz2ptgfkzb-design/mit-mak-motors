@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Phone, Clock, Mail, MapPin, Navigation } from 'lucide-react';
 import { locations, flagship } from '@/data/locations';
 import { siteConfig, whatsappLink } from '@/data/site';
-import { getVehicle } from '@/data/vehicles';
+import { getPublishedVehicle } from '@/lib/inventory/public';
 import { PageHero } from '@/components/layout/page-hero';
 import { ContactForm } from '@/components/contact/contact-form';
 
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact' },
 };
 
-export default function ContactPage({ searchParams }: { searchParams: { vehicle?: string; intent?: string } }) {
-  const vehicle = searchParams.vehicle ? getVehicle(searchParams.vehicle) : undefined;
+export default async function ContactPage({ searchParams }: { searchParams: { vehicle?: string; intent?: string } }) {
+  const vehicle = searchParams.vehicle ? await getPublishedVehicle(searchParams.vehicle) : undefined;
   const reserving = searchParams.intent === 'reserve' && vehicle;
   const name = vehicle ? `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}` : '';
   const prefillSubject = reserving ? `Reserve: ${name}` : '';

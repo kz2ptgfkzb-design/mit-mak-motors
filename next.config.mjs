@@ -16,6 +16,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'plus.unsplash.com',
       },
+      {
+        // Vercel Blob storage (admin-uploaded vehicle images)
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
     ],
   },
 };

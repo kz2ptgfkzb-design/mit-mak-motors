@@ -1,11 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/data/site';
-import { vehicles } from '@/data/vehicles';
+import { getPublishedVehicles } from '@/lib/inventory/public';
 import { blogPosts } from '@/data/content';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, '');
   const now = new Date();
+  const vehicles = await getPublishedVehicles();
 
   const routes = [
     '',

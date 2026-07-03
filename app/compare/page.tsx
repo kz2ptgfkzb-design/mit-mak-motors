@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { vehicleCards } from '@/data/vehicles';
+import { getPublishedCards } from '@/lib/inventory/public';
 import { PageHero } from '@/components/layout/page-hero';
 import { CompareClient } from '@/components/compare/compare-client';
 
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/compare' },
 };
 
-export default function ComparePage({ searchParams }: { searchParams: { ids?: string } }) {
+export default async function ComparePage({ searchParams }: { searchParams: { ids?: string } }) {
+  const vehicleCards = await getPublishedCards();
   const known = new Set(vehicleCards.map((v) => v.id));
   const initialIds = (typeof searchParams.ids === 'string' ? searchParams.ids : '')
     .split(',')

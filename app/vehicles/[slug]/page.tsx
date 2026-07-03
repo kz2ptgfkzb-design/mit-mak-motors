@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Check } from 'lucide-react';
-import { getVehicle, vehicles } from '@/data/vehicles';
+import { getPublishedVehicle, getAllPublishedSlugs, getRelatedCards } from '@/lib/inventory/public';
 import { siteConfig } from '@/data/site';
 import { formatPrice } from '@/lib/utils';
 import { VehicleGallery } from '@/components/vehicle/vehicle-gallery';
@@ -11,16 +11,18 @@ import { Accordion } from '@/components/vehicle/detail-accordion';
 import { TrustBlock } from '@/components/vehicle/trust-block';
 import { StickyActionPanel } from '@/components/vehicle/sticky-action-panel';
 import { RelatedVehicles } from '@/components/vehicle/related-vehicles';
+import { EnquiryForm } from '@/components/vehicle/enquiry-form';
 import { CtaBand } from '@/components/layout/cta-band';
 import { Eyebrow } from '@/components/ui/section-heading';
+import { StatusBadge } from '@/components/ui/badge';
 
-export function generateStaticParams() {
-  return vehicles.map((v) => ({ slug: v.slug }));
+export async function generateStaticParams() {
+  return (await getAllPublishedSlugs()).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const v = getVehicle(params.slug);
-  if (!v) return { title: 'Vehicle not found' };
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const v = await getPublishedVehicle(params.slug);
+  if (!v) return { title: 'Vehicle not found', robots: { index: false } };
   const title = `${v.year} ${v.make} ${v.model} ${v.variant}`;
   return {
     title: `${title}, ${formatPrice(v.price)}`,
@@ -30,10 +32,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function VehiclePage({ params }: { params: { slug: string } }) {
-  const vehicle = getVehicle(params.slug);
+export default async function VehiclePage({ params }: { params: { slug: string } }) {
+  const vehicle = await getPublishedVehicle(params.slug);
   if (!vehicle) notFound();
 
+  const related = await getRelatedCards(vehicle);
   const title = `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}`;
 
   const accordionItems = [
@@ -132,6 +135,17 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
             <h1 className="mt-4 font-anton text-4xl uppercase leading-[0.9] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {title}
             </h1>
+            {(vehicle.sold || vehicle.reserved || vehicle.comingSoon) && (
+              <div className="mt-4">
+                {vehicle.sold ? (
+                  <StatusBadge status="sold">Sold</StatusBadge>
+                ) : vehicle.reserved ? (
+                  <StatusBadge status="reserved">Reserved</StatusBadge>
+                ) : (
+                  <StatusBadge status="coming">Coming Soon</StatusBadge>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12">
@@ -158,6 +172,10 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
               <div className="mt-8">
                 <TrustBlock />
               </div>
+
+              <div className="mt-8">
+                <EnquiryForm vehicle={vehicle} />
+              </div>
             </div>
 
             <div className="lg:col-span-5 xl:col-span-4">
@@ -167,7 +185,7 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <RelatedVehicles vehicle={vehicle} />
+      <RelatedVehicles related={related} />
 
       <CtaBand
         eyebrow="Not quite the one?"
@@ -176,8 +194,8 @@ export default function VehiclePage({ params }: { params: { slug: string } }) {
         secondary={{ label: 'Get a Cash Offer', href: '/sell-your-car' }}
       />
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, '\\u003c') }} />
     </>
   );
 }

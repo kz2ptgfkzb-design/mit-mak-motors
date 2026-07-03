@@ -29,3 +29,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# Local file-store fallback (dev inventory data)
+data/.admin-store.json
+.env*.local

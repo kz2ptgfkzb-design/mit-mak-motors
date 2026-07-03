@@ -4,14 +4,8 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/data/site';
 import { locations } from '@/data/locations';
-import { SmoothScroll } from '@/components/providers/smooth-scroll';
-import { CustomCursor } from '@/components/providers/custom-cursor';
-import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { QuickActions } from '@/components/layout/quick-actions';
-import { CookieBanner } from '@/components/layout/cookie-banner';
-import { ScrollProgress } from '@/components/layout/scroll-progress';
-import { IgnitionIntro } from '@/components/home/ignition-intro';
+import { SiteFrame } from '@/components/layout/site-frame';
 
 const display = Oswald({
   subsets: ['latin'],
@@ -94,22 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={cn(display.variable, sans.variable, anton.variable)}>
       <body className="bg-ink-900 font-sans antialiased">
-        <IgnitionIntro />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-red focus:px-5 focus:py-2 focus:font-display focus:text-sm focus:uppercase focus:text-white"
-        >
-          Skip to content
-        </a>
-        <SmoothScroll>
-          <ScrollProgress />
-          <CustomCursor />
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <QuickActions />
-          <CookieBanner />
-        </SmoothScroll>
+        <SiteFrame footer={<Footer />}>{children}</SiteFrame>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

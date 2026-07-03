@@ -45,7 +45,7 @@ export function DriveBadge({ drive, className }: { drive: DriveType; className?:
   );
 }
 
-type Status = 'new' | 'reserved' | 'reduced' | 'featured' | 'sold';
+type Status = 'new' | 'reserved' | 'reduced' | 'featured' | 'sold' | 'coming';
 
 const statusStyles: Record<Status, string> = {
   new: 'bg-white text-ink-900',
@@ -53,6 +53,7 @@ const statusStyles: Record<Status, string> = {
   reduced: 'bg-red text-white shadow-glow-sm',
   featured: 'bg-red text-white',
   sold: 'bg-ink-700 text-graphite-300',
+  coming: 'bg-sky-500 text-white',
 };
 
 export function StatusBadge({ status, children, className }: { status: Status; children: ReactNode; className?: string }) {

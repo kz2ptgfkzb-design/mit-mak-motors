@@ -2,25 +2,33 @@
   "name": "mit-mak-motors",
   "version": "1.0.0",
   "private": true,
-  "description": "Awwwards-level website for Mit-Mak Motors — premium pre-owned cars, Pretoria.",
+  "description": "Awwwards-level website for Mit-Mak Motors - premium pre-owned cars, Pretoria.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup-db": "node scripts/setup-db.mjs",
+    "scrape": "node scripts/scrape-inventory.mjs"
   },
   "dependencies": {
+    "@vercel/blob": "^0.27.3",
+    "bcryptjs": "^2.4.3",
     "clsx": "2.1.1",
     "framer-motion": "11.11.17",
     "gsap": "3.12.5",
+    "jose": "^5.10.0",
     "lenis": "1.1.18",
     "lucide-react": "0.454.0",
     "next": "^14.2.35",
+    "postgres": "^3.4.9",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "tailwind-merge": "2.5.4"
+    "tailwind-merge": "2.5.4",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "20.16.13",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",

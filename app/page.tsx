@@ -1,4 +1,4 @@
-import { featuredCards, heroVehicle, toCard, filterMeta } from '@/data/vehicles';
+import { getHomepageCards, getHeroVehicle, getFilterMeta } from '@/lib/inventory/public';
 import { Hero } from '@/components/home/hero';
 import { QuickSearch } from '@/components/home/quick-search';
 import { AwardsMarquee } from '@/components/home/awards-marquee';
@@ -9,13 +9,18 @@ import { Testimonials } from '@/components/home/testimonials';
 import { FomoTeasers } from '@/components/home/fomo-teasers';
 import { CtaBand } from '@/components/layout/cta-band';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [heroVehicle, homepageCards, filterMeta] = await Promise.all([
+    getHeroVehicle(),
+    getHomepageCards(),
+    getFilterMeta(),
+  ]);
   return (
     <>
-      <Hero vehicle={toCard(heroVehicle)} />
+      <Hero vehicle={heroVehicle} />
       <QuickSearch meta={filterMeta} />
       <AwardsMarquee />
-      <FeaturedInventory vehicles={featuredCards} />
+      <FeaturedInventory vehicles={homepageCards} />
       <ScrollMarquee />
       <BrandPillars />
       <Testimonials />

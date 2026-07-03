@@ -47,6 +47,7 @@ export interface Vehicle {
   previousPrice?: number; // for "reduced" badges
   reserved?: boolean;
   sold?: boolean;
+  comingSoon?: boolean; // pre-arrival stock, shown with a "Coming Soon" badge
   featured?: boolean;
 
   // Core specs (the detail-page spec grid)

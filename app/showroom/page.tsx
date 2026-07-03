@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { SortKey, VehicleFilters, BodyType } from '@/types';
-import { allBodyTypes, allMakes, vehicleCards, filterMeta } from '@/data/vehicles';
+import { getPublishedCards, getFilterMeta } from '@/lib/inventory/public';
 import { PageHero } from '@/components/layout/page-hero';
 import { ShowroomClient } from '@/components/showroom/showroom-client';
 
@@ -13,11 +13,13 @@ export const metadata: Metadata = {
 
 const VALID_SORTS: SortKey[] = ['newest', 'price-asc', 'price-desc', 'year-desc', 'mileage-asc'];
 
-export default function ShowroomPage({
+export default async function ShowroomPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const [vehicleCards, filterMeta] = await Promise.all([getPublishedCards(), getFilterMeta()]);
+
   const typeParam = typeof searchParams.type === 'string' ? searchParams.type : '';
   const makeParam = typeof searchParams.make === 'string' ? searchParams.make : '';
   const modelParam = typeof searchParams.model === 'string' ? searchParams.model : '';
@@ -30,8 +32,8 @@ export default function ShowroomPage({
 
   const initialFilters: Partial<VehicleFilters> = {
     q: qParam,
-    bodyType: allBodyTypes.includes(typeParam as BodyType) ? [typeParam as BodyType] : [],
-    make: allMakes.includes(makeParam) ? [makeParam] : [],
+    bodyType: filterMeta.bodyTypes.includes(typeParam as BodyType) ? [typeParam as BodyType] : [],
+    make: filterMeta.makes.includes(makeParam) ? [makeParam] : [],
     model: allModels.includes(modelParam) ? [modelParam] : [],
     maxPrice: maxPriceParam && Number.isFinite(maxPriceNum) && maxPriceNum > 0 ? maxPriceNum : null,
   };

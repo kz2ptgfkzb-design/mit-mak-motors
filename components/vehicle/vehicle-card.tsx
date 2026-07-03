@@ -106,9 +106,15 @@ export function VehicleCard({
 
           {/* Status badges */}
           <div className={cn('absolute left-3 z-[5] flex flex-wrap gap-2', selectable ? 'top-14' : 'top-3')}>
-            {vehicle.reserved && <StatusBadge status="reserved">Reserved</StatusBadge>}
-            {vehicle.previousPrice && !vehicle.reserved && <StatusBadge status="reduced">Reduced</StatusBadge>}
-            {vehicle.featured && !vehicle.reserved && !vehicle.previousPrice && (
+            {vehicle.sold && <StatusBadge status="sold">Sold</StatusBadge>}
+            {vehicle.reserved && !vehicle.sold && <StatusBadge status="reserved">Reserved</StatusBadge>}
+            {vehicle.comingSoon && !vehicle.sold && !vehicle.reserved && (
+              <StatusBadge status="coming">Coming Soon</StatusBadge>
+            )}
+            {vehicle.previousPrice && !vehicle.reserved && !vehicle.sold && !vehicle.comingSoon && (
+              <StatusBadge status="reduced">Reduced</StatusBadge>
+            )}
+            {vehicle.featured && !vehicle.reserved && !vehicle.sold && !vehicle.comingSoon && !vehicle.previousPrice && (
               <StatusBadge status="featured">Featured</StatusBadge>
             )}
           </div>

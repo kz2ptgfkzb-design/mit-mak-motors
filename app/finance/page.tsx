@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getVehicle } from '@/data/vehicles';
+import { getPublishedVehicle } from '@/lib/inventory/public';
 import { cn } from '@/lib/utils';
 import { PageHero } from '@/components/layout/page-hero';
 import { FinanceApplication } from '@/components/finance/finance-application';
@@ -30,8 +30,8 @@ function Tabs({ active }: { active: 'individual' | 'business' }) {
   );
 }
 
-export default function FinancePage({ searchParams }: { searchParams: { vehicle?: string } }) {
-  const vehicle = searchParams.vehicle ? getVehicle(searchParams.vehicle) : undefined;
+export default async function FinancePage({ searchParams }: { searchParams: { vehicle?: string } }) {
+  const vehicle = searchParams.vehicle ? await getPublishedVehicle(searchParams.vehicle) : undefined;
   const price = vehicle?.price ?? 549900;
   const vehicleName = vehicle ? `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}` : '';
 
