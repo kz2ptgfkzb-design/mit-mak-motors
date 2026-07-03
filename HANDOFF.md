@@ -1,18 +1,23 @@
 # Mit-Mak Motors — Session Handoff
 
-Everything a fresh session needs to continue. Updated end of the "full-site build + image/mobile/black-space fixes" session.
+Everything a fresh session needs to continue. Updated end of the "social + menu redesign + polish + vehicle-image correctness" session.
 
 ---
 
 ## 0. READ FIRST — state in one breath
 
-- **Our build (public, share this):** https://mit-mak-motors.vercel.app — fully deployed & current.
-- **The REAL company site is https://www.mitmakmotors.co.za** — a WordPress/Elementor site behind Cloudflare. It is NOT our build; it is the reference we mirror. (Our build is the Next.js app on vercel.app.) Chrome can open co.za but BLOCKS vercel.app (see §6).
-- **Everything is committed + pushed + LIVE.** `main` == `origin/main`. The home **black-space fix (`a1fca3d`) is committed, pushed, and DEPLOYED** — verified by the blur data-URI (37×) + `bg-ink-700` markers in the live home HTML. Remaining on it: a human eyeball scroll-through, since tooling can't screenshot the live deploy (§6).
-- **Social reroutes FIXED (`data/site.ts`):** the footer/mega-menu/contact social links now point to the real Mit-Mak profiles — FB `/MitMakMotors`, IG `/mitmakmotors`, YouTube `@MitMakMasterclass`, TikTok `@mitmakmotors`, X `mit_mak_motors` — matched 1:1 against the real co.za footer. (Previously they were placeholder bare domains, e.g. `https://facebook.com`.)
-- **Menu redesign + full polish shipped (latest session):** the mega-menu now has a hover/focus "showroom" preview rail (cross-fade, reduced-motion-safe) + a **Customer Care care-pill surfacing Compliment/Complaint (`/feedback`) in the menu** (also added to the megaMenu Company column); proper dialog semantics + focus trap + focus-return; richer link hover + active-page cue; WhatsApp Button in the menu bottom bar; md-breakpoint fix; one-tap call button on phones. Perf: cursor rAF parks when idle/hidden, marquees pause off-screen, BrandPillars re-render guard + no permanent will-change, intro unlocks scroll ~1s sooner. Images: dark blur placeholders across secondary pages (AutoTrader stays `unoptimized`). Removed 2 orphaned `/fomo-zone/{merch,masterclass}` detail routes (content lives at `/merch` + `/masterclass`). SEO: vehicle BreadcrumbList + UsedCondition JSON-LD, blog publisher/dateModified, sitemap +/compare,/merch,/masterclass. Built via audit + design + adversarial-review workflows.
-- **Build must stay green.** `npm run build` compiles all routes.
-- ⛔ **Don't share the long `mit-mak-motors-…-jordan-marcus-projects.vercel.app` URLs** — those require a Vercel login (per-deploy protection). The short alias above is public.
+- **Our build (public, share this):** https://mit-mak-motors.vercel.app — fully deployed & current. `main` == `origin/main`; everything below is committed, pushed, and LIVE.
+- **The REAL company site is https://www.mitmakmotors.co.za** — a WordPress/Elementor site behind Cloudflare. NOT our build; it's the reference we mirror. Chrome can open co.za but BLOCKS vercel.app (§6).
+- **Inventory: 400 cars** (`data/vehicles.json`) — down from 401 after dropping one photo-less listing (see below).
+- **This session's changes (all LIVE), newest first:**
+  - **Vehicle images corrected (`d2c63c7`).** A scraper bug had injected 4 dealer *banner* images into EVERY car's gallery, so cars showed photos belonging to no car (and 5 had a banner as their hero/card image). Stripped the banners from all cars (`scripts/fix-vehicle-images.mjs`), dropped 1 photo-less listing (`2026 FAW FAW TIGER`, 401→400), and added a recurrence guard to `scripts/scrape-inventory.mjs`. Verified: 0 cars now share a photo with a different make/model.
+  - **Image "enhancement" via Cloudinary was tried and REVERTED (`e8d9368` → `4150925`).** AutoTrader serves one master per photo (~1024×768–1440×1080) and IGNORES the size token in the URL, so a CDN transform can't add resolution; routing through Cloudinary fetch also added a per-image cold-load penalty. Reverted to direct AutoTrader images. **Do NOT retry a CDN transform for "quality"** — see §6. (Genuine quality would need better source photos or self-hosted AI-upscaled images.)
+  - **Heading word-spacing fixed + deep-link (`455de70`).** `RevealText` was trimming inter-word spaces (headings rendered "TheMit-MakStandard"); now renders correctly. "Why we're trusted" (home testimonials) deep-links to `/about#the-standard`.
+  - **Reveal bulletproofed (`646baac`).** `components/ui/reveal.tsx` rewritten: reveal is driven by a direct IntersectionObserver + a scroll-position failsafe (+ rAF mount check), so content can NEVER stay stuck invisible ("black space") under Lenis smooth-scroll / fast scroll. Replaces the earlier `whileInView` threshold approach.
+  - **Menu redesign + full polish (`ff12ba1`).** Mega-menu: hover/focus "showroom" preview rail (reduced-motion-safe) + a **Customer Care care-pill surfacing Compliment/Complaint (`/feedback`)** (also in the Company column + footer); dialog semantics + focus trap + focus-return; richer link hover + active-page cue; WhatsApp Button in bottom bar; md-breakpoint fix; one-tap call button on phones. Perf: cursor rAF parks when idle/hidden, marquees pause off-screen (`useInView`), BrandPillars re-render guard + no permanent will-change, intro unlocks scroll ~1s sooner. Removed 2 orphaned `/fomo-zone/{merch,masterclass}` routes. SEO: vehicle BreadcrumbList + UsedCondition JSON-LD, blog publisher/dateModified, sitemap +/compare,/merch,/masterclass.
+  - **Social links (`804371f`).** `data/site.ts` socials repointed to the real Mit-Mak profiles — FB `/MitMakMotors`, IG `/mitmakmotors`, YouTube `@MitMakMasterclass`, TikTok `@mitmakmotors`, X `mit_mak_motors`.
+- **Build must stay green.** `npm run build` compiles all routes; `./node_modules/.bin/tsc --noEmit` clean.
+- ⛔ **Don't share the long `mit-mak-motors-…-jordan-marcus-projects.vercel.app` URLs** — those require a Vercel login. The short alias above is public.
 
 ## 1. TL;DR
 
@@ -43,9 +48,8 @@ npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects
 
 ## 3. Git state — clean (all shipped)
 
-`main` == `origin/main`. All work is committed + pushed + deployed. Recent:
-- `a1fca3d` — home black-space fix (blur placeholders + reveal threshold). **LIVE.**
-- this session — social-link reroute fix in `data/site.ts` + this HANDOFF update.
+`main` == `origin/main`. All work is committed + pushed + deployed. Latest CODE commit: `4150925` (this HANDOFF update commits on top, docs-only — the live site already reflects `4150925`). Recent (newest first):
+- `4150925` revert Cloudinary enhancement · `e8d9368` add it (reverted) · `d2c63c7` vehicle-image correctness · `455de70` heading spacing + deep-link · `646baac` bulletproof Reveal · `ff12ba1` menu redesign + polish · `804371f` social links · `a1fca3d` original home black-space fix.
 
 Standard ship loop (deploy uploads the working tree, so commit first):
 ```bash
@@ -55,17 +59,13 @@ git push origin main
 npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects
 ```
 
-## 4. The home "black spaces on scroll" fix (what it does — VERIFY LIVE)
+## 4. "Black space on scroll" — root cause + current fix (RESOLVED)
 
-Diagnosed (parallel workflow) → two root causes of dark gaps while scrolling the dark-theme home page:
-1. **Unoptimized vehicle-card images flashed their near-black container** before loading (the recent AutoTrader `unoptimized` change removed blur placeholders).
-2. **The shared `Reveal` threshold** (`amount: 0.3`; `RevealText` `0.5`) left tall blocks stuck at `opacity:0` over the dark bg on fast scroll / over-tall sections.
+Dark gaps while scrolling the dark-theme pages had two causes, both now fixed and live:
+1. **Images flashing their near-black container before load** → `lib/blur.ts` provides a dark (#16161a) blur-placeholder data URI, applied as `placeholder="blur" blurDataURL={BLUR}` on lazy/unoptimized images (vehicle cards, hero, brand-pillars, quick-search, fomo teasers, cta band, secondary-page heroes). Images fade in from a dark tile, never pure black.
+2. **Reveal blocks stuck at `opacity:0`** → `components/ui/reveal.tsx` (`Reveal`/`RevealText`) now drives the reveal off a direct IntersectionObserver **plus a scroll-position failsafe** (+ an initial rAF check). If an element is ever actually in the viewport it reveals, regardless of scroll speed or Lenis smooth-scroll. This replaced the fragile `whileInView`+`once` approach that could leave content permanently invisible on fast scroll (`646baac`).
 
-The staged fix:
-- **`lib/blur.ts`** — a tiny dark (#16161a) blur-placeholder data URI. Added `placeholder="blur" blurDataURL={BLUR}` to every lazy/unoptimized image: vehicle cards, brand-pillars (desktop crossfade + mobile), quick-search backdrop, fomo teasers, cta band, hero (main + inset). Images now fade in from a dark tile, never pure black.
-- `vehicle-card` container `bg-ink-800` → `bg-ink-700`; `brand-pillars` sticky stage given a `bg-ink-950` base + `priority` on the first crossfade image.
-- `reveal.tsx`: `amount 0.3 → 0.01`, `RevealText 0.5 → 0.2` so content always reveals (no permanently-invisible blocks).
-- **Still to verify (couldn't headless-test — see §6):** a real **scroll-through of the live home on desktop + mobile** to confirm zero black flashes. This is the single manual check before managers view.
+If "black space" is reported again, it's almost certainly a NEW component whose content isn't wrapped in `Reveal`, or an image missing a blur placeholder — not the reveal mechanism itself.
 
 ## 5. What's built / changed THIS session (all committed + live unless noted)
 
@@ -83,6 +83,11 @@ The staged fix:
 12. **Vehicle images** — AutoTrader's CDN intermittently **502'd Vercel's image optimizer** (~2.5% = "missing images"). All AutoTrader `<Image>` set to **`unoptimized`** → load direct (all 9769 URLs are 200). Local staff/merch + Unsplash keep optimization (verified ~48KB WebP).
 13. **Home black-space fix** (committed `a1fca3d`, deployed + live) — see §4.
 14. **Social-link reroute fix** — `data/site.ts` socials repointed from placeholder bare domains (`https://facebook.com`, etc.) to the real Mit-Mak profiles: FB `/MitMakMotors`, IG `/mitmakmotors`, YouTube `@MitMakMasterclass`, TikTok `@mitmakmotors`, X `mit_mak_motors`. Added **X** (was missing) and matched order to the real co.za footer. Rendered in footer, mega-menu, and contact page.
+15. **Menu redesign + full polish** (`ff12ba1`) — mega-menu hover/focus preview rail + **Customer Care care-pill surfacing Compliment/Complaint** (also Company column + footer); dialog semantics + focus trap + focus-return; active-page cue; WhatsApp Button in bottom bar; md-breakpoint fix; one-tap call button on phones. Perf: `custom-cursor` rAF parks when idle/hidden; `marquee` pauses off-screen (`useInView`); `brand-pillars` re-render guard + dropped permanent `will-change`; `ignition-intro` unlocks scroll ~1s sooner. Removed orphaned `/fomo-zone/{merch,masterclass}` detail routes. SEO: vehicle `BreadcrumbList` + `UsedCondition` JSON-LD, blog `publisher`/`dateModified`, sitemap +/compare,/merch,/masterclass.
+16. **Reveal bulletproofed** (`646baac`) — `components/ui/reveal.tsx` rewritten (IntersectionObserver + scroll failsafe). See §4.
+17. **Heading word-spacing + deep-link** (`455de70`) — `RevealText` inter-word spaces fixed (headings were "TheMit-MakStandard"); "Why we're trusted" now links to `/about#the-standard` (that section has `id="the-standard" scroll-mt-28`).
+18. **Vehicle image correctness** (`d2c63c7`) — stripped 4 dealer banner images that had contaminated every gallery; dropped the photo-less FAW Tiger (401→400); added a scrape guard. See §0.
+19. **Cloudinary image enhancement — TRIED & REVERTED** (`e8d9368`→`4150925`). See §0 and §6.
 
 ## 6. Gotchas for the next agent (READ — these cost hours)
 
@@ -95,14 +100,17 @@ The staged fix:
 - **Branches (3) ≠ locations (6).** Don't "fix" one to match the other; both are intentional (3 customer showrooms, 6 physical sites).
 - **Repo is ~76MB of real photos** (`public/staff` 47MB, `public/merch` 29MB). Fine; Next serves optimized WebP for those (they're local, never 502).
 - Framer dev-only warnings (React DevTools info, useScroll "non-static position") are **stripped from production** — the live console is clean.
+- **AutoTrader images cap at ~1024×768–1440×1080 and the CDN IGNORES the size token** (`Crop1024x576`, `Crop2560x1440`, `Original` all return the same master). So you canNOT get a sharper photo by changing the URL — we already serve the max. **Don't route car images through a CDN transform (Cloudinary/imgix/etc.) for "quality"** — it was tried (Cloudinary fetch) and reverted: no resolution gain + a per-image cold-transform penalty that made browsing feel slower. Real quality gain needs better source photos or self-hosted AI-upscaled images.
+- **Some identical new units legitimately share one stock-photo set** (e.g. 6 identical `2026 Mahindra Pik Up Single Cab` units). That's expected, not the banner bug. The real bug (fixed) was 4 dealer *banner* images on every car; `scripts/scrape-inventory.mjs` now strips any image appearing across a large share of listings, and `scripts/fix-vehicle-images.mjs` is the one-off repair. A re-scrape self-cleans.
+- **`server-only` import + Cloudinary lesson:** the abandoned AI-advisor experiment briefly added `@anthropic-ai/sdk`; it was removed (`a9fc593`). If you build the advisor (see §7), the SDK + an `ANTHROPIC_API_KEY` (Vercel env) are needed.
 
 ## 7. Open items / next steps (priority order)
 
-1. **Black-space fix is shipped + live.** Remaining: a **human desktop + mobile scroll-through** of the live home (https://mit-mak-motors.vercel.app) to confirm zero black flashes — tooling can't screenshot the live deploy (Chrome blocks vercel.app, preview renders next/image black; §6), so this needs a person's eyes.
-2. **Forms don't deliver yet** — all `/api/*` routes log + echo success unless `FORM_WEBHOOK_URL` is set (`lib/api.ts`). The **King Price insurance form collects ID numbers + consent (PII)** — wire it to a real CRM/Zapier before real traffic.
-3. Optional pitch polish: connect **GitHub↔Vercel auto-deploy**; a **custom domain** (`demo.mitmakmotors.co.za`); mirror vehicle images to own storage to re-enable optimization.
+1. **Forms don't deliver yet** — all `/api/*` routes log + echo success unless `FORM_WEBHOOK_URL` is set (`lib/api.ts`). The **King Price insurance form collects ID numbers + consent (PII)** — wire it to a real CRM/Zapier before real traffic.
+2. **AI car advisor — REQUESTED, not built.** The user wanted a conversational bot (dedicated `/advisor` page, Opus 4.8) that helps people who don't know cars pick one from inventory. Design was scoped (streaming `/api/advisor` route + prompt-cached compact catalog in the system prompt + chat UI + `[[car:slug]]` recommendation cards) but the build was dropped mid-start — **NO code exists**. To build: `npm i @anthropic-ai/sdk`, set `ANTHROPIC_API_KEY` in Vercel, use the `claude-api` skill; model `claude-opus-4-8`; degrade gracefully if the key is unset.
+3. **Image quality ceiling** — photos are already at AutoTrader's max (~1440px); the CDN ignores size hints (§6). Real improvement needs better source photos or a self-hosted AI-upscale + rehost pipeline. **Do not retry a CDN transform** (Cloudinary was tried & reverted).
 4. The About **"Our Story"** narrative + founder name ("Mike Makua") and some staff bios are **placeholder fiction** from an early session — swap for real info if the client provides it. (The /staff directory IS real.)
-5. `/fomo-zone/merch` + `/fomo-zone/masterclass` detail pages are now orphaned (nav points to `/merch` + `/masterclass`); harmless, can be removed.
+5. Optional pitch polish: connect **GitHub↔Vercel auto-deploy**; a **custom domain** (`demo.mitmakmotors.co.za`). The reveal fix is now bulletproof, but a human desktop+mobile scroll-through is still worth a glance before the managers view (tooling can't screenshot the live deploy — §6).
 
 ## 8. File map (key)
 
@@ -127,13 +135,14 @@ components/
   referrals/ careers/ feedback/ forms (referral-form, careers-form, feedback-form, form-success)
   ui/      reveal, section-heading, counter, button, magnetic, marquee, badge, chevron, prose, body-type-icons
   providers/ smooth-scroll (Lenis), custom-cursor
-data/   vehicles.json (401 cars, server-only) + vehicles.ts, staff.ts, merch.ts, masterclass.ts,
+data/   vehicles.json (400 cars, server-only) + vehicles.ts, staff.ts, merch.ts, masterclass.ts,
         locations.ts (6), navigation.ts, content.ts, awards.ts, site.ts, fomo.ts
-lib/    utils, finance, filters, compare, api, blur (NEW)
-scripts/ scrape-inventory.mjs, fetch-staff.mjs, fetch-merch.mjs, audit-images.mjs
+lib/    utils, finance, filters, compare, api, blur, hooks
+scripts/ scrape-inventory.mjs (has banner-strip guard), fetch-staff.mjs, fetch-merch.mjs,
+        audit-images.mjs, fix-vehicle-images.mjs (one-off banner-contamination repair)
 public/  staff/*.png (130), merch/*.png (80), body-types/*.svg, mit-mak-logo.png, masterclass-badge.png
 ```
 
 ## 9. Suggested first message for the new session
 
-> "Continue the Mit-Mak Motors build at `/Users/jordanmarcus/mit-mak-motors`. Read `HANDOFF.md` first. Step 1 (§7.1): there's an uncommitted, build-green **home black-space fix** on disk — commit + push + deploy it (`git push origin main` works via keychain; deploy with `npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects`), then we'll do a live scroll-through. The site is live + public at https://mit-mak-motors.vercel.app. Then: [next task]."
+> "Continue the Mit-Mak Motors build at `/Users/jordanmarcus/mit-mak-motors`. Read `HANDOFF.md` first — everything is committed + pushed + LIVE at https://mit-mak-motors.vercel.app (`main` == `origin/main`, latest code commit `4150925`), nothing pending. Ship loop: `git push origin main` (keychain, no token) then `npx -y vercel@latest deploy --prod --yes --scope jordan-marcus-projects`. Hard constraints: NO em/en-dashes in copy; AutoTrader car images stay `unoptimized` and must NOT be routed through a CDN transform for 'quality' (tried Cloudinary, reverted — §6). Then: [my task]."
