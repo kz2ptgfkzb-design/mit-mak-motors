@@ -384,7 +384,7 @@ export class PgStore implements InventoryStore {
     const sql = await this.sql();
     const now = new Date();
     const user: AdminUser = {
-      id: globalThis.crypto.randomUUID(),
+      id: input.id ?? globalThis.crypto.randomUUID(),
       email: input.email.toLowerCase(),
       name: input.name,
       role: input.role,

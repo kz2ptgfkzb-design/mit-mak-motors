@@ -14,6 +14,8 @@ import type {
 } from './types';
 
 export interface UserInput {
+  /** Optional stable id (used to seed a deterministic demo admin across instances). */
+  id?: string;
   email: string;
   name: string;
   role: Role;

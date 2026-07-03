@@ -243,7 +243,7 @@ export class FileStore implements InventoryStore {
     const b = await this.load();
     const now = new Date().toISOString();
     const user: AdminUser = {
-      id: this.uid(),
+      id: input.id ?? this.uid(),
       email: input.email.toLowerCase(),
       name: input.name,
       role: input.role,

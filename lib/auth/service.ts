@@ -42,6 +42,9 @@ export function ensureSeedAdmin(): Promise<void> {
       }
       try {
         await store.createUser({
+          // Deterministic id so the keyless demo admin is the same across
+          // ephemeral serverless instances (session stays valid as you navigate).
+          id: secureSeed ? undefined : 'mmseed-super-admin',
           email,
           name,
           role: 'super_admin',
