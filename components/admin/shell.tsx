@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -63,16 +64,22 @@ export function AdminShell({
   }
 
   const sidebar = (
-    <div className="flex h-full flex-col bg-ink-950 text-slate-300">
-      <div className="flex items-center gap-2 px-5 py-5">
-        <span className="text-lg font-semibold tracking-tight text-white">
-          MIT-MAK<span className="text-red-500">.</span>
-        </span>
-        <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-300">
-          Admin
-        </span>
+    <div className="relative flex h-full flex-col bg-ink-950 text-slate-300">
+      {/* subtle brand glow behind the logo */}
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-40 w-56 -translate-x-1/2 rounded-full bg-red-600/10 blur-3xl" />
+      <div className="relative px-5 pb-4 pt-6">
+        <Image
+          src="/mit-mak-logo.png"
+          alt="Mit-Mak Motors"
+          width={1198}
+          height={1198}
+          priority
+          className="h-12 w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
+        />
+        <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-500">Inventory Console</p>
       </div>
-      <nav className="flex-1 space-y-1 px-3 py-2">
+      <div className="relative mx-5 mb-2 h-px bg-white/10" />
+      <nav className="relative flex-1 space-y-1 px-3 py-2">
         {items.map((n) => {
           const Icon = n.icon;
           const active = isActive(n);
