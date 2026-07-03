@@ -116,7 +116,7 @@ export function AdminShell({
 
   return (
     <AdminUXProvider>
-      <div className="min-h-screen bg-slate-100">
+      <div className="min-h-screen bg-slate-100 [color-scheme:light]">
         {/* Desktop sidebar */}
         <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 lg:block">{sidebar}</aside>
 
