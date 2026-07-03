@@ -117,6 +117,10 @@ export const getCurrentUser = cache(async (): Promise<SafeUser | null> => {
   const claims = await verifySessionToken(token);
   if (!claims) return null;
   try {
+    // Ensure the seeded admin exists on this (possibly cold) instance before we
+    // look it up. No-op once any user exists (countUsers > 0), so it never
+    // re-seeds a real database-backed deployment.
+    await ensureSeedAdmin();
     const user = await getStore().getUserById(claims.sub);
     if (!user || !user.active) return null;
     return toSafeUser(user);
