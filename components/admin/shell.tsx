@@ -89,8 +89,10 @@ export function AdminShell({
               href={n.href}
               onClick={() => setOpen(false)}
               className={cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
-                active ? 'bg-red-600 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white',
+                'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-all',
+                active
+                  ? 'bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-950/50'
+                  : 'text-slate-400 hover:bg-white/5 hover:text-white',
               )}
             >
               <Icon className="h-[18px] w-[18px]" />

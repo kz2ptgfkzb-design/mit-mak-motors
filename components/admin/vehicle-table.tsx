@@ -38,6 +38,15 @@ interface Props {
 type SortKey = 'newest' | 'oldest' | 'price-desc' | 'price-asc' | 'mileage-asc' | 'status';
 const PAGE_SIZE = 20;
 
+// Colour cue next to the status dropdown so state reads at a glance.
+const STATUS_DOT: Record<VehicleStatus, string> = {
+  available: 'bg-emerald-500',
+  reserved: 'bg-amber-500',
+  sold: 'bg-slate-400',
+  coming_soon: 'bg-sky-500',
+  draft: 'bg-slate-300',
+};
+
 export function VehicleTable({ vehicles, locations, canCreate, canEdit, canDelete }: Props) {
   const router = useRouter();
   const toast = useToast();
@@ -327,7 +336,7 @@ export function VehicleTable({ vehicles, locations, canCreate, canEdit, canDelet
                       <img
                         src={v.images[0]?.url || '/mit-mak-logo.png'}
                         alt=""
-                        className="h-10 w-14 shrink-0 rounded bg-slate-100 object-cover"
+                        className="h-12 w-[68px] shrink-0 rounded-lg bg-slate-100 object-cover ring-1 ring-slate-200"
                         loading="lazy"
                       />
                       <div className="min-w-0">
@@ -370,18 +379,21 @@ export function VehicleTable({ vehicles, locations, canCreate, canEdit, canDelet
                   </td>
                   <td className="px-3 py-2.5">
                     {canEdit ? (
-                      <select
-                        value={v.status}
-                        disabled={busy}
-                        onChange={(e) => patchVehicle(v.id, { status: e.target.value }, 'Status updated')}
-                        className="rounded-md border border-slate-200 bg-white px-2 py-1 text-xs text-slate-700 focus:border-red-400 focus:outline-none"
-                      >
-                        {VEHICLE_STATUSES.map((s) => (
-                          <option key={s} value={s}>
-                            {STATUS_LABELS[s]}
-                          </option>
-                        ))}
-                      </select>
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className={cn('h-2 w-2 shrink-0 rounded-full', STATUS_DOT[v.status])} aria-hidden />
+                        <select
+                          value={v.status}
+                          disabled={busy}
+                          onChange={(e) => patchVehicle(v.id, { status: e.target.value }, 'Status updated')}
+                          className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-medium text-slate-700 focus:border-red-400 focus:outline-none"
+                        >
+                          {VEHICLE_STATUSES.map((s) => (
+                            <option key={s} value={s}>
+                              {STATUS_LABELS[s]}
+                            </option>
+                          ))}
+                        </select>
+                      </span>
                     ) : (
                       <VehicleStatusBadge status={v.status} />
                     )}

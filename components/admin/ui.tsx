@@ -22,7 +22,7 @@ export function PageHeader({
   return (
     <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{title}</h1>
+        <h1 className="font-display text-2xl font-semibold uppercase tracking-tight text-slate-900">{title}</h1>
         {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
       </div>
       {children && <div className="flex flex-wrap items-center gap-2">{children}</div>}
@@ -34,17 +34,17 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
 type ButtonSize = 'sm' | 'md';
 
 const BTN_BASE =
-  'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-1';
+  'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-1';
 const BTN_VARIANT: Record<ButtonVariant, string> = {
-  primary: 'bg-red-600 text-white hover:bg-red-700',
+  primary: 'bg-red-600 text-white shadow-md shadow-red-600/20 hover:-translate-y-px hover:bg-red-700 hover:shadow-lg hover:shadow-red-600/30',
   secondary: 'bg-slate-900 text-white hover:bg-slate-800',
-  outline: 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
+  outline: 'border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50',
   ghost: 'text-slate-600 hover:bg-slate-100',
   danger: 'border border-red-200 bg-red-50 text-red-700 hover:bg-red-100',
 };
 const BTN_SIZE: Record<ButtonSize, string> = {
   sm: 'px-3 py-1.5 text-xs',
-  md: 'px-4 py-2 text-sm',
+  md: 'px-4 py-2.5 text-sm',
 };
 
 export function Button({
@@ -92,7 +92,7 @@ export function Field({
 }
 
 const CONTROL =
-  'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-red-400 focus:outline-none focus:ring-1 focus:ring-red-400 disabled:bg-slate-50';
+  'w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-400/30 disabled:bg-slate-50';
 
 export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
   return <input className={cn(CONTROL, className)} {...props} />;
@@ -148,24 +148,42 @@ export function Toggle({
   );
 }
 
+export type StatTone = 'red' | 'green' | 'amber' | 'sky' | 'slate' | 'violet';
+
+const STAT_TONES: Record<StatTone, { chip: string; value: string }> = {
+  red: { chip: 'bg-red-50 text-red-600', value: 'text-red-600' },
+  green: { chip: 'bg-emerald-50 text-emerald-600', value: 'text-emerald-600' },
+  amber: { chip: 'bg-amber-50 text-amber-600', value: 'text-amber-600' },
+  sky: { chip: 'bg-sky-50 text-sky-600', value: 'text-sky-600' },
+  violet: { chip: 'bg-violet-50 text-violet-600', value: 'text-violet-600' },
+  slate: { chip: 'bg-slate-100 text-slate-500', value: 'text-slate-900' },
+};
+
 export function StatCard({
   label,
   value,
-  accent,
+  tone = 'slate',
   icon,
 }: {
   label: string;
   value: ReactNode;
-  accent?: string;
+  tone?: StatTone;
   icon?: ReactNode;
 }) {
+  const t = STAT_TONES[tone];
   return (
-    <Card className="p-4">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-medium uppercase tracking-wide text-slate-400">{label}</span>
-        {icon && <span className={cn('text-slate-300', accent)}>{icon}</span>}
+    <Card className="group p-4 transition-all hover:-translate-y-0.5 hover:shadow-md">
+      <div className="flex items-center gap-3">
+        {icon && (
+          <span className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105', t.chip)}>
+            {icon}
+          </span>
+        )}
+        <div className="min-w-0">
+          <div className={cn('text-2xl font-bold leading-none tabular-nums', t.value)}>{value}</div>
+          <p className="mt-1 truncate text-xs font-medium text-slate-500">{label}</p>
+        </div>
       </div>
-      <div className={cn('mt-2 text-2xl font-semibold tabular-nums text-slate-900', accent)}>{value}</div>
     </Card>
   );
 }
