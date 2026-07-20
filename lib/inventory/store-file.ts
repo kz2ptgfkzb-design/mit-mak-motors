@@ -156,6 +156,15 @@ export class FileStore implements InventoryStore {
     return true;
   }
 
+  async resyncScrapedInventory(seed: InventoryVehicle[]): Promise<{ count: number; removed: number }> {
+    const b = await this.load();
+    const manual = b.vehicles.filter((v) => v.id !== v.slug); // hand-added cars survive
+    const removed = b.vehicles.length - manual.length;
+    b.vehicles = [...seed, ...manual];
+    await this.persist();
+    return { count: seed.length, removed };
+  }
+
   // Leads
   async listLeads(): Promise<Lead[]> {
     const b = await this.load();

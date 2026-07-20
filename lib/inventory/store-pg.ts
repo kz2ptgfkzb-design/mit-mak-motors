@@ -293,6 +293,21 @@ export class PgStore implements InventoryStore {
     return rows.length > 0;
   }
 
+  async resyncScrapedInventory(seed: InventoryVehicle[]): Promise<{ count: number; removed: number }> {
+    const sql = await this.sql();
+    const rows = seed.map(vehicleRow);
+    let removed = 0;
+    await sql.begin(async (tx) => {
+      // Scrape-origin rows use id === slug; hand-added rows use a uuid id and survive.
+      const del = await tx`DELETE FROM vehicles WHERE id = slug RETURNING id`;
+      removed = del.length;
+      if (rows.length) {
+        await tx`INSERT INTO vehicles ${tx(rows, ...VEHICLE_COLS)} ON CONFLICT (id) DO NOTHING`;
+      }
+    });
+    return { count: seed.length, removed };
+  }
+
   // Leads
   async listLeads(): Promise<Lead[]> {
     const sql = await this.sql();

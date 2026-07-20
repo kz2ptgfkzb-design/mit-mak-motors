@@ -50,6 +50,13 @@ export interface InventoryStore {
   updateVehicle(id: string, patch: VehicleInput): Promise<InventoryVehicle | null>;
   deleteVehicle(id: string): Promise<boolean>;
   slugExists(slug: string, exceptId?: string): Promise<boolean>;
+  /**
+   * Reconcile the scraped inventory with a fresh seed: replace all
+   * scrape-origin vehicles (those whose id equals their slug) with the given
+   * set, while leaving any hand-added vehicles (id !== slug) untouched. Used to
+   * refresh the demo to match the live source site.
+   */
+  resyncScrapedInventory(seed: InventoryVehicle[]): Promise<{ count: number; removed: number }>;
 
   // Leads
   listLeads(): Promise<Lead[]>;
